@@ -1,0 +1,112 @@
+{var $css = "formpdf"}
+{block content}
+
+    {form receiptForm, class => 'nf-form', novalidate => true}
+
+        {** Globální chyby formuláře **}
+        <ul class="nf-errors" n:if="$form->hasErrors()">
+            <li n:foreach="$form->errors as $e">{$e}</li>
+        </ul>
+
+        <div class="nf-grid">
+            {var $err = $form['received_from']->hasErrors()}
+        <div class="nf-field{if $err} is-error{/if}">
+                    {label received_from, class => 'nf-label' /}
+            {input received_from, class => 'nf-input', placeholder => 'Jméno / organizace'}
+                    <small class="nf-help" n:if="$err">{inputError received_from}</small>
+        </div>
+
+        {var $err = $form['paid_at']->hasErrors()}
+        <div class="nf-field{if $err} is-error{/if}">
+                    {label paid_at, class => 'nf-label' /}
+            {input paid_at, class => 'nf-input'}
+                    <small class="nf-help" n:if="$err">{inputError paid_at}</small>
+        </div>
+
+        {var $err = $form['total_amount']->hasErrors()}
+        <div class="nf-field nf-affix{if $err} is-error{/if}" data-suffix="Kč">
+                    {label total_amount, class => 'nf-label' /}
+            {input total_amount, class => 'nf-input', inputmode => 'decimal', step => '0.01'}
+                    <small class="nf-help" n:if="$err">{inputError total_amount}</small>
+        </div>
+
+        {var $err = $form['total_amount_without_vat']->hasErrors()}
+        <div class="nf-field nf-affix{if $err} is-error{/if}" data-suffix="Kč">
+                    {label total_amount_without_vat, class => 'nf-label' /}
+            {input total_amount_without_vat, class => 'nf-input', inputmode => 'decimal', step => '0.01'}
+                    <small class="nf-help" n:if="$err">{inputError total_amount_without_vat}</small>
+        </div>
+
+        {var $err = $form['vat']->hasErrors()}
+        <div class="nf-field nf-affix{if $err} is-error{/if}" data-suffix="%">
+                    {label vat, class => 'nf-label' /}
+            {input vat, class => 'nf-input', inputmode => 'numeric', step => '1', min => '0'}
+                    <small class="nf-help" n:if="$err">{inputError vat}</small>
+        </div>
+
+        {var $err = $form['text']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                {label text, class => 'nf-label' /}
+            {input text, class => 'nf-input nf-textarea', rows => 4, placeholder => 'Poznámka / text na doklad'}
+                <small class="nf-help" n:if="$err">{inputError text}</small>
+            </div>
+        </div>
+
+        <div class="nf-actions">
+            {input download, class => 'nf-btn nf-btn--primary', value => 'Generovat PDF'}
+        </div>
+
+    {/form}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // najdi pole *uvnitř stejného formuláře* jako je total_amount_without_vat
+            var net = document.querySelector('input[name="total_amount_without_vat"]');
+            if (!net) return;
+            var form = net.form || document.querySelector('form');
+            if (!form) return;
+
+            // podporuj i alternativní název total_price (kdyby se používal)
+            var gross = form.querySelector('input[name="total_amount"]') || form.querySelector('input[name="total_price"]');
+            var vat   = form.querySelector('input[name="vat"]');
+            if (!gross || !vat) return;
+
+            // převod textu na číslo (podpora čárky, tečky, odstranění mezer a znaků měny/%)
+            function toNumber(src) {
+                var s = String(src && src.value != null ? src.value : src || '')
+                    .trim()
+                    .replace(/\s+/g, '')
+                    .replace(/[^\d,.\-]/g, '')
+                    .replace(',', '.');
+                if (s === '' || s === '-' || s === '.' || s === '-.') return NaN;
+                return Number(s);
+            }
+
+            // výpočet: bezDPH = sDPH / (1 + sazba/100)
+            function recalc() {
+                var g = toNumber(gross);
+                var v = toNumber(vat);
+
+                if (Number.isFinite(g) && Number.isFinite(v) && v > -100) {
+                    var netVal = g / (1 + v / 100);
+                    // zaokrouhlení na 2 desetinná místa
+                    net.value = (Math.round((netVal + Number.EPSILON) * 100) / 100).toFixed(2);
+                } else {
+                    net.value = '';
+                }
+            }
+
+            // přepočítávej při psaní i změně, a také těsně před odesláním
+            ['input', 'change'].forEach(function (ev) {
+                gross.addEventListener(ev, recalc);
+                vat.addEventListener(ev, recalc);
+            });
+            if (form) form.addEventListener('submit', recalc);
+
+            // pole "bez DPH" necháme jen pro čtení, aby ho uživatel nepřepisoval
+            net.readOnly = true;
+
+        });
+    </script>
+
+{/block}

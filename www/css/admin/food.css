@@ -1,0 +1,476 @@
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js!./style/admin/food.scss ***!
+  \******************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
+:root {
+  font-size: 16px;
+  font-weight: 400;
+  scroll-behavior: smooth;
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body,
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: calc(1.375rem + 1.5vw);
+}
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+h2 {
+  font-size: calc(1.325rem + 0.9vw);
+}
+@media screen and (min-width: 768px) {
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+h3 {
+  font-size: calc(1.3rem + 0.6vw);
+}
+@media screen and (min-width: 768px) {
+  h3 {
+    font-size: 1.75rem;
+  }
+}
+
+h4 {
+  font-size: calc(1.275rem + 0.3vw);
+}
+@media screen and (min-width: 768px) {
+  h4 {
+    font-size: 1.5rem;
+  }
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+@media screen and (min-width: 768px) {
+  h5 {
+    font-size: 1.25rem;
+  }
+}
+
+h6 {
+  font-size: 1rem;
+}
+@media screen and (min-width: 768px) {
+  h6 {
+    font-size: 1rem;
+  }
+}
+
+a {
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+ul, ol {
+  padding-left: 1.5em;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+textarea,
+input,
+button {
+  font-family: inherit;
+}
+
+iframe {
+  border: none;
+}
+
+sup,
+sub,
+small {
+  font-size: smaller;
+}
+
+.nav {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1rem 2rem 0 2rem;
+  font-family: "Segoe UI", sans-serif;
+}
+.nav__up {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.nav__up h1 {
+  font-size: 1.6rem;
+  color: #333;
+  margin: 0;
+}
+.nav__up .nav__left {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.nav__up .nav__right {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 1rem;
+}
+.nav__up .nav__right a {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+.nav__up .nav__right a:hover {
+  color: #0056b3;
+}
+.nav__down {
+  margin-top: 1rem;
+  border-top: 1px solid #eee;
+}
+.nav__menu {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  border-radius: 15px;
+  justify-content: center;
+  gap: 1rem;
+}
+.nav__menu a {
+  display: flex;
+  text-decoration: none;
+  color: #000;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: #e9eaec;
+  border-radius: 8px;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.nav__menu a:hover {
+  background: #e9ecef;
+}
+.nav__menu a i {
+  font-size: 1.2rem;
+  color: #495057;
+}
+
+:root {
+  --bg: #f6f7fb;
+  --card-bg: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --shadow: 0 6px 18px rgba(0,0,0,.06);
+  --radius: 14px;
+  --brand: #0ea5e9; /* primární (světle modrá) */
+  --brand-hover: #0284c7;
+  --tab-bg: #eef2f7; /* pozadí neaktivního tabu */
+  --tab-active: #ffffff; /* pozadí aktivního tabu */
+  --tab-border: #dbe1ea;
+  --good: #10b981;
+  --warn: #f59e0b;
+  --danger: #ef4444;
+}
+
+/* ===== Tabs / Toolbar ===== */
+.tabs {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  background: var(--card-bg);
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 12px 0 18px;
+  flex-wrap: wrap; /* důležité – povolí zalomení */
+}
+
+.tabs--wrap .tab {
+  flex: 1 1 180px; /* každá zabere min ~180px, jinak se zalomí */
+  min-width: 0; /* ať se mohou zmenšit */
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border: 1px solid var(--tab-border);
+  border-radius: 10px;
+  background: var(--tab-bg);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.15s ease-in-out;
+}
+
+.tab:hover {
+  filter: brightness(0.98);
+}
+
+.tab.is-active {
+  background: var(--tab-active);
+  border-color: var(--border);
+  box-shadow: inset 0 -2px 0 var(--brand);
+}
+
+/* primární tlačítko vpravo */
+.btn.btn--primary {
+  margin-left: auto;
+  background: var(--brand);
+  color: #fff;
+  border: 1px solid var(--brand);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 3px 10px rgba(14, 165, 233, 0.25);
+  transition: background 0.15s ease-in-out, transform 0.03s ease-in-out;
+}
+
+.btn.btn--primary:hover {
+  background: var(--brand-hover);
+}
+
+.btn.btn--primary:active {
+  transform: translateY(1px);
+}
+
+/* ===== Cards ===== */
+.food-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
+  margin: 10px 0;
+}
+
+.food-item h4 {
+  margin: 0 0 4px 0;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.food-item > div:first-child { /* levý sloupec (název + cena) */
+  display: flex;
+  flex-direction: column;
+}
+
+.food-item .price {
+  color: var(--muted);
+}
+
+/* Archivovaná karta – odlišená */
+.food-item.is-archived {
+  opacity: 0.85;
+  background: #fafafa;
+}
+
+/* Archiv štítek */
+.badge {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #374151;
+  background: #e5e7eb;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+/* ===== Actions (edit / archive / restore) ===== */
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #f3f4f6;
+  border: 1px solid var(--border);
+  color: #111827;
+  text-decoration: none;
+  transition: background 0.15s ease-in-out, transform 0.03s ease-in-out, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.icon-btn:hover {
+  background: #e9eef6;
+}
+
+.icon-btn:active {
+  transform: translateY(1px);
+}
+
+/* (volitelně) barevné varianty pro akce */
+.icon-btn--edit {
+  background: #eef6ff;
+  border-color: #dbeafe;
+}
+
+.icon-btn--archive {
+  background: #fff7ed;
+  border-color: #fde68a;
+}
+
+.icon-btn--restore {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+}
+
+/* ===== Section titles ===== */
+h3 {
+  margin: 10px 4px 8px;
+  font-size: 20px;
+}
+
+h4[style] {
+  margin-top: 18px !important;
+} /* pro tvůj inline style */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modal[aria-hidden=false] {
+  display: flex;
+}
+
+.modal-content {
+  background: #fff;
+  width: 100%;
+  max-width: 520px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  padding: 16px 16px 14px;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  border: 0;
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  margin: 12px 0;
+}
+
+.field input, .field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 680px) {
+  .tabs--wrap .tab {
+    flex: 1 1 100%;
+  }
+  .tabs .btn.btn--primary {
+    width: 100%;
+    order: 99;
+  }
+  .tab {
+    min-width: unset;
+  }
+  .food-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+@media screen and (min-width: 768px) {
+  .nav__up {
+    flex-wrap: nowrap;
+  }
+  .nav__left {
+    justify-content: flex-start !important;
+  }
+  .nav__right {
+    justify-content: flex-end !important;
+  }
+}

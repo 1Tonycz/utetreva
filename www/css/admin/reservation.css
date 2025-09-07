@@ -1,0 +1,419 @@
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js!./style/admin/reservation.scss ***!
+  \*************************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
+:root {
+  font-size: 16px;
+  font-weight: 400;
+  scroll-behavior: smooth;
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body,
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: calc(1.375rem + 1.5vw);
+}
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+h2 {
+  font-size: calc(1.325rem + 0.9vw);
+}
+@media screen and (min-width: 768px) {
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+h3 {
+  font-size: calc(1.3rem + 0.6vw);
+}
+@media screen and (min-width: 768px) {
+  h3 {
+    font-size: 1.75rem;
+  }
+}
+
+h4 {
+  font-size: calc(1.275rem + 0.3vw);
+}
+@media screen and (min-width: 768px) {
+  h4 {
+    font-size: 1.5rem;
+  }
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+@media screen and (min-width: 768px) {
+  h5 {
+    font-size: 1.25rem;
+  }
+}
+
+h6 {
+  font-size: 1rem;
+}
+@media screen and (min-width: 768px) {
+  h6 {
+    font-size: 1rem;
+  }
+}
+
+a {
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+ul, ol {
+  padding-left: 1.5em;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+textarea,
+input,
+button {
+  font-family: inherit;
+}
+
+iframe {
+  border: none;
+}
+
+sup,
+sub,
+small {
+  font-size: smaller;
+}
+
+.nav {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1rem 2rem 0 2rem;
+  font-family: "Segoe UI", sans-serif;
+}
+.nav__up {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.nav__up h1 {
+  font-size: 1.6rem;
+  color: #333;
+  margin: 0;
+}
+.nav__up .nav__left {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.nav__up .nav__right {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 1rem;
+}
+.nav__up .nav__right a {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+.nav__up .nav__right a:hover {
+  color: #0056b3;
+}
+.nav__down {
+  margin-top: 1rem;
+  border-top: 1px solid #eee;
+}
+.nav__menu {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  border-radius: 15px;
+  justify-content: center;
+  gap: 1rem;
+}
+.nav__menu a {
+  display: flex;
+  text-decoration: none;
+  color: #000;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: #e9eaec;
+  border-radius: 8px;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.nav__menu a:hover {
+  background: #e9ecef;
+}
+.nav__menu a i {
+  font-size: 1.2rem;
+  color: #495057;
+}
+
+:root {
+  --bg:#f9fafb;
+  --panel:#fff;
+  --text:#111827;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --primary:#2563eb;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --radius:12px;
+  --gap:14px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.reservations-list {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.reservation-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+
+@media (min-width: 860px) {
+  .reservation-card {
+    grid-template-columns: 2fr 1.3fr;
+  }
+}
+.reservation-left h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.new-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: #065f46;
+  background: #d1fae5;
+  border: 1px solid #a7f3d0;
+  border-radius: 999px;
+  padding: 3px 8px;
+}
+
+.reservation-left p {
+  margin: 4px 0;
+}
+
+.reservation-left strong {
+  color: var(--muted);
+}
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+/* GRID pokojů */
+.rooms-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 520px) {
+  .rooms-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 980px) {
+  .rooms-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+.room-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #f9fafb;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: 0.2s;
+}
+
+.room-card:hover {
+  background: #f3f4f6;
+}
+
+.room-card.disabled {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.room-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.room-name {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.badge-ok {
+  color: var(--success);
+  background: #dcfce7;
+  border-color: #bbf7d0;
+}
+
+.badge-no {
+  color: var(--danger);
+  background: #fee2e2;
+  border-color: #fecaca;
+}
+
+.room-bottom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.check {
+  width: 18px;
+  height: 18px;
+}
+
+/* buttons */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+
+.btn-accept {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-accept:hover {
+  filter: brightness(1.05);
+}
+
+.btn-email {
+  background: #f9fafb;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-email:hover {
+  background: #f3f4f6;
+}
+
+.btn-calc {
+  background: #10b981;
+  color: #fff;
+  border: 1px solid #10b981;
+}
+
+.btn-calc:hover {
+  filter: brightness(1.05);
+}
+
+@media screen and (min-width: 768px) {
+  .nav__up {
+    flex-wrap: nowrap;
+  }
+  .nav__left {
+    justify-content: flex-start !important;
+  }
+  .nav__right {
+    justify-content: flex-end !important;
+  }
+}

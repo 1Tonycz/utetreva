@@ -1,0 +1,658 @@
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js!./style/admin/home.scss ***!
+  \******************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
+:root {
+  font-size: 16px;
+  font-weight: 400;
+  scroll-behavior: smooth;
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body,
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: calc(1.375rem + 1.5vw);
+}
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+h2 {
+  font-size: calc(1.325rem + 0.9vw);
+}
+@media screen and (min-width: 768px) {
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+h3 {
+  font-size: calc(1.3rem + 0.6vw);
+}
+@media screen and (min-width: 768px) {
+  h3 {
+    font-size: 1.75rem;
+  }
+}
+
+h4 {
+  font-size: calc(1.275rem + 0.3vw);
+}
+@media screen and (min-width: 768px) {
+  h4 {
+    font-size: 1.5rem;
+  }
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+@media screen and (min-width: 768px) {
+  h5 {
+    font-size: 1.25rem;
+  }
+}
+
+h6 {
+  font-size: 1rem;
+}
+@media screen and (min-width: 768px) {
+  h6 {
+    font-size: 1rem;
+  }
+}
+
+a {
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+ul, ol {
+  padding-left: 1.5em;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+textarea,
+input,
+button {
+  font-family: inherit;
+}
+
+iframe {
+  border: none;
+}
+
+sup,
+sub,
+small {
+  font-size: smaller;
+}
+
+.nav {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1rem 2rem 0 2rem;
+  font-family: "Segoe UI", sans-serif;
+}
+.nav__up {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.nav__up h1 {
+  font-size: 1.6rem;
+  color: #333;
+  margin: 0;
+}
+.nav__up .nav__left {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.nav__up .nav__right {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 1rem;
+}
+.nav__up .nav__right a {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+.nav__up .nav__right a:hover {
+  color: #0056b3;
+}
+.nav__down {
+  margin-top: 1rem;
+  border-top: 1px solid #eee;
+}
+.nav__menu {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  border-radius: 15px;
+  justify-content: center;
+  gap: 1rem;
+}
+.nav__menu a {
+  display: flex;
+  text-decoration: none;
+  color: #000;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: #e9eaec;
+  border-radius: 8px;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.nav__menu a:hover {
+  background: #e9ecef;
+}
+.nav__menu a i {
+  font-size: 1.2rem;
+  color: #495057;
+}
+
+:root {
+  --bg:#f9fafb;
+  --panel:#fff;
+  --text:#111827;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --primary:#2563eb;
+  --success:#16a34a;
+  --warning:#f59e0b;
+  --danger:#dc2626;
+  --radius:12px;
+  --gap:14px;
+  --shadow:0 1px 3px rgba(0,0,0,.08);
+  --focus:0 0 0 3px rgba(37,99,235,.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Toolbar */
+.cal-toolbar {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 18px;
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .cal-toolbar {
+    grid-template-columns: 1.4fr 1fr 1.8fr;
+  }
+}
+.cal-actions-left, .cal-nav, .cal-legend {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cal-nav {
+  justify-content: center;
+}
+
+.cal-legend {
+  justify-content: flex-end;
+}
+
+@media (max-width: 900px) {
+  .cal-legend {
+    justify-content: flex-start;
+  }
+}
+.cal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  background: #f9fafb;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cal-btn:hover {
+  background: #f3f4f6;
+}
+
+.cal-btn--primary {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.cal-btn--primary:hover {
+  filter: brightness(1.05);
+}
+
+/* Legend */
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  display: inline-block;
+  border: 1px solid transparent;
+}
+
+.legend-dot--paid {
+  background: #dcfce7;
+  border-color: #bbf7d0;
+}
+
+.legend-dot--partial {
+  background: #fff7ed;
+  border-color: #fde68a;
+}
+
+.legend-dot--unpaid {
+  background: #fee2e2;
+  border-color: #fecaca;
+}
+
+.legend-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #f3f4f6;
+  color: var(--text);
+}
+
+.legend-badge--today {
+  background: #e0edff;
+  border-color: #c7dbff;
+  color: #1f3b88;
+}
+
+.legend-clean-box {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid #86efac;
+  background: #dcfce7;
+  display: inline-block;
+}
+
+/* Calendar container (scrolluje se jen kalendář) */
+.calendar-wrapper {
+  /* z původního necháme vzhled; upravíme rozměry */
+  width: 100vw; /* přes celou šířku viewportu */
+  margin-left: calc(50% - 50vw); /* „vytažení“ z centra kontejneru */
+  margin-right: calc(50% - 50vw);
+  margin-top: 0;
+  margin-bottom: 18px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px; /* malý vnitřní „gutter“ od okrajů */
+}
+
+.calendar-scroll {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: 72vh;
+  width: 100%;
+}
+
+/* volitelné fade okraje při horizontálním scrollu */
+.calendar-wrapper::before,
+.calendar-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 18px;
+  pointer-events: none;
+}
+
+.calendar-wrapper::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--panel), rgba(255, 255, 255, 0));
+}
+
+.calendar-wrapper::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--panel), rgba(255, 255, 255, 0));
+}
+
+/* Tabulka */
+table.calendar {
+  border-collapse: separate;
+  border-spacing: 0;
+  /* vyplň min. celou šířku, ale můžeš být širší → horizontální scroll zůstane uvnitř .calendar-scroll */
+  min-width: 100%;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.calendar thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: #f9fafb;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  padding: 10px 8px;
+}
+
+.calendar thead .room-cell {
+  position: sticky;
+  top: 0;
+  left: 0;
+  min-width: clamp(160px, 16vw, 260px);
+  background: #f9fafb;
+  border-right: 1px solid var(--border);
+  z-index: 4;
+  text-align: left;
+}
+
+.calendar tbody th.room-cell {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  min-width: clamp(160px, 16vw, 260px);
+  background: var(--panel);
+  text-align: left;
+  font-weight: 600;
+  color: var(--text);
+  border-right: 1px solid var(--border);
+  padding: 10px 8px;
+  white-space: nowrap;
+}
+
+.calendar td,
+.calendar thead th:not(.room-cell) {
+  min-width: clamp(48px, 4.6vw, 72px); /* uprav si prostřední koeficient podle chuti */
+  height: 46px;
+}
+
+.calendar td {
+  padding: 0;
+  border-left: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: #fff;
+  min-width: 48px;
+  height: 46px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.calendar td:first-child {
+  border-left: none;
+}
+
+.calendar tr:last-child td {
+  border-bottom: none;
+}
+
+/* Stavy */
+.calendar .day--weekend {
+  background: #f3f4f6;
+}
+
+.calendar td.today {
+  box-shadow: inset 0 0 0 2px rgba(37, 99, 235, 0.25);
+}
+
+.calendar td.day--paid {
+  background: #ecfdf5;
+}
+
+.calendar td.day--partial {
+  background: #fffbeb;
+}
+
+.calendar td.day--unpaid {
+  background: #fef2f2;
+}
+
+.calendar td.day--cleaned {
+  background-image: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 25%, transparent 25%, transparent 50%, rgba(16, 185, 129, 0.08) 50%, rgba(16, 185, 129, 0.08) 75%, transparent 75%, transparent);
+  background-size: 12px 12px;
+}
+
+.calendar .cell {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rez-link {
+  display: inline-block;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.rez-link:hover {
+  background: #eef2f7;
+}
+
+.rez-sep {
+  border: 0;
+  border-top: 1px dashed var(--border);
+  margin: 4px 0;
+}
+
+/* Modal (beze změn) */
+.modal[aria-hidden=true] {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 50;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 520px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+
+.modal-close {
+  position: absolute;
+  right: 16px;
+  top: 12px;
+  background: #f9fafb;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 999px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.modal h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+@media (min-width: 520px) {
+  .grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field span {
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+input[type=date], .modal input[type=text] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #f9fafb;
+  color: var(--text);
+}
+
+input:focus {
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  background: #f9fafb;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.btn.primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.btn:hover {
+  background: #f3f4f6;
+}
+
+.btn.primary:hover {
+  filter: brightness(1.05);
+}
+
+@media screen and (min-width: 768px) {
+  .nav__up {
+    flex-wrap: nowrap;
+  }
+  .nav__left {
+    justify-content: flex-start !important;
+  }
+  .nav__right {
+    justify-content: flex-end !important;
+  }
+}

@@ -1,36 +1,48 @@
-# see https://doc.nette.org/en/configuring
+extensions:
+    translation: Contributte\Translation\DI\TranslationExtension
+
+translation:
+    locales:
+        whitelist: [cs, en, ru, de]
+        default: cs
+        fallback: [en]
+
+    dirs:
+        - %appDir%/Lang
+    returnOriginalMessage: true
+    localeResolvers:
+        - Contributte\Translation\LocalesResolvers\Router
+        - Contributte\Translation\LocalesResolvers\Session
+        - Contributte\Translation\LocalesResolvers\Parameter
 
 parameters:
 
-
 application:
-	errorPresenter:
-		4xx: Error:Error4xx
-		5xx: Error:Error5xx
-	mapping: App\Presentation\*\**Presenter
-
-
-database:
-	dsn: 'sqlite::memory:'
-	user:
-	password:
+	errorPresenter: Error:Error
+	mapping:
+	    Admin: App\Admin\UI\*\**Presenter
+	    Front: App\Front\UI\*\**Presenter
 
 
 latte:
 	strictTypes: yes
 	strictParsing: yes
-	extensions:
-		- App\Presentation\Accessory\LatteExtension
 
-
-assets:
-	mapping:
-		default:
-			path: assets
-			# type: vite  # Uncomment to activate Vite for asset building
+database:
+    dsn: 'mysql:host=localhost:3306;dbname=utetreva'
+    user: 'root'
+    password: ''
 
 
 di:
 	export:
 		parameters: no
 		tags: no
+
+mail:
+    smtp: true
+    host: 127.0.0.1
+    port: 25
+    username: ''
+    password: ''
+    secure: null

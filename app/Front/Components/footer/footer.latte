@@ -1,0 +1,71 @@
+<footer class="footer">
+    <div class="footer__grid">
+
+        <section class="footer__col">
+            <h2>{_'ui.footer.contact'}</h2>
+            <address>
+                <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin h-4 w-4 text-accent"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg> Kladská 8, 35301 Mariánské Lázně</p>
+                <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone h-4 w-4 text-accent"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> <a href="tel:+420 353 577 841">+420 353 577 841</a></p>
+            </address>
+        </section>
+
+        <section class="footer__col" aria-labelledby="footer-hours">
+            <h2 id="footer-hours">{_'ui.footer.openHours'}</h2>
+
+            <dl class="footer__hours">
+                {foreach $openingHours as $row}
+                    <div class="footer__day">
+                        <dt>
+                            {switch $row->day_of_week}
+                                {case 1}{_'ui.footer.monday'}
+                                {case 2}{_'ui.footer.tuesday'}
+                                {case 3}{_'ui.footer.wednesday'}
+                                {case 4}{_'ui.footer.thursday'}
+                                {case 5}{_'ui.footer.friday'}
+                                {case 6}{_'ui.footer.saturday'}
+                                {case 7}{_'ui.footer.sunday'}
+                            {/switch}
+                        </dt>
+                        <dd>
+                            {if $row->opens && $row->closes}
+                                {$row->opens_fmt}–{$row->closes_fmt}
+                                {if $row->overnight}(do rána){/if}
+                            {else}
+                                {_'ui.footer.close'}
+                            {/if}
+                        </dd>
+                    </div>
+                {/foreach}
+            </dl>
+
+            {if $openingExceptions && count($openingExceptions)}
+                <p><strong>{_'ui.footer.expection'}</strong></p>
+                <ul class="footer__exceptions">
+                    {foreach $openingExceptions as $ex}
+                        <li>
+                            {$ex->day|date:'j. n. Y'}:
+                            {if $ex->is_closed}
+                                {_'ui.footer.close'}
+                            {else}
+                                {$ex->opens_fmt}–{$ex->closes_fmt}
+                                {if $ex->overnight}(do rána){/if}
+                            {/if}
+                    {if $ex->note} ({$ex->note}){/if}
+                        </li>
+                    {/foreach}
+                </ul>
+            {/if}
+        </section>
+
+
+        <section class="footer__col" aria-labelledby="footer-payment">
+            <h2>{_'ui.footer.pay'}</h2>
+            <p class="footer__mark">{_'ui.footer.onlycash'}</p>
+        </section>
+
+    </div>
+
+    <div class="footer__bottom">
+        <p>© 2025 Restaurace U Tetřeva. Všechna práva vyhrazena.</p>
+    </div>
+</footer>

@@ -19,6 +19,7 @@ class Bootstrap
 		$this->rootDir = dirname(__DIR__);
 		$this->configurator = new Configurator;
 		$this->configurator->setTempDirectory($this->rootDir . '/temp');
+
 	}
 
 

@@ -1,0 +1,81 @@
+brand:
+  name: "U Tetřeva"
+
+menu:
+    home: "Domů"
+    menu: "Menu"
+    accommodation: "Ubytování"
+    gallery: "Galerie"
+    reservation: "Rezervace"
+
+footer:
+    contact: "Kontakt"
+    openHours: "Otevírací doba"
+    pay: "Způsoby platby"
+    monday: "Pondělí"
+    tuesday: "Úterý"
+    wednesday: "Středa"
+    thursday: "Čtvrtek"
+    friday: "Pátek"
+    saturday: "Sobota"
+    sunday: "Neděle"
+    close: "Zavřeno"
+    expection: "Vyjímky"
+    onlycash: "Platba pouze hotovost"
+
+hero:
+  title:
+    before: "Restaurace"
+  subtitle: "Vychutnejte si jedinečné kulinářské zážitky v našem útulném prostředí s možností ubytování v srdci přírody"
+
+cta:
+  reserveTable: "Rezervovat stůl"
+  viewMenu: "Prohlédnout Menu"
+  reserveRoom: "Rezervovat pokoj"
+  viewPhotos: "Prohlédnout fotografie"
+
+food:
+  title: "Naše oblíbené speciality"
+  subtitle: "Ochutnejte naše nejoblíbenější zvěřinové pokrmy připravované z čerstvých regionálních surovin"
+  viewAll: "Zobrazit celé menu"
+
+accommodation:
+  title: "Ubytování"
+  subtitle: "Nabízíme komfortní ubytování ve stylu loveckého srubu s krásným výhledem do přírody"
+  equipment:
+    title: "Vybavení:"
+    bathroom: "Koupelna"
+    tv: "TV"
+    wifi: "Wi-Fi"
+    towels: "Ručníky a povlečení"
+  capacity: "Kapacita: %count% osoby"
+  apartment:
+    name: "Apartmán"
+    shortDesc: "Popisek apartmánu"
+  triple:
+    name: "Třílůžkový pokoj"
+    shortDesc: "Popisek pokoje"
+  double:
+    name: "Dvoulůžkový pokoj"
+    shortDesc: "Popisek pokoje"
+  extras:
+    parking: "Parkování zdarma"
+    breakfast: "Snídaně"
+
+about:
+  title: "O nás"
+  subtitle: "Restaurace a penzion v srdci Slavkovského lesa"
+  paragraph1: "Specializujeme se na zvěřinové speciality a tradiční českou kuchyni. Restaurace U Tetřeva se nachází v krásné přírodě Slavkovského lesa, nedaleko města Mariánské Lázně."
+  feature:
+    gameRestaurant:
+      title: "Zvěřinová restaurace"
+      desc: "Specializujeme se na přípravu kvalitních zvěřinových specialit."
+    family:
+      title: "Rodinný podnik"
+      desc: "Rodinná tradice v pohostinství již více než 20 let."
+  image:
+    alt: "Interiér restaurace U Tetřeva"
+    caption: "Restaurace a Pension"
+
+common:
+  currency: "Kč"

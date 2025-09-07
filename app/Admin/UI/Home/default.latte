@@ -1,0 +1,155 @@
+{var $css = "home"}
+
+{block content}
+
+    <div class="cal-toolbar">
+        <!-- LEVÝ sloupec: akce -->
+        <div class="cal-actions-left">
+            <button type="button"
+                    class="cal-btn"
+                    data-modal-open="clean"
+                    data-day="{$cleanDefaultDay->format('Y-m-d')}">🧹 Uklizeno</button>
+            <a n:href=":Admin:Home:reservation" class="cal-btn">➕ Vytvořit rezervaci</a>
+        </div>
+
+        <!-- STŘED: navigace měsíců -->
+        <div class="cal-nav">
+            <a n:href="this, y => $prevY, m => $prevM" class="cal-btn" title="{$prevLabel}">←</a>
+            <strong>{$monthLabel}</strong>
+            <a n:href="this, y => $nextY, m => $nextM" class="cal-btn" title="{$nextLabel}">→</a>
+        </div>
+
+        <!-- PRAVÝ sloupec: legenda -->
+        <div class="cal-legend">
+            <span class="legend-item"><i class="legend-dot legend-dot--paid"></i> Zaplaceno</span>
+            <span class="legend-item"><i class="legend-dot legend-dot--partial"></i> Částečně zaplaceno</span>
+            <span class="legend-item"><i class="legend-dot legend-dot--unpaid"></i> Nezaplaceno</span>
+            <span class="legend-item"><i class="legend-badge legend-badge--today">Dnes</i></span>
+            <span class="legend-item"><i class="legend-clean-box"></i> Uklizeno</span>
+        </div>
+    </div>
+
+    <div class="calendar-wrapper">
+        <div class="calendar-scroll">
+            <table class="calendar">
+                <thead>
+                <tr>
+                    <th class="room-cell">Pokoj</th>
+                    {foreach $days as $d}
+                        {var $isWeekend = in_array($d->format('N'), [6, 7])}
+                        <th class="{if $isWeekend}day--weekend{/if}">
+                            {$d->format('j')}<br>
+                            <small>{$formatCz($d, 'EEE')}</small>
+                        </th>
+                    {/foreach}
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $rooms as $room}
+                    <tr>
+                        <th class="room-cell">{$room->Name}</th>
+                        {var $todayKey = $cleanDefaultDay->format('Y-m-d')}
+                    {foreach $days as $d}
+                            {var $key = $d->format('Y-m-d')}
+                            {var $items = $occupied[$room->ID][$key] ?? []}
+
+                            {var $status = null}
+                            {if $items}
+                                {foreach $items as $i}
+                                    {if $i['deposit'] >= $i['totalPrice']}
+                                        {var $status = 'paid'}
+                                    {elseif $i['deposit'] > 0}
+                                        {var $status = 'partial'}
+                                    {else}
+                                        {var $status = 'unpaid'}
+                                    {/if}
+                                {/foreach}
+                            {/if}
+
+                            <td class="
+                            {if $status === 'paid'}day--paid{/if}
+                            {if $status === 'partial'}day--partial{/if}
+                            {if $status === 'unpaid'}day--unpaid{/if}
+                            {if $key === $todayKey} today{/if}
+                            {if isset($cleanMap[$room->ID][$key])} day--cleaned{/if}
+                        ">
+                                <div class="cell">
+                                    {foreach $items as $i}
+                                        <a n:href=":Admin:Home:detail, id => $i['id']" class="rez-link">{$i['name']}</a>
+                                        {if !$iterator->isLast()}<hr class="rez-sep">{/if}
+                                    {/foreach}
+                                </div>
+                            </td>
+                        {/foreach}
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    {* MODAL: Uklizeno *}
+    <div id="modal-clean" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="cleanTitle">
+            <button type="button" class="modal-close" data-modal-close aria-label="Zavřít">×</button>
+            <h3 id="cleanTitle">Označit uklizené pokoje</h3>
+
+            <form method="post" action="{link saveCleaning!}">
+                <div class="grid-2">
+                    <label class="field">
+                        <span>Den</span>
+                        <input id="clean-day" name="day" type="date" required value="{$cleanDefaultDay|date:'Y-m-d'}">
+                    </label>
+                </div>
+
+                <fieldset style="margin-top:.5rem; border:0; padding:0">
+                    <legend style="font-weight:600; margin-bottom:8px">Vybrat pokoje</legend>
+                    {foreach $rooms as $r}
+                        {var $checked = isset($cleanMapForDefaultDay[$r->ID])}
+                        <label style="display:block; margin:.25rem 0;">
+                            <input type="checkbox" name="room_ids[]" value="{$r->ID}" {if $checked}checked{/if}>
+                            {$r->Name}
+                        </label>
+                    {/foreach}
+                </fieldset>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn" data-modal-close>Zavřít</button>
+                    <button type="submit" class="btn primary">Uložit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            function openModal(name){
+                const el = document.getElementById('modal-' + name);
+                if (el) {
+                    el.setAttribute('aria-hidden','false');
+                    setTimeout(()=> el.querySelector('input, textarea, select')?.focus(),0);
+                }
+            }
+            function closeModal(el){ el.setAttribute('aria-hidden','true'); }
+
+            document.addEventListener('click', function(e){
+                const opener = e.target.closest('[data-modal-open]');
+                if (opener){ e.preventDefault(); openModal(opener.getAttribute('data-modal-open')); }
+                const closer = e.target.closest('[data-modal-close]');
+                if (closer){ e.preventDefault(); const modal = closer.closest('.modal'); if(modal) closeModal(modal); }
+            });
+
+            document.addEventListener('click', function(e){
+                const modal = e.target.closest('.modal');
+                if (modal && e.target === modal) closeModal(modal);
+            });
+
+            document.addEventListener('keydown', function(e){
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.modal[aria-hidden="false"]').forEach(m=>m.setAttribute('aria-hidden','true'));
+                }
+            });
+        })();
+    </script>
+{/block}

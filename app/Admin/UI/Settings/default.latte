@@ -1,0 +1,393 @@
+{var $css = "settings"}
+
+{block content}
+    <!-- Ovládání + seznam v kartách -->
+    <div class="settings-grid">
+
+        <!-- Box: Pokoje -->
+        <section class="box box--rooms">
+            <div class="box__header">
+                <h2 class="box__title">Pokoje</h2>
+            </div>
+
+            <ul class="room-list">
+                {foreach $rooms as $room}
+                    <li class="room-card">
+                        <div class="room-card__main">
+                            <span class="room-card__name">{$room->Name}</span>
+                            <span class="room-card__price">
+                            {$room->Price|number:2, ',', ' '} Kč
+                        </span>
+                        </div>
+                        <div class="room-card__actions">
+                            <button type="button" class="btn" data-modal-open="price-{$room->ID}">
+                                Změnit cenu
+                            </button>
+                        </div>
+                    </li>
+                {/foreach}
+            </ul>
+        </section>
+
+        <!-- Box: Otevírací doba -->
+        <section class="box box--hours">
+            <div class="box__header">
+                <h2 class="box__title">Otevírací doba</h2>
+            </div>
+
+            {var $dny = [1=>'Pondělí',2=>'Úterý',3=>'Středa',4=>'Čtvrtek',5=>'Pátek',6=>'Sobota',7=>'Neděle']}
+            <ul class="hours-list">
+                {foreach $openingHours as $day}
+                    <li class="hours-row">
+                        <span class="hours-row__day">{$dny[$day->day_of_week] ?? $day->day_of_week}</span>
+                        <span class="hours-row__time">
+                        <span class="t">{$day->opens_fmt}</span> – <span class="t">{$day->closes_fmt}</span>
+                            <button type="button" class="btn" data-modal-open="time-{$day->id}">
+                                Změnit čas
+                            </button>
+                    </span>
+                    </li>
+                {/foreach}
+            </ul>
+        </section>
+
+        <section class="box box--exceptions">
+            <div class="box__header">
+                <h2 class="box__title">Výjimky</h2>
+                <button type="button" class="btn btn--primary" data-modal-open="exc-add">➕ Přidat výjimku</button>
+            </div>
+
+            <ul class="ex-list">
+                {foreach $exceptions as $ex}
+                    <li class="ex-row">
+                        <span class="ex-row__date">{$ex->day|date:'j. n. Y'}</span>
+
+                        <span class="ex-row__info">
+                    {if $ex->is_closed}
+                        <span class="badge badge--danger">Zavřeno celý den</span>
+                    {else}
+                        <span class="t">{$ex->opens_fmt}</span> – <span class="t">{$ex->closes_fmt}</span>
+                        {if $ex->overnight}<span class="badge">přes půlnoc</span>{/if}
+                    {/if}
+                    {if $ex->note}<span class="ex-row__note">{$ex->note}</span>{/if}
+                </span>
+
+                        <span class="ex-row__actions">
+                    <button class="btn" data-modal-open="exc-edit-{$ex->id}">Upravit</button>
+                    <button class="btn btn--danger" data-modal-open="exc-del-{$ex->id}">Smazat</button>
+                </span>
+                    </li>
+                {/foreach}
+        {if !count($exceptions)}
+                    <li class="ex-empty">Žádné výjimky</li>
+                {/if}
+            </ul>
+        </section>
+    </div>
+
+
+    <!-- Modal: Přidat pokoj
+    <div class="modal" id="modal-addRoom" aria-hidden="true">
+        <div class="modal__dialog">
+            <header class="modal__header">
+                <h3>Přidat nový pokoj</h3>
+                <button type="button" aria-label="Zavřít" data-modal-close>&times;</button>
+            </header>
+            <div class="modal__body">
+                <form method="post" action="">
+                    <input type="hidden" name="do" value="addRoom">
+                    <div class="field">
+                        <label for="add-name">Název</label>
+                        <input id="add-name" name="name" required maxlength="100" autocomplete="off">
+                    </div>
+                    <div class="field">
+                        <label for="add-price">Cena (Kč)</label>
+                        <input id="add-price" name="price" required inputmode="decimal" pattern="[0-9]+([.,][0-9])?" placeholder="např. 1250">
+                    </div>
+                    <footer class="modal__footer">
+                        <button type="submit">Uložit</button>
+                        <button type="button" data-modal-close>Zavřít</button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </div>-->
+
+    <!-- Modaly: Změnit cenu pro každý pokoj -->
+    {foreach $rooms as $room}
+        <div class="modal" id="modal-price-{$room->ID}" aria-hidden="true">
+            <div class="modal__dialog modal__dialog--narrow">
+                <header class="modal__header">
+                    <h3>Změnit cenu – {$room->Name}</h3>
+                    <button type="button" class="modal__close" aria-label="Zavřít" data-modal-close>&times;</button>
+                </header>
+
+                <div class="modal__body">
+                    <form method="post" action="{link changePrice!, id => $room->ID}">
+                        <input type="hidden" name="do" value="changePrice">
+                        <input type="hidden" name="id" value="{$room->ID}">
+
+                        <div class="field field--inline field--affix" data-suffix="Kč">
+                            <label for="price-{$room->ID}">Nová cena</label>
+                            <input
+                                    id="price-{$room->ID}"
+                                    name="price"
+                                    type="text"
+                                    inputmode="decimal"
+                                    placeholder="např. 1250"
+                                    value="{$room->Price|number:2, '.', ''}"
+                                    required
+                            >
+                        </div>
+
+                        <footer class="modal__footer">
+                            <button type="submit" class="btn btn--primary">Uložit</button>
+                            <button type="button" class="btn" data-modal-close>Zavřít</button>
+                        </footer>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/foreach}
+
+
+    {* Modaly: Změnit čas pro každý den *}
+    {var $dny = [1=>'Pondělí',2=>'Úterý',3=>'Středa',4=>'Čtvrtek',5=>'Pátek',6=>'Sobota',7=>'Neděle']}
+    {foreach $openingHours as $day}
+        <div class="modal" id="modal-time-{$day->id}" aria-hidden="true">
+            <div class="modal__dialog modal__dialog--narrow">
+                <header class="modal__header">
+                    <h3>Změnit čas – {$dny[$day->day_of_week] ?? $day->day_of_week}</h3>
+                    <button type="button" class="modal__close" aria-label="Zavřít" data-modal-close>&times;</button>
+                </header>
+                <div class="modal__body">
+                    <form method="post" action="{link changeTime!, id => $day->id}">
+                        <input type="hidden" name="do" value="changeTime">
+                        <div class="field field--inline">
+                            <label for="opens-{$day->id}">Od</label>
+                            <input id="opens-{$day->id}" name="opens" type="time" required value="{$day->opens_fmt}">
+                        </div>
+                        <div class="field field--inline">
+                            <label for="closes-{$day->id}">Do</label>
+                            <input id="closes-{$day->id}" name="closes" type="time" required value="{$day->closes_fmt}">
+                        </div>
+                        <div class="field field--check">
+                            <label class="check">
+                                <input type="checkbox" name="overnight" {if $day->overnight}checked{/if}>
+                                Přes půlnoc (do dalšího dne)
+                            </label>
+                        </div>
+                        <footer class="modal__footer">
+                            <button type="submit" class="btn btn--primary">Uložit</button>
+                            <button type="button" class="btn" data-modal-close>Zavřít</button>
+                        </footer>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/foreach}
+
+    <div class="modal" id="modal-exc-add" aria-hidden="true">
+        <div class="modal__dialog modal__dialog--narrow">
+            <header class="modal__header">
+                <h3>Přidat výjimku</h3>
+                <button type="button" class="modal__close" aria-label="Zavřít" data-modal-close>&times;</button>
+            </header>
+            <div class="modal__body">
+                <form method="post" action="{link addException!}">
+                    <input type="hidden" name="do" value="addException">
+
+                    <div class="field field--inline">
+                        <label for="exc-day">Datum</label>
+                        <input id="exc-day" name="day" type="date" required>
+                    </div>
+
+                    <div class="field field--check">
+                        <label class="check">
+                            <input type="checkbox" name="is_closed" id="exc-closed-add">
+                            Zavřeno celý den
+                        </label>
+                    </div>
+
+                    <div class="field field--inline">
+                        <label for="exc-opens">Od</label>
+                        <input id="exc-opens" name="opens" type="time">
+                    </div>
+                    <div class="field field--inline">
+                        <label for="exc-closes">Do</label>
+                        <input id="exc-closes" name="closes" type="time">
+                    </div>
+
+                    <div class="field field--check">
+                        <label class="check">
+                            <input type="checkbox" name="overnight"> Přes půlnoc (do dalšího dne)
+                        </label>
+                    </div>
+
+                    <div class="field">
+                        <label for="exc-note">Poznámka</label>
+                        <input id="exc-note" name="note" type="text" maxlength="255" placeholder="např. státní svátek">
+                    </div>
+
+                    <footer class="modal__footer">
+                        <button type="submit" class="btn btn--primary">Uložit</button>
+                        <button type="button" class="btn" data-modal-close>Zavřít</button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </div>
+    {foreach $exceptions as $ex}
+        <div class="modal" id="modal-exc-edit-{$ex->id}" aria-hidden="true">
+            <div class="modal__dialog modal__dialog--narrow">
+                <header class="modal__header">
+                    <h3>Upravit výjimku – {$ex->day|date:'j. n. Y'}</h3>
+                    <button type="button" class="modal__close" aria-label="Zavřít" data-modal-close>&times;</button>
+                </header>
+                <div class="modal__body">
+                    <form method="post" action="{link updateException!, id => $ex->id}">
+                        <input type="hidden" name="do" value="updateException">
+
+                        <div class="field field--inline">
+                            <label for="exc-day-{$ex->id}">Datum</label>
+                            <input id="exc-day-{$ex->id}" name="day" type="date" required
+                                   value="{$ex->day|date:'Y-m-d'}">
+                        </div>
+
+                        <div class="field field--check">
+                            <label class="check">
+                                <input type="checkbox" name="is_closed" {if $ex->is_closed}checked{/if}>
+                                Zavřeno celý den
+                            </label>
+                        </div>
+
+                        <div class="field field--inline">
+                            <label for="exc-opens-{$ex->id}">Od</label>
+                            <input id="exc-opens-{$ex->id}" name="opens" type="time"
+                                   value="{$ex->opens_fmt}">
+                        </div>
+
+                        <div class="field field--inline">
+                            <label for="exc-closes-{$ex->id}">Do</label>
+                            <input id="exc-closes-{$ex->id}" name="closes" type="time"
+                                   value="{$ex->closes_fmt}">
+                        </div>
+
+                        <div class="field field--check">
+                            <label class="check">
+                                <input type="checkbox" name="overnight" {if $ex->overnight}checked{/if}>
+                                Přes půlnoc (do dalšího dne)
+                            </label>
+                        </div>
+
+                        <div class="field">
+                            <label for="exc-note-{$ex->id}">Poznámka</label>
+                            <input id="exc-note-{$ex->id}" name="note" type="text" maxlength="255"
+                                   value="{$ex->note}">
+                        </div>
+
+                        <footer class="modal__footer">
+                            <button type="submit" class="btn btn--primary">Uložit</button>
+                            <button type="button" class="btn" data-modal-close>Zavřít</button>
+                        </footer>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/foreach}
+    {foreach $exceptions as $ex}
+        <div class="modal" id="modal-exc-del-{$ex->id}" aria-hidden="true">
+            <div class="modal__dialog modal__dialog--narrow">
+                <header class="modal__header">
+                    <h3>Smazat výjimku</h3>
+                    <button type="button" class="modal__close" aria-label="Zavřít" data-modal-close>&times;</button>
+                </header>
+                <div class="modal__body">
+                    <p>Opravdu smazat výjimku pro <strong>{$ex->day|date:'j. n. Y'}</strong>?
+                        {if $ex->is_closed}
+                            <span class="badge badge--danger">Zavřeno celý den</span>
+                        {else}
+                            <span class="t">{$ex->opens_fmt}</span> – <span class="t">{$ex->closes_fmt}</span>
+                            {if $ex->overnight}<span class="badge">přes půlnoc</span>{/if}
+                        {/if}
+                    </p>
+                    <form method="post" action="{link deleteException!, id => $ex->id}">
+                        <input type="hidden" name="do" value="deleteException">
+                        <footer class="modal__footer">
+                            <button type="submit" class="btn btn--danger">Smazat</button>
+                            <button type="button" class="btn" data-modal-close>Zavřít</button>
+                        </footer>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {/foreach}
+
+
+
+    <!-- Tvůj skript na ovládání modalů -->
+    <script>
+        (function(){
+            function openModal(name){
+                const el = document.getElementById('modal-' + name);
+                if(el){ el.setAttribute('aria-hidden','false'); setTimeout(()=>el.querySelector('input,textarea')?.focus(),0); }
+            }
+            function closeModal(el){ el.setAttribute('aria-hidden','true'); }
+
+            document.addEventListener('click', function(e){
+                const opener = e.target.closest('[data-modal-open]');
+                if(opener){ e.preventDefault(); openModal(opener.getAttribute('data-modal-open')); }
+                const closer = e.target.closest('[data-modal-close]');
+                if(closer){ e.preventDefault(); const modal = closer.closest('.modal'); if(modal) closeModal(modal); }
+            });
+
+            document.addEventListener('click', function(e){
+                const modal = e.target.closest('.modal');
+                if(modal && e.target === modal) closeModal(modal);
+            });
+
+            document.addEventListener('keydown', function(e){
+                if(e.key === 'Escape'){ document.querySelectorAll('.modal[aria-hidden="false"]').forEach(closeModal); }
+            });
+        })();
+        (function(){
+            function bindClosedToggle(modal){
+                if(!modal) return;
+                var closed = modal.querySelector('input[name="is_closed"]');
+                if(!closed) return;
+
+                var timeInputs = modal.querySelectorAll('input[type="time"]');
+                var overnight  = modal.querySelector('input[name="overnight"]');
+
+                function sync(){
+                    var dis = closed.checked;
+                    timeInputs.forEach(function(i){ i.disabled = dis; if(dis) i.value = i.value; });
+                    if (overnight) overnight.disabled = dis;
+                }
+                closed.addEventListener('change', sync);
+                sync(); // init
+            }
+
+            // inicializace všech modalů při načtení
+            document.querySelectorAll('.modal').forEach(bindClosedToggle);
+
+            // doopení modalů (máš už openModal) – po otevření znovu navážeme
+            var _openModal = (name) => {
+                const el = document.getElementById('modal-' + name);
+                if(el){
+                    el.setAttribute('aria-hidden','false');
+                    setTimeout(()=>{
+                        bindClosedToggle(el);
+                        el.querySelector('input,textarea,select')?.focus();
+                    },0);
+                }
+            };
+
+            // přepíšeme handler kliknutí, aby volal náš _openModal
+            document.addEventListener('click', function(e){
+                const opener = e.target.closest('[data-modal-open]');
+                if(opener){ e.preventDefault(); _openModal(opener.getAttribute('data-modal-open')); }
+            });
+        })();
+    </script>
+{/block}

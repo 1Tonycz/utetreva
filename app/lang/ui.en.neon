@@ -1,0 +1,81 @@
+brand:
+  name: "U Tetřeva"
+
+menu:
+    home: "Home"
+    menu: "Menu"
+    accommodation: "Accommodation"
+    gallery: "Gallery"
+    reservation: "Reservations"
+
+footer:
+  contact: "Contact"
+  openHours: "Opening hours"
+  pay: "Payment methods"
+  monday: "Monday"
+  tuesday: "Tuesday"
+  wednesday: "Wednesday"
+  thursday: "Thursday"
+  friday: "Friday"
+  saturday: "Saturday"
+  sunday: "Sunday"
+  close: "Closed"
+  expection: "Exceptions"
+  onlycash: "Cash only"
+
+hero:
+  title:
+    before: "Restaurant"
+  subtitle: "Enjoy unique culinary experiences in our cozy environment with accommodation options in the heart of nature"
+
+cta:
+  reserveTable: "Book a table"
+  viewMenu: "View Menu"
+  reserveRoom: "Book a room"
+  viewPhotos: "View photos"
+
+food:
+  title: "Our favorite specialties"
+  subtitle: "Taste our most popular game dishes prepared from fresh regional ingredients"
+  viewAll: "Show full menu"
+
+accommodation:
+  title: "Accommodation"
+  subtitle: "We offer comfortable accommodation in the style of a hunting lodge with a beautiful view of nature"
+  equipment:
+    title: "Facilities:"
+    bathroom: "Bathroom"
+    tv: "TV"
+    wifi: "Wi-Fi"
+    towels: "Towels and bed linen"
+  capacity: "Capacity: %count% persons"
+  apartment:
+    name: "Apartment"
+    shortDesc: "Description of the apartment"
+  triple:
+    name: "Triple room"
+    shortDesc: "Description of the triple room"
+  double:
+    name: "Double room"
+    shortDesc: "Description of the double room"
+  extras:
+    parking: "Free parking"
+    breakfast: "Breakfast"
+
+about:
+  title: "About us"
+  subtitle: "Restaurant and guesthouse in the heart of the Slavkov Forest"
+  paragraph1: "We specialize in game specialties and traditional Czech cuisine. The At the Capercaillie restaurant is located in the beautiful nature of the Slavkov Forest, near the town of Mariánské Lázně."
+  feature:
+    gameRestaurant:
+      title: "Game restaurant"
+      desc: "We specialize in preparing high-quality game dishes."
+    family:
+      title: "Family business"
+      desc: "A family tradition in hospitality for over 20 years."
+  image:
+    alt: "Interior of the At the Capercaillie restaurant"
+    caption: "Restaurant and Guesthouse"
+
+common:
+  currency: "CZK"

@@ -1,0 +1,82 @@
+brand:
+  name: "U Tetřeva"
+
+menu:
+  home: "Startseite"
+  menu: "Speisekarte"
+  accommodation: "Unterkunft"
+  gallery: "Galerie"
+  reservation: "Reservierung"
+
+footer:
+  contact: "Kontakt"
+  openHours: "Öffnungszeiten"
+  pay: "Zahlungsarten"
+  monday: "Montag"
+  tuesday: "Dienstag"
+  wednesday: "Mittwoch"
+  thursday: "Donnerstag"
+  friday: "Freitag"
+  saturday: "Samstag"
+  sunday: "Sonntag"
+  close: "Geschlossen"
+  expection: "Ausnahmen"
+  onlycash: "Nur Barzahlung"
+
+
+hero:
+  title:
+    before: "Restaurant"
+  subtitle: "Genießen Sie einzigartige kulinarische Erlebnisse in unserer gemütlichen Umgebung mit Übernachtungsmöglichkeiten im Herzen der Natur"
+
+cta:
+  reserveTable: "Tisch reservieren"
+  viewMenu: "Speisekarte ansehen"
+  reserveRoom: "Zimmer reservieren"
+  viewPhotos: "Fotos ansehen"
+
+food:
+  title: "Unsere Lieblingsspezialitäten"
+  subtitle: "Probieren Sie unsere beliebtesten Wildgerichte, zubereitet aus frischen regionalen Zutaten"
+  viewAll: "Gesamte Speisekarte anzeigen"
+
+accommodation:
+  title: "Unterkunft"
+  subtitle: "Wir bieten komfortable Unterkünfte im Stil einer Jagdhütte mit schönem Blick in die Natur"
+  equipment:
+    title: "Ausstattung:"
+    bathroom: "Badezimmer"
+    tv: "Fernseher"
+    wifi: "Wi-Fi"
+    towels: "Handtücher und Bettwäsche"
+  capacity: "Kapazität: %count% Personen"
+  apartment:
+    name: "Apartment"
+    shortDesc: "Beschreibung des Apartments"
+  triple:
+    name: "Dreibettzimmer"
+    shortDesc: "Beschreibung des Dreibettzimmers"
+  double:
+    name: "Doppelzimmer"
+    shortDesc: "Beschreibung des Doppelzimmers"
+  extras:
+    parking: "Kostenloses Parken"
+    breakfast: "Frühstück"
+
+about:
+  title: "Über uns"
+  subtitle: "Restaurant und Pension im Herzen des Kaiserwaldes (Slavkovský les)"
+  paragraph1: "Wir sind auf Wildspezialitäten und traditionelle tschechische Küche spezialisiert. Das Restaurant U Tetřeva befindet sich in der wunderschönen Natur des Kaiserwaldes, unweit der Stadt Marienbad."
+  feature:
+    gameRestaurant:
+      title: "Wildrestaurant"
+      desc: "Wir sind auf die Zubereitung hochwertiger Wildgerichte spezialisiert."
+    family:
+      title: "Familienbetrieb"
+      desc: "Familientradition in der Gastfreundschaft seit über 20 Jahren."
+  image:
+    alt: "Innenraum des Restaurants U Tetřeva"
+    caption: "Restaurant und Pension"
+
+common:
+  currency: "Kč"

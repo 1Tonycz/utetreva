@@ -1,0 +1,51 @@
+{var $css = "formpdf"}
+
+{block content}
+
+        {form createForm, class => 'nf-form nf-form--narrow', novalidate => true, enctype => 'multipart/form-data'}
+
+            {** Globální chyby **}
+            <ul class="nf-errors" n:if="$form->hasErrors()">
+                <li n:foreach="$form->errors as $e">{$e}</li>
+            </ul>
+
+            <div class="nf-grid">
+                {var $err = $form['Title']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                        {label Title, class => 'nf-label' /}
+                {input Title, class => 'nf-input', placeholder => 'Název obrázku'}
+                        <small class="nf-help" n:if="$err">{inputError Title}</small>
+            </div>
+
+            {var $err = $form['Category']->hasErrors()}
+            <div class="nf-field{if $err} is-error{/if}">
+                        {label Category, class => 'nf-label' /}
+                {input Category, class => 'nf-input'}
+                        <small class="nf-help" n:if="$err">{inputError Category}</small>
+            </div>
+
+            {var $err = $form['Images']->hasErrors()}
+                <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                    {label Images, class => 'nf-label' /}
+
+                    <label class="nf-drop" for="images-input">
+                        <div class="nf-drop__icon">📷</div>
+                        <div class="nf-drop__text">
+                            Přetáhni fotky sem nebo <span>vyber soubory</span>
+                            <small class="nf-drop__hint">JPG, PNG, WebP • možnost víc souborů najednou</small>
+                        </div>
+                        {input Images, id => 'images-input', class => 'nf-file-input', accept => 'image/*', multiple => true}
+                    </label>
+
+                    <ul class="nf-files" id="images-list"></ul>
+                    <small class="nf-help" n:if="$err">{inputError Images}</small>
+                </div>
+            </div>
+
+            <div class="nf-actions">
+                {input Submit, class => 'nf-btn nf-btn--primary', value => 'Vytvořit galerii'}
+                <a n:href="this" class="nf-btn nf-btn--ghost">Zrušit</a>
+            </div>
+
+        {/form}
+{/block}

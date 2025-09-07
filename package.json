@@ -1,14 +1,34 @@
 {
-	"type": "module",
 	"dependencies": {
-		"nette-forms": "^3.3"
+		"@nette/vite-plugin": "^1.0.1",
+		"autoprefixer": "^10.4.21",
+		"css-loader": "^7.1.2",
+		"css-minimizer-webpack-plugin": "^7.0.2",
+		"mini-css-extract-plugin": "^2.9.3",
+		"nette-forms": "^3.3",
+		"postcss-loader": "^8.1.1",
+		"puppeteer": "^24.17.1",
+		"sass-loader": "^16.0.5",
+		"vite": "^6.3.5",
+		"webpack": "^5.101.0",
+		"webpack-cli": "^6.0.1"
 	},
 	"devDependencies": {
 		"@nette/vite-plugin": "^1.0.1",
-		"vite": "^6.3.5"
+		"autoprefixer": "^10.4.21",
+		"css-loader": "^7.1.2",
+		"css-minimizer-webpack-plugin": "^7.0.2",
+		"mini-css-extract-plugin": "^2.9.3",
+		"nette-forms": "^3.3",
+		"postcss-loader": "^8.1.1",
+		"sass-loader": "^16.0.5",
+		"vite": "^6.3.5",
+		"webpack": "^5.101.0",
+		"webpack-cli": "^6.0.1"
 	},
 	"scripts": {
-		"dev": "vite",
-		"build": "vite build"
+		"dev": "webpack --config webpack-config-css.js --mode development --watch",
+		"devjs": "webpack --config webpack-config-js.js --mode development --watch",
+		"admindev": "webpack --config webpack-config-admin-css.js --mode development --watch"
 	}
 }

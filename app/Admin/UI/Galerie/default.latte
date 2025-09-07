@@ -1,0 +1,89 @@
+{var $css = "gallery"}
+
+{block content}
+    <div class="gallery-container full-width">
+
+        <div class="gallery-head">
+            <h1>📸 Galerie</h1>
+            <a n:href="create" class="btn-add">➕ Nová fotografie</a>
+        </div>
+
+        <section class="gallery-section">
+            <h2 class="section-title">Restaurace</h2>
+            <div class="gallery-grid">
+                {foreach $restaurace as $r}
+                    <article class="gallery-card">
+                        <a
+                                class="btn-delete"
+                                n:href="delete! id => $r['id']"
+                                data-confirm="Opravdu odstranit „{$r['title']}“?"
+                                title="Odstranit">
+                            🗑️
+                        </a>
+
+                        <div class="thumbs">
+                            <img src="{$basePath}/gallery/{$r['images']}" alt="{$r['title']}" loading="lazy">
+                        </div>
+
+                        <header class="gallery-header">
+                            <h3>{$r['title']}</h3>
+                            <span class="gallery-category">{$r['category']|capitalize}</span>
+                        </header>
+                    </article>
+                {/foreach}
+            </div>
+        </section>
+
+        <section class="gallery-section">
+            <h2 class="section-title">Pension</h2>
+            <div class="gallery-grid">
+                {foreach $pension as $p}
+                    <article class="gallery-card">
+                        <a
+                                class="btn-delete"
+                                n:href="delete! id => $p['id']"
+                                data-confirm="Opravdu odstranit „{$p['title']}“?"
+                                title="Odstranit">
+                            🗑️
+                        </a>
+
+                        <div class="thumbs">
+                            <img src="{$basePath}/gallery/{$p['images']}" alt="{$p['title']}" loading="lazy">
+                        </div>
+
+                        <header class="gallery-header">
+                            <h3>{$p['title']}</h3>
+                        </header>
+                    </article>
+                {/foreach}
+            </div>
+        </section>
+
+        <section class="gallery-section">
+            <h2 class="section-title">Kladská</h2>
+            <div class="gallery-grid">
+                {foreach $kladska as $k}
+                    <article class="gallery-card">
+                        <a
+                                class="btn-delete"
+                                n:href="delete! id => $k['id']"
+                                data-confirm="Opravdu odstranit „{$k['title']}“?"
+                                title="Odstranit">
+                            🗑️
+                        </a>
+
+                        <div class="thumbs">
+                            <img src="{$basePath}/gallery/{$k['images']}" alt="{$k['title']}" loading="lazy">
+                        </div>
+
+                        <header class="gallery-header">
+                            <h3>{$k['title']}</h3>
+                            <span class="gallery-category">{$k['category']|capitalize}</span>
+                        </header>
+                    </article>
+                {/foreach}
+            </div>
+        </section>
+
+    </div>
+{/block}

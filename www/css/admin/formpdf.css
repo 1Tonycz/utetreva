@@ -1,0 +1,507 @@
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js!./style/admin/formpdf.scss ***!
+  \*********************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
+:root {
+  font-size: 16px;
+  font-weight: 400;
+  scroll-behavior: smooth;
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body,
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: calc(1.375rem + 1.5vw);
+}
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+h2 {
+  font-size: calc(1.325rem + 0.9vw);
+}
+@media screen and (min-width: 768px) {
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+h3 {
+  font-size: calc(1.3rem + 0.6vw);
+}
+@media screen and (min-width: 768px) {
+  h3 {
+    font-size: 1.75rem;
+  }
+}
+
+h4 {
+  font-size: calc(1.275rem + 0.3vw);
+}
+@media screen and (min-width: 768px) {
+  h4 {
+    font-size: 1.5rem;
+  }
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+@media screen and (min-width: 768px) {
+  h5 {
+    font-size: 1.25rem;
+  }
+}
+
+h6 {
+  font-size: 1rem;
+}
+@media screen and (min-width: 768px) {
+  h6 {
+    font-size: 1rem;
+  }
+}
+
+a {
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+ul, ol {
+  padding-left: 1.5em;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+textarea,
+input,
+button {
+  font-family: inherit;
+}
+
+iframe {
+  border: none;
+}
+
+sup,
+sub,
+small {
+  font-size: smaller;
+}
+
+.nav {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1rem 2rem 0 2rem;
+  font-family: "Segoe UI", sans-serif;
+}
+.nav__up {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.nav__up h1 {
+  font-size: 1.6rem;
+  color: #333;
+  margin: 0;
+}
+.nav__up .nav__left {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.nav__up .nav__right {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 1rem;
+}
+.nav__up .nav__right a {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+.nav__up .nav__right a:hover {
+  color: #0056b3;
+}
+.nav__down {
+  margin-top: 1rem;
+  border-top: 1px solid #eee;
+}
+.nav__menu {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  border-radius: 15px;
+  justify-content: center;
+  gap: 1rem;
+}
+.nav__menu a {
+  display: flex;
+  text-decoration: none;
+  color: #000;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: #e9eaec;
+  border-radius: 8px;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.nav__menu a:hover {
+  background: #e9ecef;
+}
+.nav__menu a i {
+  font-size: 1.2rem;
+  color: #495057;
+}
+
+/* === Design tokens === */
+:root {
+  --nf-bg: #fff;
+  --nf-fg: #111827;
+  --nf-muted: #6b7280;
+  --nf-border: #e5e7eb;
+  --nf-border-strong: #d1d5db;
+  --nf-primary: #2563eb;
+  --nf-primary-600: #1d4ed8;
+  --nf-danger: #dc2626;
+  --nf-radius: 12px;
+  --nf-pad: 14px;
+  --nf-gap: 16px;
+  --nf-shadow: 0 1px 2px rgba(0,0,0,.04), 0 4px 8px rgba(0,0,0,.03);
+}
+
+/* === Form wrapper === */
+.nf-form {
+  background: var(--nf-bg);
+  color: var(--nf-fg);
+  max-width: 960px;
+  margin: 24px auto;
+  padding: 24px;
+  border: 1px solid var(--nf-border);
+  border-radius: var(--nf-radius);
+  box-shadow: var(--nf-shadow);
+}
+
+/* === Global errors === */
+.nf-errors {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  list-style: none;
+  border: 1px solid color-mix(in srgb, var(--nf-danger) 40%, #fff);
+  background: color-mix(in srgb, var(--nf-danger) 8%, #fff);
+  color: var(--nf-danger);
+  border-radius: 10px;
+}
+
+/* === Grid === */
+.nf-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--nf-gap);
+}
+
+.nf-col-span-2 {
+  grid-column: span 2;
+}
+
+@media (max-width: 720px) {
+  .nf-grid {
+    grid-template-columns: 1fr;
+  }
+  .nf-col-span-2 {
+    grid-column: auto;
+  }
+}
+/* === Field === */
+.nf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nf-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--nf-fg);
+}
+
+.nf-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--nf-border-strong);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--nf-fg);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nf-input:focus {
+  border-color: var(--nf-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--nf-primary) 25%, transparent);
+}
+
+.nf-input[disabled],
+.nf-input[readonly] {
+  background: #f9fafb;
+  color: var(--nf-muted);
+}
+
+.nf-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Suffix pro Kč a % */
+.nf-affix {
+  position: relative;
+}
+
+.nf-affix::after {
+  content: attr(data-suffix);
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--nf-muted);
+  font-size: 14px;
+}
+
+.nf-affix .nf-input {
+  padding-right: 44px;
+}
+
+/* Help / error text */
+.nf-help {
+  font-size: 12px;
+  color: var(--nf-muted);
+}
+
+.is-error .nf-input {
+  border-color: var(--nf-danger);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--nf-danger) 20%, transparent);
+}
+
+.is-error .nf-help {
+  color: var(--nf-danger);
+}
+
+/* === Actions / buttons === */
+.nf-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.nf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--nf-border-strong);
+  background: #fff;
+  color: var(--nf-fg);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.02s ease;
+}
+
+.nf-btn:hover {
+  background: #f9fafb;
+}
+
+.nf-btn:active {
+  transform: translateY(1px);
+}
+
+.nf-btn--primary {
+  background: var(--nf-primary);
+  color: #fff;
+  border-color: var(--nf-primary-600);
+}
+
+.nf-btn--primary:hover {
+  background: var(--nf-primary-600);
+}
+
+.nf-btn--ghost {
+  background: transparent;
+  border-color: var(--nf-border-strong);
+}
+
+/* Volitelné: zvýraznění povinných polí podle atributu required */
+.nf-input[required] + .nf-help::before {
+  content: "Povinné pole";
+  margin-right: 6px;
+  color: var(--nf-muted);
+}
+
+/* dva sousední sloupce (např. od–do) */
+.nf-row-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--nf-gap);
+}
+
+@media (max-width: 720px) {
+  .nf-row-2 {
+    grid-template-columns: 1fr;
+  }
+}
+/* checkbox jako řádek */
+.nf-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.nf-check input[type=checkbox] {
+  width: 18px;
+  height: 18px;
+}
+
+/* užší forma pro jednoduché entity */
+.nf-form--narrow {
+  max-width: 640px;
+}
+
+/* drop-zone pro obrázky */
+.nf-drop {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  border: 2px dashed var(--nf-border-strong);
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.nf-drop__icon {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.nf-drop__text {
+  font-size: 14px;
+  color: var(--nf-fg);
+}
+
+.nf-drop__text span {
+  color: var(--nf-primary);
+  text-decoration: underline;
+}
+
+.nf-drop__hint {
+  display: block;
+  color: var(--nf-muted);
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.nf-file-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.nf-drop.is-dragover {
+  background: #f8fafc;
+  border-color: var(--nf-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--nf-primary) 18%, transparent);
+}
+
+/* výpis souborů */
+.nf-files {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  color: var(--nf-muted);
+}
+
+.nf-files__item {
+  font-size: 13px;
+}
+
+.nf-form--wide {
+  max-width: 960px;
+}
+
+@media (min-width: 1280px) {
+  .nf-form--wide {
+    max-width: 1100px;
+  } /* volitelné: ještě širší na velkých monitorech */
+}
+/* vyšší text area jen u tohoto formuláře */
+.nf-form--wide .nf-textarea {
+  min-height: 280px;
+}
+
+.nf-form--full {
+  max-width: none;
+  width: 60%;
+}
+
+/* větší text area na této variantě */
+.nf-form--full .nf-textarea {
+  min-height: 320px; /* klidně víc */
+}
+
+@media screen and (min-width: 768px) {
+  .nav__up {
+    flex-wrap: nowrap;
+  }
+  .nav__left {
+    justify-content: flex-start !important;
+  }
+  .nav__right {
+    justify-content: flex-end !important;
+  }
+}

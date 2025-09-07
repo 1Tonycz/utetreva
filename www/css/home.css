@@ -1,0 +1,738 @@
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js!./style/front/home.scss ***!
+  \******************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
+:root {
+  font-size: 16px;
+  font-weight: 400;
+  scroll-behavior: smooth;
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body,
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: calc(1.375rem + 1.5vw);
+}
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+h2 {
+  font-size: calc(1.325rem + 0.9vw);
+}
+@media screen and (min-width: 768px) {
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+h3 {
+  font-size: calc(1.3rem + 0.6vw);
+}
+@media screen and (min-width: 768px) {
+  h3 {
+    font-size: 1.75rem;
+  }
+}
+
+h4 {
+  font-size: calc(1.275rem + 0.3vw);
+}
+@media screen and (min-width: 768px) {
+  h4 {
+    font-size: 1.5rem;
+  }
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+@media screen and (min-width: 768px) {
+  h5 {
+    font-size: 1.25rem;
+  }
+}
+
+h6 {
+  font-size: 1rem;
+}
+@media screen and (min-width: 768px) {
+  h6 {
+    font-size: 1rem;
+  }
+}
+
+a {
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+ul, ol {
+  padding-left: 1.5em;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+textarea,
+input,
+button {
+  font-family: inherit;
+}
+
+iframe {
+  border: none;
+}
+
+sup,
+sub,
+small {
+  font-size: smaller;
+}
+
+header {
+  background-color: #141414;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* ne center */
+  gap: 16px;
+  height: 68px;
+  padding: 0 18px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#badge {
+  background: #f97316;
+  border-radius: 10px;
+}
+#badge:hover {
+  background: #265940;
+}
+
+.active {
+  background: #1b3226;
+  border-radius: 10px;
+}
+.active:hover {
+  background: #265940 !important;
+}
+
+.nav__hide:hover {
+  background: #141414 !important;
+}
+.nav__hide:active {
+  background: #141414 !important;
+}
+.nav__textlogo {
+  font-size: 24px;
+  font-weight: 800;
+  color: #f08b42;
+  text-decoration: none;
+}
+.nav__links {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 280px;
+  height: 100vh;
+  background: #141414;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 1000;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+.nav__links ul {
+  margin: 0;
+  padding: 0;
+}
+.nav__links li {
+  list-style: none;
+}
+.nav__links a {
+  display: block;
+  padding: 12px 16px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+.nav__links a:hover {
+  background: #f08b42;
+  transform: scale(1.05);
+}
+.nav__links.open {
+  transform: translateX(0);
+}
+.nav__translate {
+  position: relative;
+}
+.nav__translate-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.nav__translate .chevron {
+  transition: transform 0.18s ease;
+}
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: auto;
+}
+
+.nav__translate-toggle[aria-expanded=true] .chevron {
+  transform: rotate(180deg);
+}
+
+.nav__translate-menu[hidden] {
+  display: none !important;
+}
+
+.nav__translate-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 210px;
+  padding: 6px;
+  margin: 0;
+  list-style: none;
+  background: #161616;
+  border: 1px solid #242424;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+}
+
+.nav__translate-menu a {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  color: #fff;
+  text-decoration: none;
+  line-height: 1.1;
+}
+
+.nav__translate-menu a:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav__translate-menu [aria-selected=true] a {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nav__translate-menu .code {
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.nav__translate-menu .name {
+  color: #cfd2d4;
+  font-weight: 600;
+}
+
+* {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+}
+
+/*Hero sekce*/
+.hero {
+  background-image: url("img/u_tetreva_hero.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 80vh;
+}
+.hero__content {
+  background: linear-gradient(90deg, rgba(27, 50, 38, 0.6) 0%, rgba(0, 0, 0, 0.6) 25%);
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.hero__content h1 {
+  text-align: center;
+  color: #ffffff;
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.hero__content p {
+  text-align: center;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 1.1rem;
+}
+.hero__mark {
+  color: #f97316;
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.hero__buttons {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+.hero__button {
+  text-align: center;
+  transition: scale 0.5s ease;
+  text-decoration: none;
+  color: #ffffff;
+  padding: 0.8rem 1.2rem;
+  background: linear-gradient(90deg, #1b3226, #265940);
+  border-radius: 10px;
+  font-weight: 500;
+}
+.hero__button:hover {
+  transform: scale(1.1);
+}
+.hero__secondarybutton {
+  text-align: center;
+  transition: scale 0.5s ease, background 0.5s ease;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  color: #ffffff;
+  padding: 0.8rem 1.2rem;
+  border: 2px solid #f97316;
+  border-radius: 10px;
+  font-weight: 500;
+}
+.hero__secondarybutton:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Menu sekce */
+.food__list {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(6, auto);
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.food__list li {
+  background-color: #1c1c1c;
+  padding: 2rem 2rem;
+  border-radius: 15px;
+  border: 1px solid #2c2c2c;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), 0 8px 20px rgba(0, 0, 0, 0.25);
+  transition: scale 1s ease, border 0.5s ease;
+}
+.food__list li h3 {
+  color: #f08b42;
+  margin: 0 0 0.5rem 0;
+}
+.food__list li p {
+  color: #ffffff;
+  font-weight: 600;
+  text-align: right;
+  font-size: 1.2rem;
+}
+.food__list li:hover {
+  transform: scale(1.05);
+  border: 1px solid #265940;
+}
+.food__section {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2rem;
+  gap: 5rem;
+  background-color: #141414;
+}
+.food__header {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+.food__header p {
+  color: #a6a6a6;
+  font-size: 1.1rem;
+}
+.food__header h2 {
+  color: #f08b42;
+}
+.food__button {
+  margin: 0 2rem;
+  text-align: center;
+  transition: scale 0.5s ease;
+}
+.food__button a {
+  text-decoration: none;
+  color: #ffffff;
+  padding: 1rem 1.2rem;
+  background: linear-gradient(90deg, #1b3226, #265940);
+  border-radius: 10px;
+  font-weight: 500;
+}
+.food__button:hover {
+  transform: scale(1.1);
+}
+
+/* Ubytování sekce */
+.accommodation__section {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2rem;
+  gap: 2rem;
+  background-color: #1c1c1c;
+}
+.accommodation__header {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+.accommodation__header p {
+  color: #a6a6a6;
+  font-size: 1.1rem;
+}
+.accommodation__header h2 {
+  color: #f08b42;
+}
+.accommodation__rooms {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+}
+.accommodation__room {
+  background: #141414;
+  padding: 1rem 1rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 1px solid #2c2c2c;
+}
+.accommodation__room p {
+  margin: 0 0.5rem;
+  color: #a6a6a6;
+}
+.accommodation__room h4 {
+  margin: 0 0.5rem;
+  color: #f08b42;
+  font-size: 1rem;
+}
+.accommodation__room ul {
+  margin: 0 0.5rem;
+}
+.accommodation__room ul li {
+  color: #a6a6a6;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+.accommodation__room ul li:last-child {
+  margin-bottom: 0;
+}
+.accommodation__room header h3 {
+  color: #f08b42;
+  display: flex;
+  align-items: center;
+}
+.accommodation__room header h3 svg {
+  margin: 0 0.5rem;
+}
+.accommodation__room header p {
+  color: #a6a6a6;
+  margin: 0 0.5rem;
+}
+.accommodation__extras {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+.accommodation__extras li {
+  color: #a6a6a6;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+.accommodation__extras li svg {
+  margin-right: 0.5rem;
+  stroke: #f97316;
+}
+.accommodation__buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.accommodation__button {
+  text-align: center;
+  transition: scale 0.5s ease;
+  margin: 1rem 1rem;
+}
+.accommodation__button a {
+  text-decoration: none;
+  color: #ffffff;
+  padding: 1rem 1.2rem;
+  background: linear-gradient(90deg, #1b3226, #265940);
+  border-radius: 10px;
+  font-weight: 500;
+}
+.accommodation__button:hover {
+  transform: scale(1.1);
+}
+.accommodation__secondarybutton {
+  margin: 1rem 1rem;
+  text-align: center;
+  transition: scale 0.5s ease;
+}
+.accommodation__secondarybutton a {
+  text-decoration: none;
+  color: #ffffff;
+  padding: 1rem 1.2rem;
+  border: 2px solid #265940;
+  border-radius: 10px;
+  font-weight: 500;
+}
+.accommodation__secondarybutton:hover {
+  transform: scale(1.1);
+}
+
+/*Sekce historie*/
+.history {
+  background: #141414;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2rem;
+  gap: 2rem;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+.history h2 {
+  color: #f08b42;
+}
+.history p {
+  color: #a6a6a6;
+  font-size: 1.1rem;
+}
+.history__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem 3rem;
+  align-items: center;
+}
+.history__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+.history__img img {
+  border-radius: 12px;
+  width: 100%;
+  height: auto;
+  filter: brightness(0.9) contrast(1.1) saturate(1.1);
+}
+.history__img figcaption {
+  color: #a6a6a6;
+}
+.history__features {
+  gap: 2rem;
+  display: flex;
+}
+.history__features dt {
+  font-weight: 700;
+  color: #f6802c; /* oranžová */
+}
+.history__features dd {
+  margin: 0.25rem 0 1rem;
+  color: #cfd2d4;
+}
+
+.footer {
+  border-top: 1px solid #2c2c2c;
+  background: #131514;
+  padding: 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.footer__col h2 {
+  color: #f08b42;
+  font-size: 1rem;
+}
+.footer__col p {
+  display: flex;
+  align-items: center;
+  color: #a6a6a6;
+  margin-bottom: 0.5rem;
+}
+.footer__col p svg {
+  stroke: #f97316;
+}
+.footer__col p a {
+  text-decoration: none;
+  color: #a6a6a6;
+}
+.footer__mark {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-underline-color: #f97316;
+}
+.footer__bottom {
+  color: #a6a6a6;
+}
+.footer__hours {
+  color: #a6a6a6;
+}
+.footer__day {
+  display: grid;
+  grid-template-columns: 140px 1fr; /* první sloupec pevná šířka, druhý pružný */
+  row-gap: 1rem;
+}
+.footer__exceptions {
+  color: #f97316;
+}
+
+@media screen and (min-width: 768px) {
+  .nav__hamburger {
+    display: none;
+  }
+  .nav__links {
+    position: static;
+    top: auto;
+    right: auto;
+    width: auto;
+    height: auto;
+    transform: none;
+    background: transparent;
+    box-shadow: none;
+    border: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  .nav__links > li {
+    list-style: none;
+  }
+  .nav__links > li > a {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 12px;
+    text-decoration: none;
+  }
+  .nav__links .nav__hide {
+    display: none;
+  }
+  .nav__translate {
+    position: relative;
+    margin-left: 12px;
+  }
+  .hero__buttons {
+    grid-template-rows: repeat(1, auto);
+    grid-template-columns: repeat(3, 1fr);
+  }
+  /*Menu sekce*/
+  .food__list {
+    grid-template-rows: repeat(2, auto);
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .food__section {
+    padding: 5rem 10rem;
+  }
+  /*Ubytování sekce*/
+  .accommodation__section {
+    padding: 5rem 10rem;
+    gap: 2rem;
+  }
+  .accommodation__rooms {
+    grid-template-rows: repeat(1, auto);
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .accommodation__buttons {
+    flex-direction: row;
+  }
+  /*O nás sekce*/
+  .history {
+    padding: 5rem 10rem;
+  }
+  .history__grid {
+    display: grid;
+    grid-template-columns: 1fr 520px; /* text | foto */
+    gap: 2rem 3rem;
+    align-items: center;
+  }
+  .history__img {
+    order: -1;
+    margin-bottom: 1rem;
+  }
+  .footer {
+    padding: 2rem 10rem;
+  }
+}

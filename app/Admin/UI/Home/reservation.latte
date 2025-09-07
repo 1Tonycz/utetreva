@@ -1,0 +1,87 @@
+{var $css = "formpdf"}
+
+{block content}
+    {form accommodationForm, class => 'nf-form', novalidate => true}
+
+        {** Globální chyby **}
+        <ul class="nf-errors" n:if="$form->hasErrors()">
+            <li n:foreach="$form->errors as $e">{$e}</li>
+        </ul>
+
+        <div class="nf-grid">
+            {var $err = $form['First']->hasErrors()}
+            <div class="nf-field{if $err} is-error{/if}">
+                    {label First, class => 'nf-label' /}
+                {input First, class => 'nf-input', placeholder => 'Jméno'}
+                    <small class="nf-help" n:if="$err">{inputError First}</small>
+            </div>
+
+            {var $err = $form['Second']->hasErrors()}
+            <div class="nf-field{if $err} is-error{/if}">
+                    {label Second, class => 'nf-label' /}
+                {input Second, class => 'nf-input', placeholder => 'Příjmení'}
+                    <small class="nf-help" n:if="$err">{inputError Second}</small>
+            </div>
+
+            {var $err = $form['Mail']->hasErrors()}
+            <div class="nf-field{if $err} is-error{/if}">
+                    {label Mail, class => 'nf-label' /}
+                {input Mail, class => 'nf-input', inputmode => 'email', placeholder => 'např. osoba@domena.cz'}
+                    <small class="nf-help" n:if="$err">{inputError Mail}</small>
+            </div>
+
+            {var $err = $form['Tel']->hasErrors()}
+            <div class="nf-field{if $err} is-error{/if}">
+                    {label Tel, class => 'nf-label' /}
+                {input Tel, class => 'nf-input', inputmode => 'tel', placeholder => '+420 123 456 789'}
+                    <small class="nf-help" n:if="$err">{inputError Tel}</small>
+            </div>
+
+            {var $err = $form['Person']->hasErrors()}
+            <div class="nf-field nf-affix{if $err} is-error{/if} " data-suffix="os.">
+                    {label Person, class => 'nf-label' /}
+                {input Person, class => 'nf-input', inputmode => 'numeric', step => '1', min => '1'}
+                    <small class="nf-help" n:if="$err">{inputError Person}</small>
+            </div>
+
+            {** Date range vedle sebe **}
+            <div class="nf-row-2 nf-col-span-2">
+                    {var $err = $form['Date_from']->hasErrors()}
+                <div class="nf-field{if $err} is-error{/if}">
+                            {label Date_from, class => 'nf-label' /}
+                    {input Date_from, class => 'nf-input'}
+                            <small class="nf-help" n:if="$err">{inputError Date_from}</small>
+                </div>
+
+                {var $err = $form['Date_to']->hasErrors()}
+                    <div class="nf-field{if $err} is-error{/if}">
+                        {label Date_to, class => 'nf-label' /}
+                    {input Date_to, class => 'nf-input'}
+                        <small class="nf-help" n:if="$err">{inputError Date_to}</small>
+                    </div>
+            </div>
+
+            {var $err = $form['Dog']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                    <label class="nf-check">
+                        {input Dog}
+                        <span>{label Dog /}</span>
+                    </label>
+                    <small class="nf-help" n:if="$err">{inputError Dog}</small>
+            </div>
+
+            {var $err = $form['Note']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                {label Note, class => 'nf-label' /}
+                {input Note, class => 'nf-input nf-textarea', rows => 4, placeholder => 'Poznámka k pobytu'}
+                <small class="nf-help" n:if="$err">{inputError Note}</small>
+            </div>
+        </div>
+
+        <div class="nf-actions">
+            {input send, class => 'nf-btn nf-btn--primary', value => 'Uložit rezervaci'}
+            <a n:href="this" class="nf-btn nf-btn--ghost">Zrušit</a>
+        </div>
+
+    {/form}
+{/block}

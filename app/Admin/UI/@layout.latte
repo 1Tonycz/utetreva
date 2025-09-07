@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Antonín Zelený">
+    <link rel="stylesheet" href="{$basePath}/css/admin/{$css}.css">
+    <script src="{$basePath}/js/{if isset($js)}{$js}{else}master{/if}.js" defer></script>
+    <script src="https://unpkg.com/naja/dist/Naja.min.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', () => naja.initialize());</script>
+
+    <title>Admin</title>
+</head>
+<body>
+    {control navbar}
+    {block content}
+    {/block}
+</body>
+</html>

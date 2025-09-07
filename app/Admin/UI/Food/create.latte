@@ -1,0 +1,90 @@
+{var $css = "formpdf"}
+
+{block content}
+    {form foodForm, class => 'nf-form nf-form--narrow', novalidate => true}
+
+        {** Globální chyby **}
+        <ul class="nf-errors" n:if="$form->hasErrors()">
+            <li n:foreach="$form->errors as $e">{$e}</li>
+        </ul>
+
+        <div class="nf-grid">
+            {var $err = $form['Name_cs']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                    {label Name_cs, class => 'nf-label' /}
+                {input Name_cs, class => 'nf-input', placeholder => 'Název položky'}
+                    <small class="nf-help" n:if="$err">{inputError Name_cs}</small>
+            </div>
+
+            {var $err = $form['Name_de']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                    {label Name_de, class => 'nf-label' /}
+                {input Name_de, class => 'nf-input', placeholder => 'Název položky'}
+                    <small class="nf-help" n:if="$err">{inputError Name_de}</small>
+            </div>
+
+            {var $err = $form['Name_en']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                    {label Name_en, class => 'nf-label' /}
+                {input Name_en, class => 'nf-input', placeholder => 'Název položky'}
+                    <small class="nf-help" n:if="$err">{inputError Name_en}</small>
+            </div>
+
+            {var $err = $form['Name_ru']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                    {label Name_ru, class => 'nf-label' /}
+                {input Name_ru, class => 'nf-input', placeholder => 'Název položky'}
+                    <small class="nf-help" n:if="$err">{inputError Name_ru}</small>
+            </div>
+
+            {var $err = $form['Description_cs']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                    {label Description_cs class => 'nf-label' /}
+                {input Description_cs, class => 'nf-input', placeholder => 'Popis položky'}
+                    <small class="nf-help" n:if="$err">{inputError Description_cs}</small>
+            </div>
+
+            {var $err = $form['Description_de']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                    {label Description_de class => 'nf-label' /}
+                {input Description_de, class => 'nf-input', placeholder => 'Popis položky'}
+                    <small class="nf-help" n:if="$err">{inputError Description_de}</small>
+            </div>
+            {var $err = $form['Description_en']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                    {label Description_en class => 'nf-label' /}
+                {input Description_en, class => 'nf-input', placeholder => 'Popis položky'}
+                    <small class="nf-help" n:if="$err">{inputError Description_en}</small>
+            </div>
+
+            {var $err = $form['Description_ru']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                    {label Description_ru class => 'nf-label' /}
+                {input Description_ru, class => 'nf-input', placeholder => 'Popis položky'}
+                    <small class="nf-help" n:if="$err">{inputError Description_ru}</small>
+            </div>
+
+
+
+            {var $err = $form['Price']->hasErrors()}
+            <div class="nf-field nf-affix{if $err} is-error{/if}" data-suffix="Kč">
+                    {label Price, class => 'nf-label' /}
+                {input Price, class => 'nf-input', inputmode => 'decimal', step => '0.01', min => '0'}
+                    <small class="nf-help" n:if="$err">{inputError Price}</small>
+            </div>
+
+            {var $err = $form['Category']->hasErrors()}
+            <div class="nf-field{if $err} is-error{/if}">
+                {label Category, class => 'nf-label' /}
+                {input Category, class => 'nf-input'}
+                <small class="nf-help" n:if="$err">{inputError Category}</small>
+            </div>
+        </div>
+
+        <div class="nf-actions">
+            {input Submit, class => 'nf-btn nf-btn--primary', value => 'Uložit položku'}
+            <a n:href="this" class="nf-btn nf-btn--ghost">Zrušit</a>
+        </div>
+
+    {/form}
+{/block}

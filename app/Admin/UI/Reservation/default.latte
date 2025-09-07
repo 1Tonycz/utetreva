@@ -1,0 +1,60 @@
+{var $css = "reservation"}
+
+{block content}
+    <div class="reservations-list">
+        {foreach $accommodations as $reservation}
+            <div class="reservation-card">
+                <!-- levá strana -->
+                <div class="reservation-left">
+                    <h2>
+                        {$reservation->First} {$reservation->Second}
+                        <span class="new-badge">Nová rezervace</span>
+                    </h2>
+                    <p><strong>Email:</strong> {$reservation->Mail}</p>
+                    <p><strong>Telefon:</strong> {$reservation->Tel}</p>
+                    <p><strong>Příjezd:</strong> {$reservation->Date_from|date:'j. n. Y'}</p>
+                    <p><strong>Odjezd:</strong> {$reservation->Date_to|date:'j. n. Y'}</p>
+                    <p><strong>Počet osob:</strong> {$reservation->Person}</p>
+                    <p><strong>Mazlíček:</strong> {if $reservation->Dog == 1}Ano{else}Ne{/if}</p>
+                    {if $reservation->Note}
+                        <p><strong>Poznámka:</strong> {$reservation->Note}</p>
+                    {/if}
+                </div>
+
+                <!-- pravá strana -->
+                <div class="reservation-right">
+                    <form method="post" action="{link this}">
+                        <input type="hidden" name="reservation_id" value="{$reservation->ID}">
+
+                        <fieldset>
+                            <legend>Pokoje</legend>
+                            <div class="rooms-grid">
+                                {foreach $rooms as $room}
+                                    {var $free = $isRoomAvailable($room->ID, $reservation->Date_from, $reservation->Date_to)}
+                                    <label class="room-card {if !$free}disabled{/if}">
+                                        <div class="room-top">
+                                            <span class="room-name">{$room->Name}</span>
+                                            <span class="badge {if $free}badge-ok{else}badge-no{/if}">
+                      {if $free}volný{else}obsazeno{/if}
+                    </span>
+                                        </div>
+                                        <div class="room-bottom">
+                                            <input class="check" type="checkbox" name="room_ids[]" value="{$room->ID}" {if !$free}disabled{/if}>
+                                            <span class="muted" style="font-size:13px">{if $free}vybrat{else}nelze{/if}</span>
+                                        </div>
+                                    </label>
+                                {/foreach}
+                            </div>
+                        </fieldset>
+
+                        <div class="actions">
+                            <button type="submit" name="action" value="accept" class="btn btn-accept">Přijmout</button>
+                            <button type="submit" name="action" value="email" class="btn btn-email">E-mail</button>
+                            <a n:href=":Admin:Reservation:calculation, id => $reservation->ID" class="btn btn-calc">Kalkulace</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {/foreach}
+    </div>
+{/block}

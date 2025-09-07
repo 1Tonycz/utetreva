@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8">
+    <style>
+        @page {
+            size: A5 landscape;
+            margin: 8mm;
+        }
+        @media print {
+            body { box-shadow: none; margin: 0; }
+        }
+        body{
+            margin: 0.2rem;
+            font: 12px/1.35 "Segoe UI", Roboto, Arial, sans-serif;
+        }
+        .line{
+            display: flex;
+            justify-content: space-between;
+            text-align: left;
+
+        }
+        .quad{
+            width: 25%;
+            vertical-align: top;
+            display: flex;
+        }
+        .half{
+            width: 50%;
+            vertical-align: top;
+            display: flex;
+        }
+        table {
+            border-collapse: collapse; /* Sloučí okraje buněk pro čistší vzhled */
+            width: 100%;
+            table-layout: fixed;
+        }
+        td {
+            border: 1px solid black; /* Okraj buněk */
+            text-align: left;
+            min-height: 50px;
+        }
+        td[rowspan] {
+            vertical-align: middle; /* Vertikální zarovnání textu */
+        }
+        tr{
+            width: 100%;
+        }
+        .h4{
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        .h3{
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .w50{
+            width: 50%;
+        }
+
+        header > *{
+            border: none;
+        }
+        header > .line > *{
+            border: none;
+        }
+        header > .line + .line > *{
+            border: none;
+        }
+        .split { display: flex; }
+        .split > div { flex: 1; }
+        /* volitelné: svislá čára mezi polovinami, jako dřív mezi dvěma <td> */
+        .split > div + div { border-left: 1px solid black; padding-left: 6px; margin-left: 6px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="line">
+            <div class="quad">
+                <span class="h4">Organizace</span>
+            </div>
+            <div class="quad">
+                Jindřich Kolesa<br>
+                Plzeňská 99/6<br>
+                35301, Mariánské Lázně, ČR<br>
+            </div>
+            <div class="half">
+                <span class="h3">Přijmový pokladní doklad</span>
+            </div>
+        </div>
+        <div class="line">
+            <div class="quad">
+                <span class="h4">IČO:</span>
+            </div>
+            <div class="quad">
+                4684468
+            </div>
+            <div class="half">
+                <span class="h4">Číslo:</span>
+            </div>
+        </div>
+        <div class="line">
+            <div class="quad">
+                <span class="h4">DIČ:</span>
+            </div>
+            <div class="quad">
+                CZ8001115789
+            </div>
+            <div class="half">
+                <span class="h4">Ze dne: </span><span>{$data['paid_at']}</span>
+            </div>
+        </div>
+    </header>
+    <table>
+        <tr>
+            <td colspan="3" style="border-bottom: none;">
+                <h4>Přijato od: {$data['received_from']}</h4>
+            </td>
+        </tr>
+        <tr>{* IČO příjemce *}
+            <td style="border-top: none; border-right: none;">
+                <span class="h4">IČO:</span>
+            </td>
+            <td colspan="2" style="border-top: none; border-left: none;">
+                <span class="h4">DIČ:</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3"><h4>Přijato Kč: {$data['total_amount']}</h4> </td>
+        </tr>
+        <tr>
+            <td colspan="3"><h4>slovy: {$data['total_amount_words']}</h4></td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div class="split">
+                    <div><span class="h4">Účel platby: Ubytování</span></div>
+                    <div><span class="h4">Rozpočtová skladba:</span></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div class="split">
+                    <div><span class="h4">Schválil:</span></div>
+                    <div><span class="h4">Podpis pokladníka:</span></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div class="split">
+                    <div><span class="h4">Účetní doklad ze dne:</span></div>
+                    <div style="border-left: none"><span class="h4">číslo:</span></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center"><span class="h4">Text</span></td>
+            <td style="text-align: center"><span class="h4">Účtovací předpis (Dal - účet)</span></td>
+            <td style="text-align: center"><span class="h4">Kč</span></td>
+        </tr>
+        <tr>
+            <td>{$data['text']}</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><div style="display: flex; justify-content: space-between"><span class="h4">Suma bez DPH:</span><span class="h4"> {$data['total_amount_without_vat']} Kč</span></div></td>
+            <td><div style="display: flex; justify-content: space-between;"><span class="h4">DPH {$data['vat']} %:</span><span class="h4">{$data['vat_amount']} Kč</span></div></td>
+            <td rowspan="2">Přezkoušel:<br>Dne:<br>Zaúčtoval:<br>Dne:</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="border-right: none !important;"><div style="display: flex; justify-content: space-between"><span class="h4">Nepodléhá DPH:</span><span class="h4">0,00 Kč</span></div></td>
+        </tr>
+    </table>
+
+
+
+</body>
+</html>

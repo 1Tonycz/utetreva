@@ -1,0 +1,46 @@
+{var $css = "formpdf"}
+{block content}
+
+    {form feeForm, class => 'nf-form', novalidate => true}
+
+        {** Globální chyby formuláře **}
+        <ul class="nf-errors" n:if="$form->hasErrors()">
+            <li n:foreach="$form->errors as $e">{$e}</li>
+        </ul>
+
+        <div class="nf-grid">
+            {var $err = $form['received_from']->hasErrors()}
+        <div class="nf-field{if $err} is-error{/if}">
+                    {label received_from, class => 'nf-label' /}
+            {input received_from, class => 'nf-input', placeholder => 'Jméno / organizace'}
+                    <small class="nf-help" n:if="$err">{inputError received_from}</small>
+        </div>
+
+        {var $err = $form['paid_at']->hasErrors()}
+        <div class="nf-field{if $err} is-error{/if}">
+                    {label paid_at, class => 'nf-label' /}
+            {input paid_at, class => 'nf-input'}
+                    <small class="nf-help" n:if="$err">{inputError paid_at}</small>
+        </div>
+
+        {var $err = $form['total_amount']->hasErrors()}
+        <div class="nf-field nf-affix{if $err} is-error{/if}" data-suffix="Kč">
+                    {label total_amount, class => 'nf-label' /}
+            {input total_amount, class => 'nf-input', inputmode => 'decimal', step => '0.01'}
+                    <small class="nf-help" n:if="$err">{inputError total_amount}</small>
+        </div>
+        {var $err = $form['text']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                {label text, class => 'nf-label' /}
+            {input text, class => 'nf-input nf-textarea', rows => 4, placeholder => 'Poznámka / text na doklad'}
+                <small class="nf-help" n:if="$err">{inputError text}</small>
+            </div>
+        </div>
+
+        <div class="nf-actions">
+            {input download, class => 'nf-btn nf-btn--primary', value => 'Generovat PDF'}
+        </div>
+
+    {/form}
+
+{/block}

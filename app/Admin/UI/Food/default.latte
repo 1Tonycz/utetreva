@@ -1,0 +1,204 @@
+{var $css = "food"}
+
+{block content}
+
+<div n:snippet="tabs" class="tabs tabs--wrap">
+    {foreach $cats as $id => $label}
+        <a n:href="this, cat => $id"
+                data-naja
+                class="tab {if $cat === $id}is-active{/if}">
+            {$label}
+        </a>
+    {/foreach}
+    <a n:href=":Admin:Food:create" class="btn btn--primary">
+        + Přidat jídlo
+    </a>
+</div>
+
+<div n:snippet="foods">
+    <h3>{$cats[$cat]}</h3>
+
+    {if $foods}
+        {foreach $foods as $food}
+            <div class="food-item">
+                <div>
+                    <h4>{$food->Name_cs}</h4>
+                    <div class="price">{$food->Price} Kč</div>
+                </div>
+                <div class="actions">
+                    <button type="button"
+                            class="icon-btn icon-btn--edit"
+                            title="Upravit"
+                            data-modal-open="food-edit"
+                            data-food-id="{$food->ID}"
+                            data-food-name="{$food->Name_cs}"
+                            data-food-price="{$food->Price}"
+                            data-food-cat="{$food->Category}"
+                            data-food-archived="{$food->Archived}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                        </svg>
+                    </button>
+                    <a n:href="archive!, id => $food->ID" data-naja class="icon-btn icon-btn--archive" title="Archivovat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
+                            <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+                        </svg></a>
+                    <a n:href="delete!, id => $food->ID" data-naja class="icon-btn icon-btn--restore" title="Smazat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                        </svg></a>
+                </div>
+            </div>
+        {/foreach}
+    {else}
+        <p>V této kategorii zatím nic není.</p>
+    {/if}
+
+    <h3 style="margin-top:1rem;">Archivované položky</h3>
+    {if $archived}
+        {foreach $archived as $food}
+            <div class="food-item is-archived">
+                <div>
+                    <strong>{$food->Name_cs}</strong>
+                    <div class="price">{$food->Price} Kč</div>
+                </div>
+                <div class="actions">
+                    <button type="button"
+                            class="icon-btn icon-btn--edit"
+                            title="Upravit"
+                            data-modal-open="food-edit"
+                            data-food-id="{$food->ID}"
+                            data-food-name="{$food->Name_cs}"
+                            data-food-price="{$food->Price}"
+                            data-food-cat="{$food->Category}"
+                            data-food-archived="{$food->Archived}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                        </svg>
+                    </button>
+                    <a n:href="unarchive!, id => $food->ID" data-naja class="icon-btn icon-btn--restore" title="Obnovit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+                        </svg></a>
+                    <a n:href="delete!, id => $food->ID" data-naja class="icon-btn icon-btn--restore" title="Smazat"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                        </svg></a>
+                </div>
+            </div>
+        {/foreach}
+    {else}
+        <p>Žádné archivované položky.</p>
+    {/if}
+</div>
+<div id="modal-food-edit" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="foodEditTitle">
+        <button type="button" class="modal-close" data-modal-close aria-label="Zavřít">×</button>
+        <h3 id="foodEditTitle">Upravit jídlo</h3>
+
+        <form method="post" action="{link editFood!}">
+            <input type="hidden" name="id" id="fe-id">
+
+            <div class="field">
+                <label>
+                    <span>Název</span>
+                    <input type="text" name="name" id="fe-name" required>
+                </label>
+            </div>
+
+            <div class="field">
+                <label>
+                    <span>Cena (Kč)</span>
+                    <input type="number" name="price" id="fe-price" min="0" step="1" required>
+                </label>
+            </div>
+
+            <div class="field">
+                <label>
+                    <span>Kategorie</span>
+                    <select name="category" id="fe-cat" required>
+                        {foreach $cats as $catId => $catLabel}
+                            <option value="{$catId}">{$catLabel}</option>
+                        {/foreach}
+                    </select>
+                </label>
+            </div>
+
+            <div class="field" style="display:flex; align-items:center; gap:8px;">
+                <label>
+                    <input type="checkbox" name="archived" id="fe-archived" value="1">
+                    <span>Archivovat</span>
+                </label>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn" data-modal-close>Zrušit</button>
+                <button type="submit" class="btn primary">Uložit změny</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    (function(){
+        function openModalById(id){ const el = document.getElementById(id); if (!el) return; el.setAttribute('aria-hidden','false'); setTimeout(()=>el.querySelector('input, select, textarea')?.focus(),0); }
+        function closeModal(el){ el.setAttribute('aria-hidden','true'); }
+
+        document.addEventListener('click', function(e){
+            const opener = e.target.closest('[data-modal-open]');
+            if (opener) {
+                e.preventDefault();
+                const target = opener.getAttribute('data-modal-open');
+
+                // Modal: food-edit – naplň z data- atributů
+                if (target === 'food-edit') {
+                    const modalId = 'modal-food-edit';
+                    const el = document.getElementById(modalId);
+                    if (!el) return;
+
+                    const id = opener.dataset.foodId || '';
+                    const name = opener.dataset.foodName || '';
+                    const price = opener.dataset.foodPrice || '';
+                    const cat = opener.dataset.foodCat || '';
+                    const archived = opener.dataset.foodArchived || '0';
+
+                    el.querySelector('#fe-id').value = id;
+                    el.querySelector('#fe-name').value = name;
+                    el.querySelector('#fe-price').value = price;
+                    el.querySelector('#fe-cat').value = cat;
+                    el.querySelector('#fe-archived').checked = (archived === '1');
+
+                    openModalById(modalId);
+                    return;
+                }
+
+                // Ostatní modaly (pokud máš)
+                openModalById('modal-' + target);
+                return;
+            }
+
+            const closer = e.target.closest('[data-modal-close]');
+            if (closer) {
+                e.preventDefault();
+                const m = closer.closest('.modal'); if (m) closeModal(m);
+                return;
+            }
+
+            // klik mimo obsah zavírá
+            const modal = e.target.closest('.modal');
+            if (modal && e.target === modal) closeModal(modal);
+        });
+
+        // Esc zavírá aktivní modaly
+        document.addEventListener('keydown', function(e){
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal[aria-hidden="false"]').forEach(closeModal);
+            }
+        });
+
+        // Po AJAXu (Naja) znovu navěs chování, pokud by se snippet přerenderoval
+        document.addEventListener('naja:complete', () => {
+            // nic speciálního tady není potřeba, handler je delegovaný na document
+        });
+    })();
+</script>

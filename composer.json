@@ -19,7 +19,12 @@
 		"nette/security": "^3.2",
 		"nette/utils": "^4.0",
 		"latte/latte": "^3.0",
-		"tracy/tracy": "^2.10"
+		"tracy/tracy": "^2.10",
+		"mpdf/mpdf": "^8.2",
+		"kwn/number-to-words": "^2.12",
+		"dompdf/dompdf": "^3.1",
+		"spatie/browsershot": "^5.0",
+		"contributte/translation": "^2.0"
 	},
 	"require-dev": {
 		"nette/tester": "^2.5",

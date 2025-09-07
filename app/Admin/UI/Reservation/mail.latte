@@ -1,0 +1,39 @@
+{var $css = "formpdf"}
+
+{block content}
+    {form emailForm, class => 'nf-form nf-form--full', novalidate => true}
+
+        <ul class="nf-errors" n:if="$form->hasErrors()">
+            <li n:foreach="$form->errors as $e">{$e}</li>
+        </ul>
+
+        <div class="nf-grid">
+            {var $err = $form['email']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                    {label email, class => 'nf-label' /}
+                {input email, class => 'nf-input', inputmode => 'email', placeholder => 'např. uzivatel@domena.cz'}
+                    <small class="nf-help" n:if="$err">{inputError email}</small>
+            </div>
+
+            {var $err = $form['subject']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                    {label subject, class => 'nf-label' /}
+                {input subject, class => 'nf-input', placeholder => 'Předmět zprávy'}
+                    <small class="nf-help" n:if="$err">{inputError subject}</small>
+            </div>
+
+            {var $err = $form['message']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                {label message, class => 'nf-label' /}
+                {input message, class => 'nf-input nf-textarea', rows => 12, placeholder => 'Text zprávy…'}
+                <small class="nf-help" n:if="$err">{inputError message}</small>
+            </div>
+        </div>
+
+        <div class="nf-actions">
+            {input send, class => 'nf-btn nf-btn--primary', value => 'Odeslat e-mail'}
+            <a n:href="this" class="nf-btn nf-btn--ghost">Zrušit</a>
+        </div>
+
+    {/form}
+{/block}

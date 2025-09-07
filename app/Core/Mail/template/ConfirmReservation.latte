@@ -1,0 +1,41 @@
+Dobrý den,<br>
+<br>
+Potvrzujeme Vaší rezervaci.<br>
+<br>
+Termín: {$from|date: 'd/m/Y'} - {$to|date: 'd/m/Y'}<br>
+<br>
+<ul>
+    {foreach $rooms as $room}
+        <li>{$room['name']}: {$room['price']} Kč / noc</li><br>
+    {/foreach}
+</ul>
+
+{$nights} noci x  {$totalPrice} = {= ($nights * $totalPrice)},-<br>
+{$nights} noci x {$person} os x 50 lázeňský poplatek = {= ($nights * $person) * 50},-<br>
+{if $Dog == 1}
+Poplatek za mazlíčka: 150 Kč / noc<br>
+{$nights} noci x 150 Kč = {= $nights * 150},-<br>
+{/if}
+----------------------------------------------<br>
+Celková cena: {= ($nights * $totalPrice) + (($nights * $person) * 50) + ($Dog == 1 ? ($nights * 150) : 0)},-<br>
+<br>
+Záloha činí minimálně 50% z celkové hodnoty pobytu<br>
+{= (($nights * $totalPrice) + (($nights * $person) * 50) + ($Dog == 1 ? ($nights * 150) : 0)) / 2},- do 14 dní před příjezdem. Zbylou částku<br>
+můžete doplatit převodem na účet nebo u nás.<br>
+<br>
+Platbu můžete poslat na účet: xxx<br>
+Variabilní symbol: {$VS}<br>
+Do poznámky: {$name}<br>
+<br>
+Důležité informace:<br>
+<br>
+V celém resortu Kladská není mobilní signál a nelze platit platební kartou.<br>
+Wifi signál je na pokoji, v restauraci velice slabý.<br>
+
+Snídaně jsou od 9:00 - 10:00, po případné domluvě lze čas upravit.<br>
+
+Parkování na našem parkovišti zdarma.<br>
+<br>
+V příloze zasíláme všeobecné informace.<br>
+<br>
+Děkujeme a těšíme se na Vaší návštěvu.<br>

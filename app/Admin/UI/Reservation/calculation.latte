@@ -1,0 +1,161 @@
+{var $css = "calculation"}
+{block content}
+    <div class="container">
+        <div class="page-title">Kalkulace rezervace - {$reservation->First} {$reservation->Second}</div>
+        <div class="meta">
+            Termín: <strong>{$reservation->Date_from|date:'j.n.Y'}</strong> – <strong>{$reservation->Date_to|date:'j.n.Y'}</strong>
+            · Nocí: <strong>{$summary['nights']}</strong> · Osob: <strong>{$reservation->Person}</strong>
+            {if $reservation->Dog} · Pes: <strong>ano</strong>{/if}
+        </div>
+
+        <form method="post" action="{$presenter->link('Reservation:calculation', ['id' => $reservation->ID])}" novalidate>
+            <div class="layout">
+                <!-- ROOMS -->
+                <section class="card">
+                    <h3 style="margin:0 0 10px;font-size:16px">Pokoje</h3>
+                    <div class="section section--rooms">
+                        {foreach $rooms as $r}
+                            {var $rid = (int) $r->ID}
+                            {var $checked = in_array($rid, $selectedRooms ?? [])}
+                            {var $available = $isRoomAvailable($rid)}
+                            <article class="room card" aria-disabled="{!$available}">
+                                <div class="room__head">
+                                    <input class="check"
+                                           type="checkbox"
+                                           name="room_ids[]"
+                                           value="{$rid}"
+                                           {if $checked}checked{/if}
+                       {if !$available}disabled aria-label="Pokoj {$r->Name} je obsazen"{/if}
+                                           id="room-{$rid}">
+                                    <label class="room__name" for="room-{$rid}">{$r->Name}</label>
+                                    <span class="badge {if $available}badge--ok{else}badge--no{/if}">
+                  {if $available}volný{else}obsazeno{/if}
+                </span>
+                                </div>
+
+                                <div class="room__prices">
+                                    <label class="field">
+                                        <span class="label">Výchozí cena / noc</span>
+                                        <input class="input" type="text" value="{=number_format((float)$r->Price,0,',',' ')} Kč" readonly>
+                                    </label>
+
+                                    <label class="field">
+                                        <span class="label">Speciální cena / noc</span>
+                                        <input class="input"
+                                               type="text"
+                                               inputmode="decimal"
+                                               name="custom_prices[{$rid}]"
+                                               value="{ifset $customPrices[$rid]}{$customPrices[$rid]}{/ifset}"
+                                               placeholder="ponechat prázdné = výchozí"
+                                               {if !$available}disabled{/if}>
+                                    </label>
+                                </div>
+                            </article>
+                        {/foreach}
+                    </div>
+                </section>
+
+                <!-- SUMMARY (sticky on desktop) -->
+                <aside class="card summary summary-sticky">
+                    <h3 style="margin:0 0 10px;font-size:16px">Souhrn</h3>
+                    <ul>
+                        <li><span>Pokoje / noc</span><strong>{=number_format($summary['perNightRooms'],0,',',' ')} Kč</strong></li>
+                        <li><span>Počet nocí</span><strong>{$summary['nights']}</strong></li>
+                        <li><span>Poplatky (osoby{if $summary['flags']['countDogFee']} + pes{/if})</span><strong>{=number_format($summary['accomFees'],0,',',' ')} Kč</strong></li>
+
+                        {if $summary['extraItems']}
+                            {foreach $summary['extraItems'] as $ei}
+                                <li>
+                                    <span>{$ei['label'] ? $ei['label'] : 'Přídavná položka'}</span>
+                                    <strong>{=number_format($ei['amount'],0,',',' ')} Kč</strong>
+                                </li>
+                            {/foreach}
+                        {/if}
+
+                        <li class="total"><span>Celkem pobyt</span><strong>{=number_format($summary['total'],0,',',' ')} Kč</strong></li>
+                    </ul>
+
+                    <div class="actions" style="margin-top:12px">
+                        <button type="submit" class="btn-secondary" name="calc_action" value="recalc">Přepočítat</button>
+                        <button type="submit" class="btn" name="calc_action" value="confirm">Potvrdit kalkulaci</button>
+                    </div>
+                    <p class="hint">„Přepočítat“ neukládá do DB. „Potvrdit“ nastaví Solved, uloží cenu a odešle e-mail.</p>
+                </aside>
+            </div>
+
+            <!-- FEES -->
+            <section class="card" style="margin-top:var(--gap)">
+                <h3 style="margin:0 0 10px;font-size:16px">Poplatky</h3>
+
+                <div class="section section--fees">
+                    <label class="switch">
+                        <input type="checkbox" name="count_fees" value="1" {if $summary['flags']['countFees']}checked{/if}>
+                        <div>
+                            <div><strong>Počítat poplatky za osoby</strong></div>
+                            <small>{$perPersonFee} Kč / osoba / noc</small>
+                        </div>
+                    </label>
+
+                    <label class="switch">
+                        <input type="checkbox" name="count_dog_fee" value="1" {if $summary['flags']['countDogFee']}checked{/if} {if !$reservation->Dog}disabled{/if}>
+                        <div>
+                            <div><strong>Počítat poplatek za psa</strong></div>
+                            <small>{$dogFeePerNight} Kč / noc {if !$reservation->Dog}(rezervace nemá psa){/if}</small>
+                        </div>
+                    </label>
+                </div>
+
+                <div style="margin-top:12px">
+                    <div style="font-weight:600; margin-bottom:6px">Přídavné položky (poplatek/sleva)</div>
+                    <div class="fees-list" id="extra-fees-list">
+                        {if $extraItems}
+                            {foreach $extraItems as $ei}
+                                <div class="fee-row">
+                                    <input class="input" type="text" inputmode="decimal" name="extra_fees_amount[]" value="{$ei['amount']}" placeholder="např. 300">
+                                    <input class="input" type="text" name="extra_fees_label[]" value="{$ei['label']}" placeholder="Popis položky (např. parkování)">
+                                    <button type="button" class="btn-icon" aria-label="Odstranit" onclick="this.parentNode.remove()">✕</button>
+                                </div>
+                            {/foreach}
+                        {else}
+                            <div class="fee-row">
+                                <input class="input" type="text" inputmode="decimal" name="extra_fees_amount[]" placeholder="např. 300">
+                                <input class="input" type="text" name="extra_fees_label[]" placeholder="Popis položky (např. parkování)">
+                                <button type="button" class="btn-icon" aria-label="Odstranit" onclick="this.parentNode.remove()">✕</button>
+                            </div>
+                        {/if}
+                    </div>
+                    <button type="button" id="add-fee" class="btn-secondary" style="margin-top:8px">+ Přidat položku</button>
+                    <p class="hint">Zadej kladné i záporné částky (sleva). Popis je volitelný.</p>
+                </div>
+            </section>
+
+            <!-- mobile sticky bar spacer -->
+            <div class="spacer"></div>
+
+            <!-- MOBILE ACTION BAR -->
+            <div class="mobile-bar">
+                <div class="mobile-bar__total">Celkem: {=number_format($summary['total'],0,',',' ')} Kč</div>
+                <button type="submit" class="btn-secondary" name="calc_action" value="recalc" aria-label="Přepočítat">Přepočítat</button>
+                <button type="submit" class="btn" name="calc_action" value="confirm" aria-label="Potvrdit kalkulaci">Potvrdit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        (function(){
+            var addBtn = document.getElementById('add-fee');
+            if(addBtn){
+                addBtn.addEventListener('click', function(){
+                    var wrap = document.getElementById('extra-fees-list');
+                    var row = document.createElement('div');
+                    row.className = 'fee-row';
+                    row.innerHTML =
+                        '<input class="input" type="text" inputmode="decimal" name="extra_fees_amount[]" placeholder="např. 300">' +
+                        '<input class="input" type="text" name="extra_fees_label[]" placeholder="Popis položky (např. parkování)">' +
+                        '<button type="button" class="btn-icon" aria-label="Odstranit" onclick="this.parentNode.remove()">✕</button>';
+                    wrap.appendChild(row);
+                });
+            }
+        })();
+    </script>
+{/block}

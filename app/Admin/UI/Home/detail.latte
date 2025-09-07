@@ -1,0 +1,219 @@
+{var $css = "detail"}
+
+{block content}
+
+    <div class="detail-container">
+        <!-- Levý sloupec – hlavní info o rezervaci -->
+        <div class="card">
+            <div class="card-header">Informace o rezervaci</div>
+            <div class="info-list">
+                <div class="info-row">
+                    <div class="info-label">Jméno</div>
+                    <div class="info-value">{$reservation->First} {$reservation->Second}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Počet osob</div>
+                    <div class="info-value">{$reservation->Person}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Telefon</div>
+                    <div class="info-value"><a href="tel:{$reservation->Tel}">{$reservation->Tel}</a></div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Email</div>
+                    <div class="info-value"><a href="mailto:{$reservation->Mail}">{$reservation->Mail}</a></div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Od</div>
+                    <div class="info-value">{$reservation->Date_from|date:'j. n. Y'}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Do</div>
+                    <div class="info-value">{$reservation->Date_to|date:'j. n. Y'}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Počet nocí</div>
+                    <div class="info-value">{$nights}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Pes</div>
+                    <div class="info-value">{if $reservation->Dog}Ano{else}Ne{/if}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Již zaplaceno</div>
+                    <div class="info-value"><strong>{$reservation->Deposit},-</strong></div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Cena celkem</div>
+                    <div class="info-value"><strong>{$reservation->totalPrice},-</strong></div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Doplatit</div>
+                    <div class="info-value"><strong>{= ($reservation->totalPrice - $reservation->Deposit) } ,-</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pravý sloupec – pokoje a akce -->
+        <div class="card">
+            <div class="card-header">Pokoje</div>
+            <ul class="room-list">
+                {foreach $rooms as $room}
+                    <li><strong>{$room['Name']}</strong></li>
+                {/foreach}
+            </ul>
+
+            <div class="actions" style="margin-top:16px;">
+                <button type="button" class="btn secondary" data-modal-open="comment" data-res-id="{$reservation->ID}">💬 Přidat poznámku</button>
+                <button type="button" class="btn secondary" data-modal-open="deposit" data-res-id="{$reservation->ID}">💰 Záloha</button>
+                <button type="button" class="btn secondary" data-modal-open="dates" data-res-id="{$reservation->ID}">✏ Upravit termín</button>
+                <button type="button" class="btn danger" data-modal-open="cancel" data-res-id="{$reservation->ID}">🗑 Zrušit rezervaci</button>
+                <button type="button" class="btn secondary" data-modal-open="room" data-res-id="{$reservation->ID}">🛏 Změnit pokoj</button>
+                <a n:href="markPaid!, id => $reservation->ID" class="btn primary">✔ Zaplaceno</a>
+                <a n:href="accommodationlist, id => $reservation->ID" class="btn secondary">Daňový pokladní list - Ubytování</a>
+                <a n:href="feelist, id => $reservation->ID" class="btn secondary">Daňový pokladní list - Lazeňský poplatek</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Poznámky -->
+    <div class="card comment-section">
+        <div class="card-header">Poznámky</div>
+        {if isset($comments) && $comments}
+            {foreach $comments as $c}
+                <div class="comment-item">
+                    <div class="comment-meta">{$c->created_at|date:'j. n. Y H:i'}</div>
+                    <div class="comment-body">{$c->Note|breaklines}</div>
+                </div>
+            {/foreach}
+        {else}
+            <p>Žádné poznámky zatím…</p>
+        {/if}
+    </div>
+
+    <!-- MODALY -->
+    {* Záloha *}
+    <div id="modal-deposit" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="depositTitle">
+            <button type="button" class="modal-close" data-modal-close aria-label="Zavřít">×</button>
+            <h3 id="depositTitle">Nastavit zálohu</h3>
+            <form method="post" action="{link addDeposit!, id => $reservation->ID}">
+                <label class="field"><span>Částka (Kč)</span>
+                    <input name="amount" type="number" step="0.01" min="0" required>
+                </label>
+                <div class="modal-actions">
+                    <button type="button" class="btn" data-modal-close>Zrušit</button>
+                    <button type="submit" class="btn primary">Uložit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {* Poznámka *}
+    <div id="modal-comment" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="commentTitle">
+            <button type="button" class="modal-close" data-modal-close aria-label="Zavřít">×</button>
+            <h3 id="commentTitle">Přidat poznámku</h3>
+            <form method="post" action="{link addComment!, id => $reservation->ID}">
+                <label class="field"><span>Poznámka</span>
+                    <textarea name="note" rows="5" required placeholder="Napište interní poznámku…"></textarea>
+                </label>
+                <div class="modal-actions">
+                    <button type="button" class="btn" data-modal-close>Zrušit</button>
+                    <button type="submit" class="btn primary">Uložit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {* Změna termínu *}
+    <div id="modal-dates" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="datesTitle">
+            <button type="button" class="modal-close" data-modal-close aria-label="Zavřít">×</button>
+            <h3 id="datesTitle">Upravit termín</h3>
+            <form method="post" action="{link changeDates!, id => $reservation->ID}">
+                <div class="grid-2">
+                    <label class="field"><span>Příjezd (Od)</span>
+                        <input name="date_from" type="date" required value="{$reservation->Date_from|date:'Y-m-d'}">
+                    </label>
+                    <label class="field"><span>Odjezd (Do)</span>
+                        <input name="date_to" type="date" required value="{$reservation->Date_to|date:'Y-m-d'}">
+                    </label>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn" data-modal-close>Zrušit</button>
+                    <button type="submit" class="btn primary">Uložit změny</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {* Zrušení rezervace *}
+    <div id="modal-cancel" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="cancelTitle">
+            <button type="button" class="modal-close" data-modal-close aria-label="Zavřít">×</button>
+            <h3 id="cancelTitle">Zrušit rezervaci</h3>
+            <p>Opravdu chcete zrušit tuto rezervaci? Akce není vratná.</p>
+            <form method="post" action="{link cancelReservation!, id => $reservation->ID}">
+                <div class="modal-actions">
+                    <button type="button" class="btn" data-modal-close>Nechat být</button>
+                    <button type="submit" class="btn danger">Ano, zrušit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {* Změna pokojů *}
+    <div id="modal-room" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="roomTitle">
+            <button type="button" class="modal-close" data-modal-close aria-label="Zavřít">×</button>
+            <h3 id="roomTitle">Změnit pokoj(e)</h3>
+            <form method="post" action="{link changeRooms!, id => $reservation->ID}">
+                <fieldset>
+                    <legend>Vybrat pokoj</legend>
+                    {foreach $allRooms as $room}
+                        {var $isSelected = in_array((int)$room->ID, $selectedRoomIds)}
+                        {var $isAvail = $isRoomAvailable($room->ID, $reservation->Date_from, $reservation->Date_to)}
+                        {var $disabled = (!$isSelected && !$isAvail)}
+                        <label style="display:block; margin:.25rem 0;">
+                            <input type="checkbox" name="room_ids[]" value="{$room->ID}" {if $isSelected}checked{/if} {if $disabled}disabled{/if}>
+                            {$room->Name} ({$room->Price},- / noc)
+                            {if !$isAvail && !$isSelected}<small style="opacity:.7;">— obsazeno</small>{/if}
+                        </label>
+                    {/foreach}
+                </fieldset>
+                <div class="modal-actions">
+                    <button type="button" class="btn" data-modal-close>Zrušit</button>
+                    <button type="submit" class="btn primary">Uložit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            function openModal(name){
+                const el = document.getElementById('modal-' + name);
+                if(el){ el.setAttribute('aria-hidden','false'); setTimeout(()=>el.querySelector('input,textarea')?.focus(),0);}
+            }
+            function closeModal(el){ el.setAttribute('aria-hidden','true'); }
+
+            document.addEventListener('click', function(e){
+                const opener = e.target.closest('[data-modal-open]');
+                if(opener){ e.preventDefault(); openModal(opener.getAttribute('data-modal-open')); }
+                const closer = e.target.closest('[data-modal-close]');
+                if(closer){ e.preventDefault(); const modal = closer.closest('.modal'); if(modal) closeModal(modal); }
+            });
+
+            document.addEventListener('click', function(e){
+                const modal = e.target.closest('.modal');
+                if(modal && e.target===modal) closeModal(modal);
+            });
+
+            document.addEventListener('keydown', function(e){
+                if(e.key==='Escape'){ document.querySelectorAll('.modal[aria-hidden="false"]').forEach(closeModal); }
+            });
+        })();
+    </script>
+
+{/block}
