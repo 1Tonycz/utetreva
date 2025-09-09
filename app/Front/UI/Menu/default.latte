@@ -1,0 +1,38 @@
+{var $css = "menu"}
+{block content}
+    <section class="menu">
+        <header class="menu__header">
+            <h1>Menu</h1>
+            <p>Vychutnejte si jedinečné pokrmy připravované z nejkvalitnějších surovin</p>
+            <ul n:snippet="menuTabs">
+                <li>
+                    <a n:href="changeCategory! predkrmy"
+               n:class="$selectedCategory === 'predkrmy' ? 'menu__active ajax' : 'ajax'">Předkrmy</a>
+                </li>
+                <li>
+                    <a n:href="changeCategory! hlavni"
+               n:class="$selectedCategory === 'hlavni' ? 'menu__active ajax' : 'ajax'">Hlavní jídla</a>
+                </li>
+                <li>
+                    <a n:href="changeCategory! dezerty"
+               n:class="$selectedCategory === 'dezerty' ? 'menu__active ajax' : 'ajax'">Dezerty</a>
+                </li>
+                <li>
+                    <a n:href="changeCategory! napoje"
+               n:class="$selectedCategory === 'napoje' ? 'menu__active ajax' : 'ajax'">Nápoje</a>
+                </li>
+            </ul>
+        </header>
+        <article>
+            <div n:snippet="menuContent">
+                {foreach $menuItems as $item}
+                    <div class="menu__item">
+                        <h2>{$item->Name_cs}</h2>
+                        <p>{$item->Description_cs}</p>
+                        <span class="menu__price">{$item->Price} Kč</span>
+                    </div>
+                {/foreach}
+            </div>
+        </article>
+    </section>
+{/block}

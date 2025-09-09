@@ -1,0 +1,86 @@
+{var $css = "home"}
+{block content}
+
+<section class="rooms" aria-labelledby="rooms-title">
+    <h2 id="rooms-title" class="visually-hidden">Nabídka pokojů</h2>
+
+    <ul class="rooms__list" role="list">
+        <li>
+            <article class="room" itemscope itemtype="https://schema.org/HotelRoom">
+                <header class="room__header">
+                    <p class="room__badge" aria-label="Kapacita">
+            <span itemprop="occupancy" itemscope itemtype="https://schema.org/QuantitativeValue">
+              <data value="2" itemprop="value">2</data> osoby
+            </span>
+                    </p>
+
+                    <h3 class="room__title" itemprop="name">Dvoulůžkový pokoj</h3>
+
+                    <p class="room__price">
+            <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+              <data value="1800" itemprop="price">1 800</data>
+              <span itemprop="priceCurrency" content="CZK"><abbr title="korun českých">Kč</abbr></span>
+              <span class="room__per">/noc</span>
+            </span>
+                    </p>
+                </header>
+
+                <p class="room__desc" itemprop="description">
+                    Útulný pokoj s vlastní koupelnou se sprchou a toaletou
+                </p>
+
+                <h4 class="room__amenities-title">Vybavení:</h4>
+                <ul class="room__amenities" role="list">
+                    <li><span class="chip">Vlastní koupelna</span></li>
+                    <li><span class="chip">TV</span></li>
+                    <li><span class="chip">Wi-Fi</span></li>
+                    <li><span class="chip">Ručníky a povlečení</span></li>
+                </ul>
+
+                <footer class="room__actions">
+                    <!-- Pokud vede na samostatnou stránku s fotkami: -->
+                    <a href="/pokoje/dvouluzkovy/fotky" class="btn btn-ghost">Zobrazit více fotografií</a>
+                    <!-- Pokud otevírá modální okno, použij button type="button" -->
+                    <a href="/rezervace?room=dvouluzkovy" class="btn btn-primary">Rezervovat pokoj</a>
+                </footer>
+            </article>
+        </li>
+
+        <li>
+            <article class="room" itemscope itemtype="https://schema.org/HotelRoom">
+                <header class="room__header">
+                    <p class="room__badge" aria-label="Kapacita">
+            <span itemprop="occupancy" itemscope itemtype="https://schema.org/QuantitativeValue">
+              <data value="4" itemprop="value">4</data> osoby
+            </span>
+                    </p>
+                    <h3 class="room__title" itemprop="name">Čtyřlůžkový pokoj</h3>
+                    <p class="room__price">
+            <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+              <data value="2800" itemprop="price">2 800</data>
+              <span itemprop="priceCurrency" content="CZK"><abbr title="korun českých">Kč</abbr></span>
+              <span class="room__per">/noc</span>
+            </span>
+                    </p>
+                </header>
+
+                <p class="room__desc" itemprop="description">
+                    Prostorný pokoj s vanou a kompletním vybavením
+                </p>
+
+                <h4 class="room__amenities-title">Vybavení:</h4>
+                <ul class="room__amenities" role="list">
+                    <li><span class="chip">Vlastní koupelna s vanou</span></li>
+                    <li><span class="chip">TV</span></li>
+                    <li><span class="chip">Wi-Fi</span></li>
+                    <li><span class="chip">Kompletní vybavení</span></li>
+                </ul>
+
+                <footer class="room__actions">
+                    <a href="/pokoje/ctyrluzkovy/fotky" class="btn btn-ghost">Zobrazit více fotografií</a>
+                    <a href="/rezervace?room=ctyrluzkovy" class="btn btn-primary">Rezervovat pokoj</a>
+                </footer>
+            </article>
+        </li>
+    </ul>
+</section>

@@ -11,8 +11,8 @@
                     </svg>
                 </a></li>
             <li><a href="{$presenter->link(':Front:Home:default')}" class="{if isLinkCurrent(':Front:Home:default')}active{/if}">{_'ui.menu.home'}</a></li>
-            <li><a href="">{_'ui.menu.menu'}</a></li>
-            <li><a href="#">{_'ui.menu.accommodation'}</a></li>
+            <li><a href="{$presenter->link(':Front:Menu:default')}" class="{if isLinkCurrent(':Front:Menu:default')}active{/if}">{_'ui.menu.menu'}</a></li>
+            <li><a href="{$presenter->link(':Front:Accommodation:default')}" class="{if isLinkCurrent(':Front:Accommodation:default')}active{/if}">{_'ui.menu.accommodation'}</a></li>
             <li><a href="/#gallery">{_'ui.menu.gallery'}</a></li>
             <li><a href="/#contact" id="badge">{_'ui.menu.reservation'}</a></li>
         </div>
@@ -35,10 +35,10 @@
             </button>
 
             <ul id="translateMenu" class="nav__translate-menu" role="listbox" hidden>
-                <li role="option" aria-selected="true"><a href="/cs" lang="cs"><span class="code">CS</span><span class="name">Čeština</span></a></li>
-                <li role="option"><a href="/en" lang="en"><span class="code">EN</span><span class="name">English</span></a></li>
-                <li role="option"><a href="/de" lang="de"><span class="code">DE</span><span class="name">Deutsch</span></a></li>
-                <li role="option"><a href="/ru" lang="ru"><span class="code">RU</span><span class="name">Русский</span></a></li>
+                <li role="option" aria-selected="true"><a href="/cs/{$presenter->link("this")}" lang="cs"><span class="code">CS</span><span class="name">Čeština</span></a></li>
+                <li role="option"><a href="/en/{$presenter->link("this")}" lang="en"><span class="code">EN</span><span class="name">English</span></a></li>
+                <li role="option"><a href="/de/{$presenter->link("this")}" lang="de"><span class="code">DE</span><span class="name">Deutsch</span></a></li>
+                <li role="option"><a href="/ru/{$presenter->link("this")}" lang="ru"><span class="code">RU</span><span class="name">Русский</span></a></li>
             </ul>
         </div>
     </nav>

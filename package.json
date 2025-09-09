@@ -5,6 +5,7 @@
 		"css-loader": "^7.1.2",
 		"css-minimizer-webpack-plugin": "^7.0.2",
 		"mini-css-extract-plugin": "^2.9.3",
+		"naja": "^3.2.1",
 		"nette-forms": "^3.3",
 		"postcss-loader": "^8.1.1",
 		"puppeteer": "^24.17.1",
