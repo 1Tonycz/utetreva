@@ -3,12 +3,13 @@
 {block content}
     {form accommodationForm, class => 'nf-form', novalidate => true}
 
-        {** Globální chyby **}
+        {* Globální chyby *}
         <ul class="nf-errors" n:if="$form->hasErrors()">
             <li n:foreach="$form->errors as $e">{$e}</li>
         </ul>
 
         <div class="nf-grid">
+
             {var $err = $form['First']->hasErrors()}
             <div class="nf-field{if $err} is-error{/if}">
                     {label First, class => 'nf-label' /}
@@ -38,25 +39,48 @@
             </div>
 
             {var $err = $form['Person']->hasErrors()}
-            <div class="nf-field nf-affix{if $err} is-error{/if} " data-suffix="os.">
+            <div class="nf-field nf-affix{if $err} is-error{/if}" data-suffix="os.">
                     {label Person, class => 'nf-label' /}
                 {input Person, class => 'nf-input', inputmode => 'numeric', step => '1', min => '1'}
                     <small class="nf-help" n:if="$err">{inputError Person}</small>
             </div>
 
-            {** Date range vedle sebe **}
+            {* Pokoje — vlastní rendrování do gridu *}
+            {var $err = $form['room_ids']->hasErrors()}
+            <fieldset class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                    <legend class="nf-label">{label room_ids /}</legend>
+
+                    <div class="nf-rooms">
+                        {var $ctrl = $form['room_ids']}
+                    {foreach $ctrl->items as $id => $label}
+                            {*
+                               Použijeme n:name="room_ids:$id" – Nette doplní checked/disabled/ids samo.
+                               Třídu 'is-disabled' přidáme podle disabled stavu controlu.
+                            *}
+                            {var $part = $ctrl->getControlPart($id)}
+                            <label class="nf-check nf-room{if isset($part->attrs['disabled'])} is-disabled{/if}">
+                                <input n:name="room_ids:$id">
+                                <span>{$label}</span>
+                            </label>
+                        {/foreach}
+                    </div>
+
+                    <small class="nf-help" n:if="$err">{inputError room_ids}</small>
+            </fieldset>
+
+            {* Date range vedle sebe *}
             <div class="nf-row-2 nf-col-span-2">
                     {var $err = $form['Date_from']->hasErrors()}
                 <div class="nf-field{if $err} is-error{/if}">
                             {label Date_from, class => 'nf-label' /}
-                    {input Date_from, class => 'nf-input'}
+                    {input Date_from, class => 'nf-input', autocomplete => 'off'}
                             <small class="nf-help" n:if="$err">{inputError Date_from}</small>
                 </div>
 
                 {var $err = $form['Date_to']->hasErrors()}
                     <div class="nf-field{if $err} is-error{/if}">
                         {label Date_to, class => 'nf-label' /}
-                    {input Date_to, class => 'nf-input'}
+                    {input Date_to, class => 'nf-input', autocomplete => 'off'}
                         <small class="nf-help" n:if="$err">{inputError Date_to}</small>
                     </div>
             </div>
@@ -82,6 +106,5 @@
             {input send, class => 'nf-btn nf-btn--primary', value => 'Uložit rezervaci'}
             <a n:href="this" class="nf-btn nf-btn--ghost">Zrušit</a>
         </div>
-
     {/form}
 {/block}

@@ -40,11 +40,21 @@ class BasePresenter extends Presenter
     protected function startup(): void
     {
         parent::startup();
-        $sec = $this->session->getSection('locale');
-        if (!empty($sec->code)) {
-            $this->translator->setLocale($sec->code);
+
+        $locale = $this->getParameter('locale');
+
+        if ($locale) {
+            $sec = $this->session->getSection('locale');
+            $sec->code = $locale;
+            $this->translator->setLocale($locale);
+        } else {
+            $sec = $this->session->getSection('locale');
+            if (!empty($sec->code)) {
+                $this->translator->setLocale($sec->code);
+            }
         }
     }
+
 
 
     protected function getBasePath(): string

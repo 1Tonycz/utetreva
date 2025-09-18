@@ -5,11 +5,11 @@
     <div class="cal-toolbar">
         <!-- LEVÝ sloupec: akce -->
         <div class="cal-actions-left">
-            <button type="button"
+            {if $user->isAllowed('home','clean')}<button type="button"
                     class="cal-btn"
                     data-modal-open="clean"
-                    data-day="{$cleanDefaultDay->format('Y-m-d')}">🧹 Uklizeno</button>
-            <a n:href=":Admin:Home:reservation" class="cal-btn">➕ Vytvořit rezervaci</a>
+                    data-day="{$cleanDefaultDay->format('Y-m-d')}">🧹 Uklizeno</button>{/if}
+            {if $user->isAllowed('home','reservation')}<a n:href=":Admin:Home:reservation" class="cal-btn">➕ Vytvořit rezervaci</a>{/if}
         </div>
 
         <!-- STŘED: navigace měsíců -->

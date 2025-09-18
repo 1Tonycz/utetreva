@@ -60,7 +60,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // najdi pole *uvnitř stejného formuláře* jako je total_amount_without_vat
             var net = document.querySelector('input[name="total_amount_without_vat"]');
             if (!net) return;
             var form = net.form || document.querySelector('form');

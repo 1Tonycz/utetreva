@@ -412,6 +412,10 @@ a:hover {
   cursor: pointer;
 }
 
+textarea {
+  width: 100%;
+}
+
 @media screen and (min-width: 768px) {
   .nav__up {
     flex-wrap: nowrap;

@@ -19,6 +19,10 @@ final class GaleriePresenter extends BasePresenter
     /** Výpis všech nahraných fotografií */
     public function renderDefault(): void
     {
+        if (!$this->getUser()->isAllowed('galerie', 'default')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $this->template->pension = $this->galerieRepository->getAll()->where('Category', 'pension')->order('created_at DESC');
         $this->template->restaurace = $this->galerieRepository->getAll()->where('Category', 'restaurace')->order('created_at DESC');
         $this->template->kladska = $this->galerieRepository->getAll()->where('Category', 'kladska')->order('created_at DESC');
@@ -27,7 +31,9 @@ final class GaleriePresenter extends BasePresenter
     /** nahrání nové fotografie */
     public function renderCreate(): void
     {
-
+        if (!$this->getUser()->isAllowed('galerie', 'create')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
     }
 
     /** Komponenta formuláře */
@@ -113,6 +119,10 @@ final class GaleriePresenter extends BasePresenter
 
     public function handleDelete(int $id): void
     {
+        if (!$this->getUser()->isAllowed('galerie', 'delete')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         // případně kontrola oprávnění uživatele
         $item = $this->galerieRepository->getById($id);
 

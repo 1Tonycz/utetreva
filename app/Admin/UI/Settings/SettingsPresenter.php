@@ -22,6 +22,10 @@ final class SettingsPresenter extends BasePresenter
 
     public function renderDefault(): void
     {
+        if (!$this->getUser()->isAllowed('settings', 'default')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $rooms = $this->roomRepository->getAll();
         $this->template->rooms = $rooms;
 
@@ -39,6 +43,10 @@ final class SettingsPresenter extends BasePresenter
     /** Signal: změna ceny (POST s fields: id, price) */
     public function handleChangePrice(int $id): void
     {
+        if (!$this->getUser()->isAllowed('settings', 'changePrice')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $http = $this->getHttpRequest();
         $priceNorm = (string) $http->getPost('price', '');
 
@@ -103,6 +111,10 @@ final class SettingsPresenter extends BasePresenter
 
     public function handleChangeTime(int $id)
     {
+        if (!$this->getUser()->isAllowed('settings', 'changeTime')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $opens  = $this->getHttpRequest()->getPost('opens');   // '11:00'
         $closes = $this->getHttpRequest()->getPost('closes');  // '22:00'
         $overnight = (int) ($closes <= $opens);                // přes půlnoc
@@ -115,6 +127,10 @@ final class SettingsPresenter extends BasePresenter
 
     public function handleAddException(): void
     {
+        if (!$this->getUser()->isAllowed('settings', 'exception')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $r = $this->getHttpRequest();
         $day = (string) $r->getPost('day');             // YYYY-MM-DD
         $isClosed = (bool) $r->getPost('is_closed');
@@ -147,6 +163,10 @@ final class SettingsPresenter extends BasePresenter
 
     public function handleUpdateException(int $id): void
     {
+        if (!$this->getUser()->isAllowed('settings', 'updateException')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $r = $this->getHttpRequest();
         $day = (string) $r->getPost('day');
         $isClosed = (bool) $r->getPost('is_closed');
@@ -179,6 +199,10 @@ final class SettingsPresenter extends BasePresenter
 
     public function handleDeleteException(int $id): void
     {
+        if (!$this->getUser()->isAllowed('settings', 'deleteException')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $this->openingExceptionsRepository->delete($id);
         $this->flashMessage('Výjimka smazána.', 'success');
         $this->redirect('this');

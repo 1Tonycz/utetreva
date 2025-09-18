@@ -64,14 +64,14 @@
             </ul>
 
             <div class="actions" style="margin-top:16px;">
-                <button type="button" class="btn secondary" data-modal-open="comment" data-res-id="{$reservation->ID}">💬 Přidat poznámku</button>
-                <button type="button" class="btn secondary" data-modal-open="deposit" data-res-id="{$reservation->ID}">💰 Záloha</button>
-                <button type="button" class="btn secondary" data-modal-open="dates" data-res-id="{$reservation->ID}">✏ Upravit termín</button>
-                <button type="button" class="btn danger" data-modal-open="cancel" data-res-id="{$reservation->ID}">🗑 Zrušit rezervaci</button>
-                <button type="button" class="btn secondary" data-modal-open="room" data-res-id="{$reservation->ID}">🛏 Změnit pokoj</button>
-                <a n:href="markPaid!, id => $reservation->ID" class="btn primary">✔ Zaplaceno</a>
-                <a n:href="accommodationlist, id => $reservation->ID" class="btn secondary">Daňový pokladní list - Ubytování</a>
-                <a n:href="feelist, id => $reservation->ID" class="btn secondary">Daňový pokladní list - Lazeňský poplatek</a>
+                {if $user->isAllowed('home','comments')}<button type="button" class="btn secondary" data-modal-open="comment" data-res-id="{$reservation->ID}">💬 Přidat poznámku</button>{/if}
+                {if $user->isAllowed('home','deposit')}<button type="button" class="btn secondary" data-modal-open="deposit" data-res-id="{$reservation->ID}">💰 Záloha</button>{/if}
+                {if $user->isAllowed('home','changeDate')}<button type="button" class="btn secondary" data-modal-open="dates" data-res-id="{$reservation->ID}">✏ Upravit termín</button>{/if}
+                {if $user->isAllowed('home','cancle')}<button type="button" class="btn danger" data-modal-open="cancel" data-res-id="{$reservation->ID}">🗑 Zrušit rezervaci</button>{/if}
+                {if $user->isAllowed('home','changeRoom')}<button type="button" class="btn secondary" data-modal-open="room" data-res-id="{$reservation->ID}">🛏 Změnit pokoj</button>{/if}
+                {if $user->isAllowed('home','paid')}<a n:href="markPaid!, id => $reservation->ID" class="btn primary">✔ Zaplaceno</a>{/if}
+                {if $user->isAllowed('home','receipt')}<a n:href="accommodationlist, id => $reservation->ID" class="btn secondary">Daňový pokladní list - Ubytování</a>{/if}
+                {if $user->isAllowed('home','receipt')}<a n:href="feelist, id => $reservation->ID" class="btn secondary">Daňový pokladní list - Lazeňský poplatek</a>{/if}
             </div>
         </div>
     </div>

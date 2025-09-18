@@ -1,4 +1,7 @@
 {var $css = "accommodation"}
+{var $title = "Ubytování | Pension U Tetřeva Kladská u Mariánských Lázní – útulné pokoje v přírodě"}
+{var $description = "Pension U Tetřeva na Kladské u Mariánských Lázní nabízí útulné pokoje i apartmány v srdci Slavkovského lesa. Užijte si klidnou atmosféru, pohodlné ubytování a malebné okolí ideální pro turistiku i odpočinek."}
+{var $keywords = "ubytování U Tetřeva, pension Kladská, pokoje Mariánské Lázně, apartmán Kladská, Slavkovský les ubytování"}
 {block content}
 
     <section class="rooms">
@@ -39,8 +42,8 @@
                     </ul>
 
                     <footer class="room__buttons">
-                        <p class="room__secondarybutton"><a href="/pokoje/dvouluzkovy/fotky">{_'ui.cta.viewPhotos'}</a></p>
-                        <p class="room__button"><a href="/rezervace?room=dvouluzkovy">{_'ui.cta.bookRoom'}</a></p>
+                        <p class="room__secondarybutton"><a href="{$presenter->link(':Front:Galerie:default')}">{_'ui.cta.viewPhotos'}</a></p>
+                        <p class="room__button"><a href="{$presenter->link(':Front:Reservation:default')}">{_'ui.cta.bookRoom'}</a></p>
                     </footer>
                 </article>
             </li>
@@ -78,8 +81,8 @@
                     </ul>
 
                     <footer class="room__buttons">
-                        <p class="room__secondarybutton"><a href="/pokoje/apartman/fotky">{_'ui.cta.viewPhotos'}</a></p>
-                        <p class="room__button"><a href="/rezervace?room=apartman">{_'ui.cta.bookRoom'}</a></p>
+                        <p class="room__secondarybutton"><a href="{$presenter->link(':Front:Galerie:default')}">{_'ui.cta.viewPhotos'}</a></p>
+                        <p class="room__button"><a href="{$presenter->link(':Front:Reservation:default')}">{_'ui.cta.bookRoom'}</a></p>
                     </footer>
                 </article>
             </li>
@@ -117,8 +120,8 @@
                     </ul>
 
                     <footer class="room__buttons">
-                        <p class="room__secondarybutton"><a href="/pokoje/triluzkovy/fotky">{_'ui.cta.viewPhotos'}</a></p>
-                        <p class="room__button"><a href="/rezervace?room=triluzkovy">{_'ui.cta.bookRoom'}</a></p>
+                        <p class="room__secondarybutton"><a href="{$presenter->link(':Front:Galerie:default')}">{_'ui.cta.viewPhotos'}</a></p>
+                        <p class="room__button"><a href="{$presenter->link(':Front:Reservation:default')}">{_'ui.cta.bookRoom'}</a></p>
                     </footer>
                 </article>
             </li>

@@ -22,6 +22,10 @@ final class ReservationPresenter extends BasePresenter
 
     public function renderDefault(): void
     {
+        if (!$this->getUser()->isAllowed('reservation', 'default')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         // Data pro šablonu (výpis nových rezervací + všechny pokoje)
         $this->template->accommodations = $this->accommodationRepository->getAll()
             ->where('Solved = ?', 0)
@@ -156,6 +160,10 @@ final class ReservationPresenter extends BasePresenter
 
     public function renderCalculation(int $id): void
     {
+        if (!$this->getUser()->isAllowed('reservation', 'calculation')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         // 1) Rezervace
         $reservation = $this->accommodationRepository->getById($id);
         if (!$reservation) {
@@ -405,6 +413,10 @@ final class ReservationPresenter extends BasePresenter
 
     public function renderMail(int $id): void
     {
+        if (!$this->getUser()->isAllowed('reservation', 'mail')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $reservation = $this->accommodationRepository->getById($id);
         if (!$reservation) {
             $this->flashMessage('Rezervace nenalezena.');

@@ -17,24 +17,22 @@ final class UserAuthenticator implements Authenticator
 
     public function authenticate(string $username, string $password): SimpleIdentity
     {
-        $row = $this->database
-            ->table('users')
-            ->where('username', $username)
-            ->fetch();
-
+        $row = $this->database->table('users')->where('username', $username)->fetch();
         if (!$row) {
             throw new AuthenticationException('Uživatel nenalezen.');
         }
-
-        bdump($password, 'Zadané heslo');
-        bdump($row->password, 'Hash z databáze');
-        bdump(password_hash('1234', PASSWORD_DEFAULT), 'Nově vygenerovaný hash hesla "1234"');
-        bdump(password_verify($password, $row->password), 'Výsledek ověření');
-
         if (!password_verify($password, $row->password)) {
             throw new AuthenticationException('Špatné heslo.');
         }
 
-        return new SimpleIdentity($row->id, $row->role ?? 'user', ['username' => $row->username]);
+        // role může být "admin", "user" nebo "admin,user"
+        $roles = $row->role ? array_map('trim', explode(',', (string)$row->role)) : ['user'];
+
+        return new SimpleIdentity(
+            $row->id,
+            $roles,
+            ['username' => $row->username]
+        );
     }
+
 }

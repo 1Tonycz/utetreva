@@ -2,6 +2,7 @@ services:
 	- App\Core\Router\RouterFactory::createRouter
 	- App\Core\Security\UserAuthenticator
 	- App\Core\Mail\MailService
+	security.authorizator: @App\Core\Security\AuthorizatorFactory::create()
 
 
 search:

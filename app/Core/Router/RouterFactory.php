@@ -31,10 +31,17 @@ final class RouterFactory
 
         $router
             ->withModule('Front')
-            ->addRoute('', 'Home:default')
-            ->addRoute('<presenter>/<action>[/<id>]', [
+            ->addRoute('[<locale=cs en|cs|ru|de>/]', 'Home:default')
+            ->addRoute('[<locale=cs en|cs|ru|de>/]<presenter>/<action>[/<id>]', [
                 'presenter' => [
                     Route::Value => 'Home',
+                    Route::FilterTable => [
+                        'jidelni-listek' => 'Menu',
+                        'ubytovani' => 'Accommodation',
+                        'galerie' => 'Galerie',
+                        'rezervace' => 'Reservation',
+                    ],
+
                 ],
                 'action' => [
                     Route::Value => 'default',

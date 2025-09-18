@@ -37,6 +37,11 @@ final class HomePresenter extends BasePresenter
     // přijmeme parametry y=rok, m=měsíc (1–12)
     public function renderDefault(?int $y = null, ?int $m = null): void
     {
+        if (!$this->getUser()->isAllowed('home', 'default')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
+
         // --- Základ: vychozí časová zóna a datum ---
         $tz = new \DateTimeZone('Europe/Prague');
         $base = new \DateTimeImmutable('today', $tz);
@@ -157,6 +162,9 @@ final class HomePresenter extends BasePresenter
 
     public function renderDetail(int $id): void
     {
+        if (!$this->getUser()->isAllowed('home', 'detail')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
 
         // 1) načti rezervaci
         $reservation = $this->accommodationRepository->getById($id);
@@ -205,7 +213,9 @@ final class HomePresenter extends BasePresenter
     }
 
     public function renderReservation(){
-        $this->template->title = 'Vytvořit rezervaci';
+        if (!$this->getUser()->isAllowed('home', 'reservation')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
     }
 
     protected function createComponentAccommodationForm(): Form
@@ -307,12 +317,14 @@ final class HomePresenter extends BasePresenter
         }
 
         $this->flashMessage('Rezervace vytvořena.');
-        // přesměruj na detail (uprav route dle projektu)
         $this->redirect(':Admin:Home:detail', ['id' => (int)$row->ID]);
     }
 
     public function handleAddComment(int $id): void
     {
+        if (!$this->getUser()->isAllowed('home', 'comments')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
         $note = trim((string)($this->getHttpRequest()->getPost('note') ?? ''));
         $this->reservationCommentsRepository->insert(['reservation_id' => $id, 'note' => $note, 'created_at' => date('Y-m-d H:i:s')]);
 
@@ -322,6 +334,10 @@ final class HomePresenter extends BasePresenter
 
     public function handleAddDeposit(int $id): void
     {
+        if (!$this->getUser()->isAllowed('home', 'deposit')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $amount = (float) ($this->getHttpRequest()->getPost('amount') ?? 0);
         $this->accommodationRepository->update($id, [
             'Deposit' => $amount,
@@ -333,6 +349,10 @@ final class HomePresenter extends BasePresenter
 
     public function handleMarkPaid(int $id): void
     {
+        if (!$this->getUser()->isAllowed('home', 'paid')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $reservation = $this->accommodationRepository->getById($id);
         $this->accommodationRepository->update($id, [
             'Deposit' => $reservation->totalPrice,
@@ -342,6 +362,10 @@ final class HomePresenter extends BasePresenter
 
     public function handleChangeDates(int $id): void
     {
+        if (!$this->getUser()->isAllowed('home', 'changeDate')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         // načti rezervaci
         $reservation = $this->accommodationRepository->getById($id);
 
@@ -414,6 +438,10 @@ final class HomePresenter extends BasePresenter
 
     public function handleCancelReservation(int $id): void
     {
+        if (!$this->getUser()->isAllowed('home', 'cancel')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $reservation = $this->accommodationRepository->getById($id);
         if (!$reservation) {
             $this->error('Rezervace nenalezena.');
@@ -427,6 +455,10 @@ final class HomePresenter extends BasePresenter
 
     public function handleChangeRooms(int $id): void
     {
+        if (!$this->getUser()->isAllowed('home', 'changeRoom')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $reservation = $this->accommodationRepository->getById($id);
         if (!$reservation) {
             $this->error('Rezervace nenalezena.');
@@ -496,6 +528,10 @@ final class HomePresenter extends BasePresenter
 
     public function handleSaveCleaning(): void
     {
+        if (!$this->getUser()->isAllowed('home', 'clean')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $dayStr = (string) ($this->getHttpRequest()->getPost('day') ?? '');
         $roomIdsPost = (array) ($this->getHttpRequest()->getPost('room_ids') ?? []);
 
@@ -524,6 +560,10 @@ final class HomePresenter extends BasePresenter
 
     public function handleCreateReservation(): void
     {
+        if (!$this->getUser()->isAllowed('home', 'reservation')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $post = $this->getHttpRequest()->getPost();
 
         $first  = trim((string)($post['first']  ?? ''));
@@ -627,23 +667,34 @@ final class HomePresenter extends BasePresenter
 
     public function renderAccommodationlist(int $id): void
     {
+        if (!$this->getUser()->isAllowed('home', 'receipt')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $r = $this->accommodationRepository->getById($id);
 
         $nights = $this->accommodationRepository->getNumberOfNights($r->Date_from, $r->Date_to);
 
         $totalPrice = $r->totalPrice - ($nights * 50 * $r->Person);
 
+
+
         $this['receiptForm']->setDefaults([
             'received_from'     => trim($r->First . ' ' . $r->Second),
             'paid_at'           => $r->Date_from->format('Y-m-d'),
             'total_amount'      => $totalPrice,
             'vat'               => 12,
+            'total_amount_without_vat' => $totalPrice/(1.12),
             'text'              => $r->Person . 'os/ ' . $nights . ($nights == 1 ? 'noc' : 'noci'),
         ]);
     }
 
     public function renderFeelist(int $id): void
     {
+        if (!$this->getUser()->isAllowed('home', 'receipt')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $r = $this->accommodationRepository->getById($id);
 
         $nights = $this->accommodationRepository->getNumberOfNights($r->Date_from, $r->Date_to);

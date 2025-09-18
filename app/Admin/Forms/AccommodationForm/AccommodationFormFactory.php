@@ -7,6 +7,7 @@ namespace App\Admin\Forms\AccommodationForm;
 use App\Core\Repository\ReservationroomRepository;
 use App\Core\Repository\RoomRepository;
 use Nette\Application\UI\Form;
+use Nette\Utils\ArrayHash;
 
 final class AccommodationFormFactory
 {
@@ -100,9 +101,7 @@ final class AccommodationFormFactory
         // --- SUBMIT ---
         $form->addSubmit('send', 'Vytvořit rezervaci');
 
-        // (volitelné) mezivalidační pravidlo: Date_from <= Date_to
-        $form->onValidate[] = function (Form $form): void {
-            $v = $form->getValues('array');
+        $form->onValidate[] = function (Form $form, ArrayHash $v): void {
             if (!empty($v['Date_from']) && !empty($v['Date_to'])) {
                 try {
                     $from = new \DateTimeImmutable((string)$v['Date_from']);

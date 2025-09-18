@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+        xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+    <!-- ===================== -->
+    <!-- Home / Domovská stránka -->
+    <!-- ===================== -->
+    <url>
+        <loc>https://1tonytesterweb.online/cs/</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <url>
+        <loc>https://1tonytesterweb.online/en/</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <url>
+        <loc>https://1tonytesterweb.online/de/</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <url>
+        <loc>https://1tonytesterweb.online/ru/</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- ===================== -->
+    <!-- Jídelní lístek -->
+    <!-- ===================== -->
+    <url>
+        <loc>https://1tonytesterweb.online/cs/jidelni-listek</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/jidelni-listek" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://1tonytesterweb.online/en/jidelni-listek</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/jidelni-listek" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://1tonytesterweb.online/de/jidelni-listek</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/jidelni-listek" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://1tonytesterweb.online/ru/jidelni-listek</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/jidelni-listek" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- ===================== -->
+    <!-- Ubytování -->
+    <!-- ===================== -->
+    <url>
+        <loc>https://1tonytesterweb.online/cs/ubytovani</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/ubytovani" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://1tonytesterweb.online/en/ubytovani</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/ubytovani" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://1tonytesterweb.online/de/ubytovani</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/ubytovani" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://1tonytesterweb.online/ru/ubytovani</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/ubytovani" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- ===================== -->
+    <!-- Rezervace -->
+    <!-- ===================== -->
+    <url>
+        <loc>https://1tonytesterweb.online/cs/rezervace</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/rezervace" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/rezervace" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/rezervace" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/rezervace" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/rezervace" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://1tonytesterweb.online/en/rezervace</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/rezervace" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/rezervace" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/rezervace" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/rezervace" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/rezervace" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://1tonytesterweb.online/de/rezervace</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/rezervace" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/rezervace" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/rezervace" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/rezervace" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/rezervace" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://1tonytesterweb.online/ru/rezervace</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/rezervace" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/rezervace" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/rezervace" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/rezervace" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/rezervace" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- ===================== -->
+    <!-- Galerie -->
+    <!-- ===================== -->
+    <url>
+        <loc>https://1tonytesterweb.online/cs/galerie</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/galerie" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/galerie" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/galerie" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/galerie" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/galerie" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://1tonytesterweb.online/en/galerie</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/galerie" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/galerie" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/galerie" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/galerie" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/galerie" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://1tonytesterweb.online/de/galerie</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/galerie" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/galerie" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/galerie" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/galerie" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/galerie" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://1tonytesterweb.online/ru/galerie</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/galerie" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/galerie" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/galerie" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/galerie" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/galerie" />
+        <lastmod>2025-09-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+</urlset>

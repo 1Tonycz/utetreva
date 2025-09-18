@@ -16,13 +16,13 @@ use Nette\Http\Session;
 final class HomePresenter extends BasePresenter
 {
     public function __construct(
-        private FoodRepository $foodRepository,
+        public FoodRepository $foodRepository,
         OpeningHoursRepository $openingHoursRepository,
         OpeningExpectionsRepository $openingExpectionsRepository,
         protected Translator $translator,
         protected Session $session
     ) {
-        parent::__construct($openingHoursRepository, $openingExpectionsRepository, $translator, $session);
+        parent::__construct($openingHoursRepository, $openingExpectionsRepository, $translator, $session, $foodRepository);
     }
 
     public function renderDefault(): void

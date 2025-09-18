@@ -1,4 +1,7 @@
 {var $css = "home"}
+{var $title = "Restaurace a Pension U Tetřeva – Kladská u Mariánských Lázní"}
+{var $description = "Restaurace a Pension U Tetřeva – stylové ubytování a domácí kuchyně v srdci přírodní rezervace Kladská u Mariánských Lázní. Užijte si klidnou atmosféru, tradiční speciality z čerstvých surovin a pohodlné pokoje jen pár kroků od krásné přírody Slavkovského lesa."}
+{var $keywords = "Restaurace U Tetřeva, Pension U Tetřeva, Kladská, Mariánské Lázně, restaurace Slavkovský les, ubytování Kladská"}
 {block content}
     <section class="hero">
         <div class="hero__content">
@@ -11,9 +14,9 @@
             </p>
 
             <div class="hero__buttons">
-                <a href="/rezervace" class="hero__button">{_ 'ui.cta.reserveTable'}</a>
-                <a href="/menu" class="hero__secondarybutton">{_ 'ui.cta.viewMenu'}</a>
-                <a href="" class="hero__button">{_ 'ui.cta.reserveRoom'}</a>
+                <a href="{$presenter->link(':Front:Reservation:default')}" class="hero__button">{_ 'ui.cta.reserveTable'}</a>
+                <a href="{$presenter->link(':Front:Menu:default')}" class="hero__secondarybutton">{_ 'ui.cta.viewMenu'}</a>
+                <a href="{$presenter->link(':Front:Reservation:default')}" class="hero__button">{_ 'ui.cta.reserveRoom'}</a>
             </div>
         </div>
     </section>
@@ -39,7 +42,7 @@
         </ul>
 
         <p class="food__button">
-            <a href="/menu">{_ 'ui.food.viewAll'}</a>
+            <a href="{$presenter->link(':Front:Menu:default')}">{_ 'ui.food.viewAll'}</a>
         </p>
     </section>
 
@@ -115,7 +118,7 @@
 
         <div class="accommodation__buttons">
             <p class="accommodation__button"><a href="{$presenter->link(':Front:Accommodation:default')}">{_ 'ui.cta.reserveRoom'}</a></p>
-            <p class="accommodation__secondarybutton"><a href="/fotogalerie">{_ 'ui.cta.viewPhotos'}</a></p>
+            <p class="accommodation__secondarybutton"><a href="{$presenter->link(':Front:Galerie:default')}">{_ 'ui.cta.viewPhotos'}</a></p>
         </div>
     </section>
 
@@ -162,7 +165,7 @@
             </div>
 
             <div class="modal__body">
-                <p style="margin:0;">
+                <p>
                     {if $locale === 'en'}
                         We currently <strong>cannot accept card payments</strong>. Cash only. Thank you for understanding.
                     {elseif $locale === 'de'}

@@ -35,6 +35,9 @@ class FoodPresenter extends BasePresenter
 
     public function renderDefault(int $cat = 1): void
     {
+        if (!$this->getUser()->isAllowed('food', 'default')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
 
         $cat = array_key_exists($cat, self::Category) ? $cat : 1;
         $this->template->foods = $this->foodRepository->getAll()->where('Category', $cat)->where('archived', 0);
@@ -47,6 +50,7 @@ class FoodPresenter extends BasePresenter
 
     public function handleSelectCat(int $cat): void
     {
+
         $this->renderDefault($cat);
         $this->redrawControl('foods');
         $this->redrawControl('tabs');
@@ -54,6 +58,9 @@ class FoodPresenter extends BasePresenter
 
     public function renderCreate(): void
     {
+        if (!$this->getUser()->isAllowed('food', 'create')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
 
     }
 
@@ -81,6 +88,10 @@ class FoodPresenter extends BasePresenter
 
     public function handleArchive(int $id): void
     {
+        if (!$this->getUser()->isAllowed('food', 'archive')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $food = $this->foodRepository->getById($id);
         if ($food) {
             $this->foodRepository->update($id, ['archived' => 1]);
@@ -93,6 +104,10 @@ class FoodPresenter extends BasePresenter
 
     public function handleUnarchive(int $id): void
     {
+        if (!$this->getUser()->isAllowed('food', 'unarchive')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $food = $this->foodRepository->getById($id);
         if ($food) {
             $this->foodRepository->update($id, ['archived' => 0]);
@@ -105,6 +120,10 @@ class FoodPresenter extends BasePresenter
 
     public function handleDelete(int $id): void
     {
+        if (!$this->getUser()->isAllowed('food', 'delete')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $food = $this->foodRepository->getById($id);
         if ($food) {
             $this->foodRepository->delete($id);
@@ -117,7 +136,10 @@ class FoodPresenter extends BasePresenter
 
     public function handleEditFood(): void
     {
-        // 1) jen POST
+        if (!$this->getUser()->isAllowed('food', 'edit')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
         $req = $this->getHttpRequest();
         if (!$req->isMethod('POST')) {
             $this->error('Method not allowed');
