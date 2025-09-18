@@ -1,0 +1,65 @@
+{var $css = "gallery"}
+{block content}
+<section class="gallery">
+    <h1>{_'ui.gallery.title'}</h1>
+    <p>{_'ui.gallery.subtitle'}</p>
+    <article>
+        <h2>{_'ui.gallery.restaurace'}</h2>
+        <ul>
+            {foreach $restaurant as $image}
+                <li>
+                    <figure>
+                        <a href="{$basePath}/gallery/{$image->images}">
+                            <picture>
+                                <source srcset="{$basePath}/gallery/{$image->images}" type="image/webp">
+                                <img src="{$basePath}/gallery/{$image->images}"
+                                alt="{$image->title}"
+                                loading="lazy"
+                                decoding="async"
+                                >
+                            </picture>
+                        </a>
+                    </figure>
+                </li>
+            {/foreach}
+        </ul>
+        <h2>{_'ui.gallery.pension'}</h2>
+        <ul>
+            {foreach $pension as $image}
+                <li>
+                    <figure>
+                        <a href="{$basePath}/gallery/{$image->images}">
+                            <picture>
+                                <source srcset="{$basePath}/gallery/{$image->images}" type="image/webp">
+                                <img src="{$basePath}/gallery/{$image->images}"
+                                     alt="{$image->title}"
+                                     loading="lazy"
+                                     decoding="async"
+                                >
+                            </picture>
+                        </a>
+                    </figure>
+                </li>
+            {/foreach}
+        </ul>
+        <h2>{_'ui.gallery.kladska'}</h2>
+        <ul>
+            {foreach $kladska as $image}
+                <li>
+                    <figure>
+                        <a href="{$basePath}/gallery/{$image->images}">
+                            <picture>
+                                <source srcset="{$basePath}/gallery/{$image->images}" type="image/webp">
+                                <img src="{$basePath}/gallery/{$image->images}"
+                                     alt="{$image->title}"
+                                     loading="lazy"
+                                     decoding="async"
+                                >
+                            </picture>
+                        </a>
+                    </figure>
+                </li>
+            {/foreach}
+        </ul>
+    </article>
+</section>

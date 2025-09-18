@@ -114,7 +114,7 @@
         </ul>
 
         <div class="accommodation__buttons">
-            <p class="accommodation__button"><a href="/pokoje">{_ 'ui.cta.reserveRoom'}</a></p>
+            <p class="accommodation__button"><a href="{$presenter->link(':Front:Accommodation:default')}">{_ 'ui.cta.reserveRoom'}</a></p>
             <p class="accommodation__secondarybutton"><a href="/fotogalerie">{_ 'ui.cta.viewPhotos'}</a></p>
         </div>
     </section>
@@ -148,6 +148,103 @@
         </div>
     </section>
 
+    <div id="modal-no-card" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="nocardTitle">
+            <button type="button" class="modal-close" data-modal-close aria-label="Zavřít">×</button>
+
+            <div class="modal__header">
+                <h3 id="nocardTitle">
+                    {if $locale === 'en'}Important information
+                    {elseif $locale === 'de'}Wichtige Information
+                    {elseif $locale === 'ru'}Важная информация
+                    {else}Důležité upozornění{/if}
+                </h3>
+            </div>
+
+            <div class="modal__body">
+                <p style="margin:0;">
+                    {if $locale === 'en'}
+                        We currently <strong>cannot accept card payments</strong>. Cash only. Thank you for understanding.
+                    {elseif $locale === 'de'}
+                        Zurzeit <strong>können wir keine Kartenzahlungen akzeptieren</strong>. Nur Barzahlung. Danke für Ihr Verständnis.
+                    {elseif $locale === 'ru'}
+                        В настоящее время мы <strong>не принимаем оплату картой</strong>. Оплата только наличными. Спасибо за понимание.
+                    {else}
+                        Momentálně <strong>nelze platit kartou</strong>. Přijímáme pouze hotovost. Děkujeme za pochopení.
+                    {/if}
+                </p>
+            </div>
+
+            <div class="modal__footer">
+                <div class="modal-actions">
+                    <button type="button" class="btn" data-modal-close>
+                        {if $locale === 'en'}Close
+                        {elseif $locale === 'de'}Schließen
+                        {elseif $locale === 'ru'}Закрыть
+                        {else}Zavřít{/if}
+                    </button>
+                    <button type="button" class="btn primary" data-modal-close id="nocard-ok">
+                        {if $locale === 'en'}Got it
+                        {elseif $locale === 'de'}Verstanden
+                        {elseif $locale === 'ru'}Понятно
+                        {else}Rozumím{/if}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function () {
+            const MODAL_ID = 'modal-no-card';
+            const STORAGE_KEY = 'noCardPaymentDismissed';
+            const SHOW_DELAY_MS = 200;
+
+            const modal = document.getElementById(MODAL_ID);
+            if (!modal) return;
+
+            const content = modal.querySelector('.modal-content');
+            const closers = modal.querySelectorAll('[data-modal-close]');
+
+            const isOpen = () => modal.getAttribute('aria-hidden') === 'false';
+
+            function openModal() {
+                modal.setAttribute('aria-hidden', 'false');
+                setTimeout(() => content.querySelector('button,[href],[tabindex]:not([tabindex="-1"])')?.focus(), 0);
+            }
+            function closeModal() {
+                modal.setAttribute('aria-hidden', 'true');
+            }
+            function dismissAndRemember() {
+                try { localStorage.setItem(STORAGE_KEY, String(Date.now())); } catch(e) {}
+                closeModal();
+            }
+
+            // automatické otevření – jen pokud to uživatel dřív neodmítl
+            document.addEventListener('DOMContentLoaded', () => {
+                let dismissed = false;
+                try { dismissed = !!localStorage.getItem(STORAGE_KEY); } catch(e) {}
+                if (!dismissed) setTimeout(openModal, SHOW_DELAY_MS);
+            });
+
+            // zavření tlačítky / křížkem
+            closers.forEach(el => el.addEventListener('click', (e) => {
+                e.preventDefault();
+                dismissAndRemember();
+            }));
+
+            // klik na overlay (mimo obsah)
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) dismissAndRemember();
+            });
+
+            // klávesa ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && isOpen()) dismissAndRemember();
+            });
+        })();
+    </script>
+
+
 {/block}
 
 {define icon-bed}
@@ -161,5 +258,7 @@
 {define icon-coffee}
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-coffee h-5 w-5 text-accent"><path d="M10 2v2"></path><path d="M14 2v2"></path><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"></path><path d="M6 2v2"></path></svg>
 {/define}
+
+
 
 

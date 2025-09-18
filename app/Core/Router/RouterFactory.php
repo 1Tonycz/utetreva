@@ -29,11 +29,10 @@ final class RouterFactory
             ])
             ->end();
 
-        // FRONT – přidej locale prefix [cs|en]
         $router
             ->withModule('Front')
-            ->addRoute('[<locale=cs en|cs|ru|de>/]', 'Home:default')
-            ->addRoute('[<locale=cs en|cs|ru|de>/]<presenter>/<action>[/<id>]', [
+            ->addRoute('', 'Home:default')
+            ->addRoute('<presenter>/<action>[/<id>]', [
                 'presenter' => [
                     Route::Value => 'Home',
                 ],

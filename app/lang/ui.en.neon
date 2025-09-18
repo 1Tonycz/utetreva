@@ -1,81 +1,134 @@
-brand:
-  name: "U Tetřeva"
+  brand:
+    name: "U Tetřeva"
 
-menu:
+  menu:
     home: "Home"
     menu: "Menu"
     accommodation: "Accommodation"
     gallery: "Gallery"
-    reservation: "Reservations"
+    reservation: "Reservation"
 
-footer:
-  contact: "Contact"
-  openHours: "Opening hours"
-  pay: "Payment methods"
-  monday: "Monday"
-  tuesday: "Tuesday"
-  wednesday: "Wednesday"
-  thursday: "Thursday"
-  friday: "Friday"
-  saturday: "Saturday"
-  sunday: "Sunday"
-  close: "Closed"
-  expection: "Exceptions"
-  onlycash: "Cash only"
+  footer:
+    contact: "Contact"
+    openHours: "Opening hours"
+    pay: "Payment methods"
+    monday: "Monday"
+    tuesday: "Tuesday"
+    wednesday: "Wednesday"
+    thursday: "Thursday"
+    friday: "Friday"
+    saturday: "Saturday"
+    sunday: "Sunday"
+    close: "Closed"
+    expection: "Exceptions"
+    onlycash: "Cash only"
 
-hero:
-  title:
-    before: "Restaurant"
-  subtitle: "Enjoy unique culinary experiences in our cozy environment with accommodation options in the heart of nature"
+  hero:
+    title:
+      before: "Restaurant"
+    subtitle: "Enjoy unique culinary experiences in our cozy setting, with accommodation available in the heart of nature"
 
-cta:
-  reserveTable: "Book a table"
-  viewMenu: "View Menu"
-  reserveRoom: "Book a room"
-  viewPhotos: "View photos"
+  cta:
+    reserveTable: "Reserve a table"
+    viewMenu: "View menu"
+    reserveRoom: "Our rooms"
+    viewPhotos: "View photos"
+    bookRoom: "Book a room"
 
-food:
-  title: "Our favorite specialties"
-  subtitle: "Taste our most popular game dishes prepared from fresh regional ingredients"
-  viewAll: "Show full menu"
+  food:
+    title: "Our favourite specialties"
+    subtitle: "Taste our most popular game dishes prepared from fresh regional ingredients"
+    viewAll: "View full menu"
+    subtitleMenu: "Enjoy unique dishes prepared from the finest ingredients"
+    navigation:
+      starters: "Starters"
+      mains: "Mains"
+      desserts: "Desserts"
+      drinks: "Drinks"
 
-accommodation:
-  title: "Accommodation"
-  subtitle: "We offer comfortable accommodation in the style of a hunting lodge with a beautiful view of nature"
-  equipment:
-    title: "Facilities:"
-    bathroom: "Bathroom"
-    tv: "TV"
-    wifi: "Wi-Fi"
-    towels: "Towels and bed linen"
-  capacity: "Capacity: %count% persons"
-  apartment:
-    name: "Apartment"
-    shortDesc: "Description of the apartment"
-  triple:
-    name: "Triple room"
-    shortDesc: "Description of the triple room"
-  double:
-    name: "Double room"
-    shortDesc: "Description of the double room"
-  extras:
-    parking: "Free parking"
-    breakfast: "Breakfast"
+  accommodation:
+    title: "Accommodation"
+    subtitle: "We offer comfortable lodging in the style of a hunting lodge with beautiful views of nature"
+    lead: "Choose from our comfortable rooms and enjoy a relaxing stay in nature"
+    servicesTitle: "Guest services"
+    equipment:
+      title2: "Room amenities"
+      title: "Amenities:"
+      servicesTitle: "Guest services"
+      bathroom: "Bathroom"
+      tv: "TV"
+      wifi: "Wi-Fi"
+      towels: "Towels and bed linen"
+    capacity: "Capacity: %count% persons"
+    apartment:
+      name: "Apartment"
+      shortDesc: "Spacious apartment with private bathroom and comfortable facilities"
+    triple:
+      name: "Triple room"
+      shortDesc: "Comfortable triple room ideal for families or groups"
+    double:
+      name: "Double room"
+      shortDesc: "Cozy double room for couples or solo travelers"
+    extras:
+      parking: "Free parking"
+      breakfast: "Breakfast"
 
-about:
-  title: "About us"
-  subtitle: "Restaurant and guesthouse in the heart of the Slavkov Forest"
-  paragraph1: "We specialize in game specialties and traditional Czech cuisine. The At the Capercaillie restaurant is located in the beautiful nature of the Slavkov Forest, near the town of Mariánské Lázně."
-  feature:
-    gameRestaurant:
-      title: "Game restaurant"
-      desc: "We specialize in preparing high-quality game dishes."
-    family:
-      title: "Family business"
-      desc: "A family tradition in hospitality for over 20 years."
-  image:
-    alt: "Interior of the At the Capercaillie restaurant"
-    caption: "Restaurant and Guesthouse"
+  about:
+    title: "About us"
+    subtitle: "Restaurant and guesthouse in the heart of the Slavkov Forest"
+    paragraph1: "We specialize in game specialties and traditional Czech cuisine. Restaurant U Tetřeva is located in the beautiful nature of the Slavkov Forest, near the town of Mariánské Lázně."
+    feature:
+      gameRestaurant:
+        title: "Game restaurant"
+        desc: "We specialize in high-quality game specialties."
+      family:
+        title: "Family business"
+        desc: "A family tradition in hospitality for more than 20 years."
+    image:
+      alt: "Interior of the U Tetřeva restaurant"
+      caption: "Restaurant & Guesthouse"
 
-common:
-  currency: "CZK"
+  gallery:
+      title: "Gallery"
+      subtitle: "Take a look at photos of our restaurant, accommodation, and the surrounding countryside."
+      restaurace: "Restaurant"
+      pension: "Guesthouse"
+      kladska: "Surroundings of Kladská"
+
+  reservation:
+      title: "Reservation"
+      subtitle: "Book a table in our restaurant or a room for your stay"
+      nav:
+          room: "Room reservation"
+          table: "Table reservation"
+      room:
+          title: "Room reservation"
+          subtitle: "Book a room and enjoy a relaxing stay in our guesthouse"
+          first: "First name"
+          firstRequired: "First name is required"
+          second: "Last name"
+          secondRequired: "Last name is required"
+          email: "E-mail"
+          emailRequired: "E-mail is required"
+          emailRule: "Please enter a valid e-mail"
+          phone: "Phone"
+          phoneRequired: "Phone number is required"
+          phoneRule: "Please enter a valid phone number"
+          persons: "Number of persons"
+          personsRequired: "Number of persons is required"
+          from: "Arrival"
+          fromRequired: "Arrival date is required"
+          to: "Departure"
+          toRequired: "Departure date is required"
+          dog: "Pet"
+          message: "Note"
+          gdpr: "I agree to the processing of personal data"
+          gdprRequired: "Consent is required"
+          newsletter: "I want to receive offers by e-mail"
+          button: "Send reservation"
+
+
+  common:
+    currency: "Kč"
+    personsShort: "persons"
+    perNight: "/night"

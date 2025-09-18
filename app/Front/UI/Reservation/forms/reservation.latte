@@ -1,0 +1,55 @@
+    <h2>Rezervace ubytování</h2>
+    <p>Rezervujte si pokoj a užijte si odpočinek v našem pensionu</p>
+    {form reservationForm}
+        <div class="form__row">
+            <div class="form__input">
+                {label First/}
+                {input First}
+            </div>
+            <div class="form__input">
+                {label Second/}
+                {input Second}
+            </div>
+        </div>
+        <div class="form__row">
+            <div class="form__input">
+                {label Mail/}
+                {input Mail}
+            </div>
+            <div class="form__input">
+                {label Tel/}
+                {input Tel}
+            </div>
+        </div>
+        <div class="form__row">
+            <div class="form__input">
+                {label Date_from/}
+                {input Date_from}
+            </div>
+            <div class="form__input">
+                {label Date_to/}
+                {input Date_to}
+            </div>
+        </div>
+        <div class="form__row">
+            <div class="form__input">
+                {label Person/}
+                {input Person}
+            </div>
+            <div class="form__input" id="checkbox">
+                {label Dog/}
+                {input Dog}
+            </div>
+        </div>
+        <div class="form__row">
+            <div class="form__input">
+                {label Note/}
+                {input Note}
+            </div>
+        </div>
+        <div class="form__row">
+            {input Gdpr}
+            {input Newsletter}
+        </div>
+        {input Submit}
+    {/form}

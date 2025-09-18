@@ -9,6 +9,8 @@ use App\Core\Repository\OpeningExpectionsRepository;
 use App\Core\Repository\OpeningHoursRepository;
 use App\Front\Components\navbar\NavbarControl;
 use App\Front\Components\footer\FooterControl;
+use Contributte\Translation\Translator;
+use Nette\Http\Session;
 use Nette\Application\UI\Presenter;
 
 /**
@@ -18,9 +20,13 @@ use Nette\Application\UI\Presenter;
 
 class BasePresenter extends Presenter
 {
+
+
     public function __construct(
         protected OpeningHoursRepository $openingHoursRepository,
         protected OpeningExpectionsRepository $openingExpectionsRepository,
+        protected Translator $translator,
+        protected Session $session
 
     ){
         parent::__construct();
@@ -31,11 +37,13 @@ class BasePresenter extends Presenter
         $this->template->currVer = date("dmHis");
     }
 
-    public $locale;
-
-    protected function startup() {
-        $this->template->locale = $this->locale;
+    protected function startup(): void
+    {
         parent::startup();
+        $sec = $this->session->getSection('locale');
+        if (!empty($sec->code)) {
+            $this->translator->setLocale($sec->code);
+        }
     }
 
 
@@ -46,6 +54,8 @@ class BasePresenter extends Presenter
     protected function createComponentNavbar(): NavbarControl
     {
         return new NavbarControl(
+            $this->translator,
+            $this->session
         );
     }
 

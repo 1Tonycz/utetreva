@@ -13,7 +13,6 @@ translation:
     localeResolvers:
         - Contributte\Translation\LocalesResolvers\Router
         - Contributte\Translation\LocalesResolvers\Session
-        - Contributte\Translation\LocalesResolvers\Parameter
 
 parameters:
 
@@ -46,3 +45,6 @@ mail:
     username: ''
     password: ''
     secure: null
+
+session:
+    autoStart: smart

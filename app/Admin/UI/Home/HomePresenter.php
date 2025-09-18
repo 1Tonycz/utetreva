@@ -14,9 +14,9 @@ use App\Core\Repository\RoomRepository;
 use App\Admin\Forms\AccommodationForm\AccommodationFormFactory;
 use Nette\Application\UI\Form;
 use Nette\Utils\ArrayHash;
-use Spatie\Browsershot\Browsershot;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Nette\Application\Responses\FileResponse;
-use Nette\Application\Responses\CallbackResponse;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\Utils\Strings;
 use NumberToWords\NumberToWords;
@@ -620,6 +620,11 @@ final class HomePresenter extends BasePresenter
         $this->redirect(':Admin:Home:detail', ['id' => (int)$row->ID]);
     }
 
+    private function mmToPt(float $mm): float
+    {
+        return $mm * 72.0 / 25.4; // 1 inch = 25.4 mm, 1 inch = 72 pt
+    }
+
     public function renderAccommodationlist(int $id): void
     {
         $r = $this->accommodationRepository->getById($id);
@@ -632,7 +637,6 @@ final class HomePresenter extends BasePresenter
             'received_from'     => trim($r->First . ' ' . $r->Second),
             'paid_at'           => $r->Date_from->format('Y-m-d'),
             'total_amount'      => $totalPrice,
-            'total_amount_without_vat' => $totalPrice - ($totalPrice * 0.12),
             'vat'               => 12,
             'text'              => $r->Person . 'os/ ' . $nights . ($nights == 1 ? 'noc' : 'noci'),
         ]);
@@ -665,56 +669,68 @@ final class HomePresenter extends BasePresenter
         $form->addInteger('vat', 'DPH');
         $form->addText('text', 'Text');
 
-        // Odeslání
         $form->addSubmit('download', 'Vygenerovat PDF');
 
-        // PDF generování
         $form->onSuccess[] = function (Form $form, ArrayHash $v): void {
 
-            $totalPrice = $v->total_amount;
-            $numberToWords = new NumberToWords();
-            $transformer = $numberToWords->getNumberTransformer('cs');
+            $totalPrice = (int)$v->total_amount;
+
+            $numberToWords  = new NumberToWords();
+            $transformer    = $numberToWords->getNumberTransformer('cs');
 
             $data = [
                 'paid_at'       => $v->paid_at->format('d.m.Y'),
-                'received_from' => $v->received_from,
+                'received_from' => (string)$v->received_from,
                 'total_amount'  => $totalPrice,
                 'total_amount_words' => $transformer->toWords($totalPrice),
-                'total_amount_without_vat_words' => $transformer->toWords($v->total_amount_without_vat),
-                'total_amount_without_vat' => $v->total_amount_without_vat,
-                'vat'           => $v->vat,
-                'vat_amount'    => $totalPrice - $v->total_amount_without_vat,
-                'text'          => $v->text,
+                'total_amount_without_vat_words' => $transformer->toWords((int)$v->total_amount_without_vat),
+                'total_amount_without_vat' => (int)$v->total_amount_without_vat,
+                'vat'           => (int)$v->vat,
+                'vat_amount'    => $totalPrice - (int)$v->total_amount_without_vat,
+                'text'          => (string)$v->text,
             ];
 
-            // --- Render šablony Latte
+            // 1) Render Latte -> HTML (stejně jako dřív)
             $template = $this->templateFactory->createTemplate();
             $template->setFile(__DIR__ . '/template/receipt.pdf.latte');
             $template->data = $data;
+
+            // doplníme <base> aby fungovaly relativní cesty na webhostingu
             $html = (string) $template;
+            $baseHref = $this->getHttpRequest()->getUrl()->getBaseUrl();
+            if (stripos($html, '<head>') !== false) {
+                $html = preg_replace('~<head>~i', '<head><base href="' . htmlspecialchars($baseHref, ENT_QUOTES) . '">', $html, 1);
+            }
 
-            // --- Browsershot -> PDF
+            // 2) Dompdf (bez Node/NPM)
+            $options = new Options();
+            $options->set('defaultFont', 'DejaVu Sans');
+            $options->set('isRemoteEnabled', true);       // obrázky / fonty přes URL
+            $options->set('isHtml5ParserEnabled', true);  // lepší parser
+
+            $dompdf = new Dompdf($options);
+            $dompdf->loadHtml($html, 'UTF-8');
+
+            // přesný rozměr 148×105 mm landscape
+            $w = $this->mmToPt(148);
+            $h = $this->mmToPt(105);
+            $dompdf->setPaper([$w, $h], 'landscape'); // pořadí: width, height (Dompdf rotuje podle orientation)
+
+            $dompdf->render();
+
             $pdfPath = tempnam(sys_get_temp_dir(), 'receipt') . '.pdf';
+            file_put_contents($pdfPath, $dompdf->output());
 
-            Browsershot::html($html)
-                ->setNodeBinary('C:\Program Files\nodejs\node.exe')
-                ->setNpmBinary('C:\Program Files\nodejs\npm.cmd')
-                ->setCustomTempPath(__DIR__ . '/../../temp/browsershot')
-                ->paperSize(148, 105, 'mm')
-                ->landscape(true)
-                ->save($pdfPath);
-
-            // --- Název souboru
-            $suffix = $v->received_from ?: date('Ymd-His');
-            $suffix = Strings::replace($suffix, '~\s+~', '-');
+            $suffix   = $v->received_from ?: date('Ymd-His');
+            $suffix   = Strings::replace($suffix, '~\s+~', '-');
             $filename = sprintf('prijmovy-pokladni-doklad-ubytovani-%s.pdf', $suffix);
 
-            // --- Download response
             $this->sendResponse(new FileResponse($pdfPath, $filename, 'application/pdf'));
         };
 
         return $form;
     }
+
 
     protected function createComponentFeeForm(): Form
     {
@@ -725,47 +741,54 @@ final class HomePresenter extends BasePresenter
         $form->addInteger('total_amount', 'Přijato KČ:');
         $form->addText('text', 'Text');
 
-        // Odeslání
         $form->addSubmit('download', 'Vygenerovat PDF');
 
-        // PDF generování
         $form->onSuccess[] = function (Form $form, ArrayHash $v): void {
 
-            $totalPrice = $v->total_amount;
-            $numberToWords = new NumberToWords();
-            $transformer = $numberToWords->getNumberTransformer('cs');
+            $totalPrice      = (int)$v->total_amount;
+            $numberToWords   = new NumberToWords();
+            $transformer     = $numberToWords->getNumberTransformer('cs');
 
             $data = [
                 'paid_at'       => $v->paid_at->format('d.m.Y'),
-                'received_from' => $v->received_from,
+                'received_from' => (string)$v->received_from,
                 'total_amount'  => $totalPrice,
                 'total_amount_words' => $transformer->toWords($totalPrice),
-                'text'          => $v->text,
+                'text'          => (string)$v->text,
             ];
 
-            // --- Render šablony Latte
             $template = $this->templateFactory->createTemplate();
             $template->setFile(__DIR__ . '/template/fee.pdf.latte');
             $template->data = $data;
-            $html = (string) $template;
 
-            // --- Browsershot -> PDF
-            $pdfPath = tempnam(sys_get_temp_dir(), 'receipt') . '.pdf';
+            $html = (string)$template;
+            $baseHref = $this->getHttpRequest()->getUrl()->getBaseUrl();
+            if (stripos($html, '<head>') !== false) {
+                $html = preg_replace('~<head>~i', '<head><base href="' . htmlspecialchars($baseHref, ENT_QUOTES) . '">', $html, 1);
+            }
 
-            Browsershot::html($html)
-                ->setNodeBinary('C:\Program Files\nodejs\node.exe')
-                ->setNpmBinary('C:\Program Files\nodejs\npm.cmd')
-                ->setCustomTempPath(__DIR__ . '/../../temp/browsershot')
-                ->paperSize(148, 105, 'mm')
-                ->landscape(true)
-                ->save($pdfPath);
+            $options = new Options();
+            $options->set('defaultFont', 'DejaVu Sans');
+            $options->set('isRemoteEnabled', true);
+            $options->set('isHtml5ParserEnabled', true);
 
-            // --- Název souboru
-            $suffix = $v->received_from ?: date('Ymd-His');
-            $suffix = Strings::replace($suffix, '~\s+~', '-');
+            $dompdf = new Dompdf($options);
+            $dompdf->loadHtml($html, 'UTF-8');
+
+            // A6 landscape (148×105 mm)
+            $w = $this->mmToPt(148);
+            $h = $this->mmToPt(105);
+            $dompdf->setPaper([$w, $h], 'landscape');
+
+            $dompdf->render();
+
+            $pdfPath = tempnam(sys_get_temp_dir(), 'fee') . '.pdf';
+            file_put_contents($pdfPath, $dompdf->output());
+
+            $suffix   = $v->received_from ?: date('Ymd-His');
+            $suffix   = Strings::replace($suffix, '~\s+~', '-');
             $filename = sprintf('prijmovy-pokladni-doklad-lazensky-poplatek-%s.pdf', $suffix);
 
-            // --- Download response
             $this->sendResponse(new FileResponse($pdfPath, $filename, 'application/pdf'));
         };
 

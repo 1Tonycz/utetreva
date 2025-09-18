@@ -2,6 +2,10 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js!./style/admin/calculation.scss ***!
   \*************************************************************************************************************************************************************************************************************************/
 @charset "UTF-8";
+* {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+}
+
 :root {
   font-size: 16px;
   font-weight: 400;
@@ -177,7 +181,7 @@ small {
 .nav__menu a {
   display: flex;
   text-decoration: none;
-  color: #000;
+  color: black;
   align-items: center;
   gap: 0.4rem;
   padding: 0.5rem 1rem;

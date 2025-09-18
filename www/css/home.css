@@ -2,6 +2,10 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js!./style/front/home.scss ***!
   \******************************************************************************************************************************************************************************************************************/
 @charset "UTF-8";
+* {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+}
+
 :root {
   font-size: 16px;
   font-weight: 400;
@@ -124,6 +128,7 @@ small {
 
 header {
   background-color: #141414;
+  border-bottom: 1px solid #2c2c2c;
 }
 
 nav {
@@ -146,7 +151,7 @@ nav {
 }
 
 .active {
-  background: #1b3226;
+  background: #1b3226 !important;
   border-radius: 10px;
 }
 .active:hover {
@@ -160,7 +165,7 @@ nav {
   background: #141414 !important;
 }
 .nav__textlogo {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 800;
   color: #f08b42;
   text-decoration: none;
@@ -278,10 +283,6 @@ nav {
 .nav__translate-menu .name {
   color: #cfd2d4;
   font-weight: 600;
-}
-
-* {
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
 }
 
 /*Hero sekce*/
@@ -605,6 +606,146 @@ nav {
   color: #cfd2d4;
 }
 
+/*Modal*/
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: flex-end; /* bottom sheet na mobile */
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  padding: 0; /* na mobile využijeme celý prostor */
+  overflow-y: auto;
+}
+.modal[aria-hidden=false] {
+  display: flex;
+}
+
+.modal-content {
+  background: #ffffff;
+  width: 100%;
+  max-height: 96svh; /* bezpečná výška na mobile */
+  border-radius: 16px 16px 0 0;
+  border: 1px solid #2c2c2c;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .modal-content {
+    animation: modalIn 0.18s ease-out;
+  }
+}
+
+@keyframes modalIn {
+  from {
+    transform: translateY(10px);
+    opacity: 0.97;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+/* sekce */
+.modal__header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #ffffff;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #2c2c2c;
+}
+
+.modal__body {
+  padding: 1rem 2rem;
+  overflow: auto; /* scroll jen uvnitř obsahu */
+  flex: 1 1 auto;
+}
+
+.modal__footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  background: #ffffff;
+  padding: 1rem 2rem;
+  border-top: 1px solid #2c2c2c;
+}
+.modal__footer .modal-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+/* zavírací křížek */
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.modal-close:focus-visible {
+  outline: 2px solid #1b3226;
+  outline-offset: 2px;
+}
+
+/* prvky formuláře uvnitř modalu */
+.field {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.field input, .field textarea, .field select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #2c2c2c;
+  border-radius: 10px;
+  font: inherit;
+  background: #ffffff;
+}
+.field input:focus, .field textarea:focus, .field select:focus {
+  outline: none;
+  border-color: #1b3226;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+}
+.field textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* fallback tlačítka (pokud máš globální utility, klidně je použij) */
+.btn {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px solid #2c2c2c;
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  background: rgba(0, 0, 0, 0.06);
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn.primary {
+  background: #1b3226;
+  border-color: #1b3226;
+  color: #ffffff;
+}
+.btn.primary:hover {
+  background: #265940;
+}
+.btn.primary:active {
+  transform: translateY(1px);
+}
+
 .footer {
   border-top: 1px solid #2c2c2c;
   background: #131514;
@@ -615,7 +756,9 @@ nav {
 }
 .footer__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(1, 1fr);
+  text-align: center;
+  gap: 1rem;
 }
 .footer__col {
   display: flex;
@@ -732,7 +875,30 @@ nav {
     order: -1;
     margin-bottom: 1rem;
   }
+  /*modal*/
+  .modal {
+    align-items: center; /* už ne bottom sheet, ale centrovaný */
+    padding: 16px; /* okraje kolem dialogu */
+  }
+  .modal-content {
+    max-width: 720px;
+    max-height: 92vh;
+    border-radius: 14px; /* klasický dialog */
+  }
+  /* >= 1024 px – můžeš dialog ještě rozšířit */
+}
+@media screen and (min-width: 768px) and (min-width: 1024px) {
+  .modal-content {
+    max-width: 840px;
+  }
+}
+@media screen and (min-width: 768px) {
   .footer {
     padding: 2rem 10rem;
+  }
+  .footer__grid {
+    grid-template-columns: repeat(3, 1fr);
+    text-align: left;
+    gap: 1rem;
   }
 }

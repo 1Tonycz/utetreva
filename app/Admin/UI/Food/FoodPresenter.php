@@ -127,7 +127,20 @@ class FoodPresenter extends BasePresenter
 
         // 2) načtení a základní validace vstupů
         $id       = (int)($post['id'] ?? 0);
-        $name     = trim((string)($post['name'] ?? ''));
+
+        // názvy ve všech jazycích
+        $nameCs   = trim((string)($post['name_cs'] ?? ''));
+        $nameDe   = trim((string)($post['name_de'] ?? ''));
+        $nameEn   = trim((string)($post['name_en'] ?? ''));
+        $nameRu   = trim((string)($post['name_ru'] ?? ''));
+
+        // popisy ve všech jazycích
+        $descCs   = trim((string)($post['description_cs'] ?? ''));
+        $descDe   = trim((string)($post['description_de'] ?? ''));
+        $descEn   = trim((string)($post['description_en'] ?? ''));
+        $descRu   = trim((string)($post['description_ru'] ?? ''));
+
+        // ostatní pole
         $priceRaw = (string)($post['price'] ?? '0');
         $category = (int)($post['category'] ?? 0);
         $archived = isset($post['archived']) ? 1 : 0;
@@ -137,13 +150,15 @@ class FoodPresenter extends BasePresenter
             $this->redirect('this');
             return;
         }
-        if ($name === '') {
-            $this->flashMessage('Zadejte název jídla.', 'error');
+
+        // alespoň jeden název musí být vyplněn (doporučeně cs)
+        if ($nameCs === '' && $nameDe === '' && $nameEn === '' && $nameRu === '') {
+            $this->flashMessage('Vyplňte alespoň jeden název (doporučeně česky).', 'error');
             $this->redirect('this');
             return;
         }
 
-        // cena – povolíme celá čísla; pokud chceš i desetinné, změň na floatval
+        // cena
         if (!is_numeric($priceRaw)) {
             $this->flashMessage('Cena musí být číslo.', 'error');
             $this->redirect('this');
@@ -156,7 +171,8 @@ class FoodPresenter extends BasePresenter
             return;
         }
 
-        if ($category <= 0) {
+        // kategorie
+        if ($category <= 0 || !array_key_exists($category, self::Category)) {
             $this->flashMessage('Vyberte platnou kategorii.', 'error');
             $this->redirect('this');
             return;
@@ -170,27 +186,40 @@ class FoodPresenter extends BasePresenter
             return;
         }
 
-        // 4) update v DB (pozor na názvy sloupců podle schématu)
-        $this->foodRepository->update($id, [
-            'Name'     => $name,
-            'Price'    => $price,
-            'Category' => $category,
-            'Archived' => $archived,
-        ]);
+        // 4) příprava dat k update — aktualizujeme názvy i popisy
+        $updateData = [
+            'Name_cs'        => $nameCs,
+            'Name_de'        => $nameDe,
+            'Name_en'        => $nameEn,
+            'Name_ru'        => $nameRu,
+            'Description_cs' => $descCs,
+            'Description_de' => $descDe,
+            'Description_en' => $descEn,
+            'Description_ru' => $descRu,
+            'Price'          => $price,
+            'Category'       => $category,
+            'Archived'       => $archived,
+        ];
+
+        // 5) update v DB
+        $this->foodRepository->update($id, $updateData);
 
         $this->flashMessage('Položka byla upravena.', 'success');
 
-        // 5) AJAX vs non-AJAX odpověď
+        // 6) AJAX vs non-AJAX odpověď
         if ($this->isAjax()) {
-            // Aktualizuj data pro aktuální kategorii a překresli snippety
             $catParam = (int)($this->getParameter('cat') ?? $category);
-            // Pokud máš renderList($cat), zavolej ho pro znovunaplnění $foods/$archived:
             if (method_exists($this, 'renderList')) {
                 $this->renderList($catParam);
+            } else {
+                // fallback – znovunačti data jako v renderDefault
+                $this->template->foods    = $this->foodRepository->getAll()->where('Category', $catParam)->where('archived', 0);
+                $this->template->archived = $this->foodRepository->getAll()->where('Category', $catParam)->where('archived', 1);
+                $this->template->cat      = $catParam;
+                $this->template->cats     = self::Category;
             }
             $this->redrawControl('foods');
             $this->redrawControl('tabs');
-            // Pokud máš snippet na flash zprávy, překresli i ten:
             if (method_exists($this, 'redrawControl')) {
                 $this->redrawControl('flash');
             }
@@ -200,6 +229,8 @@ class FoodPresenter extends BasePresenter
         // Full reload
         $this->redirect('this');
     }
+
+
 
 
 }

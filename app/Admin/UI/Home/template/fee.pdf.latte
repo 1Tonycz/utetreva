@@ -3,194 +3,192 @@
 <head>
     <meta charset="utf-8">
     <style>
+        /* Dompdf-safe, A6 landscape, kompaktní */
         @page {
-            size: A5 landscape;
-            margin: 8mm;
+            size: A6 landscape;
+            margin: 4mm; /* menší okraj pro víc prostoru */
         }
-        @media print {
-            body { box-shadow: none; margin: 0; }
-        }
+        @media print { body { box-shadow: none; margin: 0; } }
+
         body{
-            margin: 0.2rem;
-            font: 12px/1.35 "Segoe UI", Roboto, Arial, sans-serif;
-        }
-        .line{
-            display: flex;
-            justify-content: space-between;
-            text-align: left;
-
-        }
-        .quad{
-            width: 25%;
-            vertical-align: top;
-            display: flex;
-        }
-        .half{
-            width: 50%;
-            vertical-align: top;
-            display: flex;
-        }
-        table {
-            border-collapse: collapse; /* Sloučí okraje buněk pro čistší vzhled */
-            width: 100%;
-            table-layout: fixed;
-        }
-        td {
-            border: 1px solid black; /* Okraj buněk */
-            text-align: left;
-            min-height: 50px;
-        }
-        td[rowspan] {
-            vertical-align: middle; /* Vertikální zarovnání textu */
-        }
-        tr{
-            width: 100%;
-        }
-        .h4{
-            font-weight: bold;
-            font-size: 0.8rem;
-        }
-        .h3{
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-        .w50{
-            width: 50%;
+            margin: 0.05rem;
+            font-family: "DejaVu Sans", sans-serif; /* jistota CZ diakritiky */
+            font-size: 8.5px; /* kompaktní */
+            color: #000;
         }
 
-        header > *{
-            border: none;
-        }
-        header > .line > *{
-            border: none;
-        }
-        header > .line + .line > *{
-            border: none;
-        }
-        .split { display: flex; }
-        .split > div { flex: 1; }
-        /* volitelné: svislá čára mezi polovinami, jako dřív mezi dvěma <td> */
-        .split > div + div { border-left: 1px solid black; padding-left: 6px; margin-left: 6px; }
+        table { border-collapse: collapse; width: 100%; }
+        td, th { vertical-align: top; }
+
+        /* Header tabulka (3 sloupce) */
+        .hdr { width: 100%; margin-bottom: 2px; }
+        .hdr td { border: none; padding: 0; font-size: 8.5px; }
+        .hdr .quad { width: 25%; }
+        .hdr .half { width: 50%; }
+
+        /* Hlavní mřížka s rámečky */
+        .grid { width: 100%; table-layout: fixed; }
+        .grid td { border: 1px solid #000; padding: 1px 2px; font-size: 8.5px; }
+
+        /* Vnořené split tabulky místo flexu */
+        .split { width: 100%; }
+        .split td { border: none; padding: 0; font-size: 8px; }
+        .split .left,
+        .split .right { width: 50%; }
+        .split .right { border-left: 1px solid #000; padding-left: 2px; }
+
+        /* Typografie */
+        .h4 { font-weight: bold; font-size: .55rem; }
+        .h3 { font-weight: bold; font-size: .75rem; }
+        .center { text-align: center; }
+        .nowrap { white-space: nowrap; }
+
+        /* Hraniční utility */
+        .no-border { border: none !important; }
+        .no-top    { border-top: none !important; }
+        .no-bottom { border-bottom: none !important; }
+        .no-left   { border-left: none !important; }
+        .no-right  { border-right: none !important; }
     </style>
 </head>
 <body>
-    <header>
-        <div class="line">
-            <div class="quad">
-                <span class="h4">Organizace</span>
-            </div>
-            <div class="quad">
-                Jindřich Kolesa<br>
-                Plzeňská 99/6<br>
-                35301, Mariánské Lázně, ČR<br>
-            </div>
-            <div class="half">
-                <span class="h3">Přijmový pokladní doklad</span>
-            </div>
-        </div>
-        <div class="line">
-            <div class="quad">
-                <span class="h4">IČO:</span>
-            </div>
-            <div class="quad">
-                4684468
-            </div>
-            <div class="half">
-                <span class="h4">Číslo:</span>
-            </div>
-        </div>
-        <div class="line">
-            <div class="quad">
-                <span class="h4">DIČ:</span>
-            </div>
-            <div class="quad">
-                CZ8001115789
-            </div>
-            <div class="half">
-                <span class="h4">Ze dne: </span><span>{$data['paid_at']}</span>
-            </div>
-        </div>
-    </header>
-    <table>
-        <tr>
-            <td colspan="3" style="border-bottom: none;">
-                <h4>Přijato od: {$data['received_from']}</h4>
-            </td>
-        </tr>
-        <tr>{* IČO příjemce *}
-            <td style="border-top: none; border-right: none;">
-                <span class="h4">IČO:</span>
-            </td>
-            <td colspan="2" style="border-top: none; border-left: none;">
-                <span class="h4">DIČ:</span>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3"><h4>Přijato Kč: {$data['total_amount']}</h4> </td>
-        </tr>
-        <tr>
-            <td colspan="3"><h4>slovy: {$data['total_amount_words']}</h4></td>
-        </tr>
-        <tr>
-            <td colspan="3">
-                <div class="split">
-                    <div><span class="h4">Účel platby: Lazeňský poplatek</span></div>
-                    <div><span class="h4">Rozpočtová skladba:</span></div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3">
-                <div class="split">
-                    <div><span class="h4">Schválil:</span></div>
-                    <div><span class="h4">Podpis pokladníka:</span></div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3">
-                <div class="split">
-                    <div><span class="h4">Účetní doklad ze dne:</span></div>
-                    <div style="border-left: none"><span class="h4">číslo:</span></div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: center"><span class="h4">Text</span></td>
-            <td style="text-align: center"><span class="h4">Účtovací předpis (Dal - účet)</span></td>
-            <td style="text-align: center"><span class="h4">Kč</span></td>
-        </tr>
-        <tr>
-            <td>{$data['text']}</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><div style="display: flex; justify-content: space-between"><span class="h4">Suma bez DPH:</span><span class="h4"> 0,00 Kč</span></div></td>
-            <td><div style="display: flex; justify-content: space-between"><span class="h4">DPH 0 %:</span><span class="h4"> 0,00 kč</span></div></td>
-            <td rowspan="2">Přezkoušel:<br>Dne:<br>Zaúčtoval:<br>Dne:</td>
-        </tr>
-        <tr>
-            <td colspan="2" style="border-right: none !important;"><div style="display: flex; justify-content: space-between"><span class="h4">Nepodléhá DPH:</span><span class="h4">{$data['total_amount']} Kč</span></div></td>
-        </tr>
-    </table>
 
+<!-- HEADER (3 řádky) -->
+<table class="hdr">
+    <tr>
+        <td class="quad">
+            <span class="h4">Organizace</span>
+        </td>
+        <td class="quad">
+            Jindřich Kolesa<br>
+            Plzeňská 99/6<br>
+            35301, Mariánské Lázně, ČR
+        </td>
+        <td class="half">
+            <span class="h3">Přijmový pokladní doklad</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="quad"><span class="h4">IČO:</span></td>
+        <td class="quad">4684468</td>
+        <td class="half"><span class="h4">Číslo:</span></td>
+    </tr>
+    <tr>
+        <td class="quad"><span class="h4">DIČ:</span></td>
+        <td class="quad">CZ8001115789</td>
+        <td class="half"><span class="h4">Ze dne: </span><span>{$data['paid_at']}</span></td>
+    </tr>
+</table>
 
+<!-- HLAVNÍ OBSAH -->
+<table class="grid">
+    <!-- Přijato od -->
+    <tr>
+        <td colspan="3" class="no-bottom">
+            <span class="h4">Přijato od: {$data['received_from']}</span>
+        </td>
+    </tr>
+
+    <!-- IČO/DIČ příjemce (prázdné políčko pro vyplnění) -->
+    <tr>
+        <td class="no-top no-right"><span class="h4">IČO:</span></td>
+        <td colspan="2" class="no-top no-left"><span class="h4">DIČ:</span></td>
+    </tr>
+
+    <!-- Částky -->
+    <tr>
+        <td colspan="3"><span class="h4">Přijato Kč: {$data['total_amount']}</span></td>
+    </tr>
+    <tr>
+        <td colspan="3"><span class="h4">slovy: {$data['total_amount_words']}</span></td>
+    </tr>
+
+    <!-- Účel / Rozpočtová skladba -->
+    <tr>
+        <td colspan="3">
+            <table class="split">
+                <tr>
+                    <td class="left"><span class="h4">Účel platby: Lázeňský poplatek</span></td>
+                    <td class="right"><span class="h4">Rozpočtová skladba:</span></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <!-- Schválil / Podpis pokladníka -->
+    <tr>
+        <td colspan="3">
+            <table class="split">
+                <tr>
+                    <td class="left"><span class="h4">Schválil:</span></td>
+                    <td class="right"><span class="h4">Podpis pokladníka:</span></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <!-- Účetní doklad: datum / číslo -->
+    <tr>
+        <td colspan="3">
+            <table class="split">
+                <tr>
+                    <td class="left"><span class="h4">Účetní doklad ze dne:</span></td>
+                    <td class="right" style="border-left:none; padding-left:0;"><span class="h4">číslo:</span></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <!-- Tabulka text / účt. předpis / Kč -->
+    <tr>
+        <td class="center"><span class="h4">Text</span></td>
+        <td class="center"><span class="h4">Účtovací předpis (Dal - účet)</span></td>
+        <td class="center nowrap"><span class="h4">Kč</span></td>
+    </tr>
+    <tr>
+        <td>{$data['text']}</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr><td>&nbsp;</td><td></td><td></td></tr>
+    <tr><td>&nbsp;</td><td></td><td></td></tr>
+    <tr><td>&nbsp;</td><td></td><td></td></tr>
+
+    <!-- Sumarizace (lázeňský poplatek — nepodléhá DPH) -->
+    <tr>
+        <td>
+            <table style="width:100%;">
+                <tr>
+                    <td class="no-border" style="width:60%;"><span class="h4">Suma bez DPH:</span></td>
+                    <td class="no-border" style="width:40%; text-align:right;"><span class="h4">0,00 Kč</span></td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table style="width:100%;">
+                <tr>
+                    <td class="no-border" style="width:60%;"><span class="h4">DPH 0 %:</span></td>
+                    <td class="no-border" style="width:40%; text-align:right;"><span class="h4">0,00 Kč</span></td>
+                </tr>
+            </table>
+        </td>
+        <td rowspan="2">
+            Přezkoušel:<br>Dne:<br>Zaúčtoval:<br>Dne:
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" class="no-right">
+            <table style="width:100%;">
+                <tr>
+                    <td class="no-border" style="width:60%;"><span class="h4">Nepodléhá DPH:</span></td>
+                    <td class="no-border" style="width:40%; text-align:right;">
+                        <span class="h4">{$data['total_amount']} Kč</span>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 
 </body>
 </html>

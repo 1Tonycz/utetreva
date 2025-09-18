@@ -6,22 +6,32 @@ use App\Core\Repository\RoomRepository;
 use App\Core\Repository\OpeningExpectionsRepository;
 use App\Core\Repository\OpeningHoursRepository;
 use App\Front\UI\BasePresenter;
+use Contributte\Translation\Translator;
+use Nette\Http\Session;
 
 final class AccommodationPresenter extends BasePresenter
 {
     public function __construct(
         OpeningHoursRepository $openingHoursRepository,
         OpeningExpectionsRepository $openingExpectionsRepository,
-        public RoomRepository $roomRepository
+        public RoomRepository $roomRepository,
+        protected Session $session,
+        protected Translator $translator,
     ) {
-        parent::__construct($openingHoursRepository, $openingExpectionsRepository, $roomRepository);
+        parent::__construct($openingHoursRepository, $openingExpectionsRepository, $translator, $session);
     }
 
     public function renderDefault(): void
     {
-        $this->template->doubleRoom = $this->roomRepository->getAll()->where('Name', 'Pokoj 2');
-        $this->template->familyRoom = $this->roomRepository->getAll()->where('Name', 'Pokoj 1');
-        $this->template->apartment = $this->roomRepository->getAll()->where('Name', 'Apartmán');
+        $doubleRoom = $this->roomRepository->getAll()->where('Name', 'Pokoj 2')->fetch()?->Price;
+        $familyRoom = $this->roomRepository->getAll()->where('Name', 'Pokoj 1')->fetch()?->Price;
+        $apartment = $this->roomRepository->getAll()->where('Name', 'Apartmán')->fetch()?->Price;
+        bdump($doubleRoom);
+        bdump($familyRoom);
+        bdump($apartment);
+        $this->template->doubleRoom = $doubleRoom;
+        $this->template->familyRoom = $familyRoom;
+        $this->template->apartment = $apartment;
     }
 
 }

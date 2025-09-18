@@ -1,82 +1,134 @@
-brand:
-  name: "U Tetřeva"
+  brand:
+    name: "U Tetřeva"
 
-menu:
-  home: "Startseite"
-  menu: "Speisekarte"
-  accommodation: "Unterkunft"
-  gallery: "Galerie"
-  reservation: "Reservierung"
+  menu:
+    home: "Startseite"
+    menu: "Speisekarte"
+    accommodation: "Unterkunft"
+    gallery: "Galerie"
+    reservation: "Reservierung"
 
-footer:
-  contact: "Kontakt"
-  openHours: "Öffnungszeiten"
-  pay: "Zahlungsarten"
-  monday: "Montag"
-  tuesday: "Dienstag"
-  wednesday: "Mittwoch"
-  thursday: "Donnerstag"
-  friday: "Freitag"
-  saturday: "Samstag"
-  sunday: "Sonntag"
-  close: "Geschlossen"
-  expection: "Ausnahmen"
-  onlycash: "Nur Barzahlung"
+  footer:
+    contact: "Kontakt"
+    openHours: "Öffnungszeiten"
+    pay: "Zahlungsarten"
+    monday: "Montag"
+    tuesday: "Dienstag"
+    wednesday: "Mittwoch"
+    thursday: "Donnerstag"
+    friday: "Freitag"
+    saturday: "Samstag"
+    sunday: "Sonntag"
+    close: "Geschlossen"
+    expection: "Ausnahmen"
+    onlycash: "Nur Barzahlung"
+
+  hero:
+    title:
+      before: "Restaurant"
+    subtitle: "Genießen Sie außergewöhnliche kulinarische Erlebnisse in gemütlicher Atmosphäre mit Übernachtungsmöglichkeit im Herzen der Natur"
+
+  cta:
+    reserveTable: "Tisch reservieren"
+    viewMenu: "Speisekarte ansehen"
+    reserveRoom: "Unsere Zimmer"
+    viewPhotos: "Fotos ansehen"
+    bookRoom: "Zimmer buchen"
+
+  food:
+    title: "Unsere Lieblingsspezialitäten"
+    subtitle: "Probieren Sie unsere beliebtesten Wildspezialitäten, zubereitet aus frischen regionalen Zutaten"
+    viewAll: "Gesamte Speisekarte anzeigen"
+    subtitleMenu: "Genießen Sie einzigartige Gerichte aus den hochwertigsten Zutaten"
+    navigation:
+      starters: "Vorspeisen"
+      mains: "Hauptgerichte"
+      desserts: "Desserts"
+      drinks: "Getränke"
+
+  accommodation:
+    title: "Unterkunft"
+    subtitle: "Wir bieten komfortable Unterkünfte im Stil einer Jagdhütte mit schönem Blick in die Natur"
+    lead: "Wählen Sie aus unseren komfortablen Zimmern und genießen Sie Erholung in der Natur"
+    servicesTitle: "Gästeservices"
+    equipment:
+      title2: "Zimmerausstattung"
+      title: "Ausstattung:"
+      servicesTitle: "Gästeservices"
+      bathroom: "Badezimmer"
+      tv: "TV"
+      wifi: "WLAN"
+      towels: "Handtücher und Bettwäsche"
+    capacity: "Kapazität: %count% Personen"
+    apartment:
+      name: "Apartment"
+      shortDesc: "Geräumiges Apartment mit eigenem Bad und komfortabler Ausstattung"
+    triple:
+      name: "Dreibettzimmer"
+      shortDesc: "Komfortables Dreibettzimmer – ideal für Familien oder Gruppen"
+    double:
+      name: "Doppelzimmer"
+      shortDesc: "Gemütliches Doppelzimmer für Paare oder Alleinreisende"
+    extras:
+      parking: "Kostenloses Parken"
+      breakfast: "Frühstück"
+
+  about:
+    title: "Über uns"
+    subtitle: "Restaurant und Pension im Herzen des Slavkovský-Waldes"
+    paragraph1: "Wir sind auf Wildspezialitäten und traditionelle tschechische Küche spezialisiert. Das Restaurant U Tetřeva liegt in der schönen Natur des Slavkovský-Waldes, unweit der Stadt Marienbad."
+    feature:
+      gameRestaurant:
+        title: "Wildrestaurant"
+        desc: "Wir sind auf hochwertige Wildspezialitäten spezialisiert."
+      family:
+        title: "Familienbetrieb"
+        desc: "Familientradition in der Gastronomie seit mehr als 20 Jahren."
+    image:
+      alt: "Innenraum des Restaurants U Tetřeva"
+      caption: "Restaurant und Pension"
+
+  gallery:
+      title: "Galerie"
+      subtitle: "Sehen Sie sich Fotos von unserem Restaurant, unseren Unterkünften und der umliegenden Natur an."
+      restaurace: "Restaurant"
+      pension: "Pension"
+      kladska: "Umgebung von Kladská"
+
+  reservation:
+      title: "Reservierung"
+      subtitle: "Reservieren Sie einen Tisch in unserem Restaurant oder ein Zimmer für Ihren Aufenthalt"
+      nav:
+          room: "Zimmerreservierung"
+          table: "Tischreservierung"
+      room:
+          title: "Zimmerreservierung"
+          subtitle: "Buchen Sie ein Zimmer und genießen Sie Entspannung in unserer Pension"
+          first: "Vorname"
+          firstRequired: "Vorname ist erforderlich"
+          second: "Nachname"
+          secondRequired: "Nachname ist erforderlich"
+          email: "E-Mail"
+          emailRequired: "E-Mail ist erforderlich"
+          emailRule: "Bitte geben Sie eine gültige E-Mail-Adresse ein"
+          phone: "Telefon"
+          phoneRequired: "Telefonnummer ist erforderlich"
+          phoneRule: "Bitte geben Sie eine gültige Telefonnummer ein"
+          persons: "Anzahl der Personen"
+          personsRequired: "Anzahl der Personen ist erforderlich"
+          from: "Anreise"
+          fromRequired: "Anreisedatum ist erforderlich"
+          to: "Abreise"
+          toRequired: "Abreisedatum ist erforderlich"
+          dog: "Haustier"
+          message: "Bemerkung"
+          gdpr: "Ich stimme der Verarbeitung personenbezogener Daten zu"
+          gdprRequired: "Zustimmung ist erforderlich"
+          newsletter: "Ich möchte Angebote per E-Mail erhalten"
+          button: "Reservierung senden"
 
 
-hero:
-  title:
-    before: "Restaurant"
-  subtitle: "Genießen Sie einzigartige kulinarische Erlebnisse in unserer gemütlichen Umgebung mit Übernachtungsmöglichkeiten im Herzen der Natur"
-
-cta:
-  reserveTable: "Tisch reservieren"
-  viewMenu: "Speisekarte ansehen"
-  reserveRoom: "Zimmer reservieren"
-  viewPhotos: "Fotos ansehen"
-
-food:
-  title: "Unsere Lieblingsspezialitäten"
-  subtitle: "Probieren Sie unsere beliebtesten Wildgerichte, zubereitet aus frischen regionalen Zutaten"
-  viewAll: "Gesamte Speisekarte anzeigen"
-
-accommodation:
-  title: "Unterkunft"
-  subtitle: "Wir bieten komfortable Unterkünfte im Stil einer Jagdhütte mit schönem Blick in die Natur"
-  equipment:
-    title: "Ausstattung:"
-    bathroom: "Badezimmer"
-    tv: "Fernseher"
-    wifi: "Wi-Fi"
-    towels: "Handtücher und Bettwäsche"
-  capacity: "Kapazität: %count% Personen"
-  apartment:
-    name: "Apartment"
-    shortDesc: "Beschreibung des Apartments"
-  triple:
-    name: "Dreibettzimmer"
-    shortDesc: "Beschreibung des Dreibettzimmers"
-  double:
-    name: "Doppelzimmer"
-    shortDesc: "Beschreibung des Doppelzimmers"
-  extras:
-    parking: "Kostenloses Parken"
-    breakfast: "Frühstück"
-
-about:
-  title: "Über uns"
-  subtitle: "Restaurant und Pension im Herzen des Kaiserwaldes (Slavkovský les)"
-  paragraph1: "Wir sind auf Wildspezialitäten und traditionelle tschechische Küche spezialisiert. Das Restaurant U Tetřeva befindet sich in der wunderschönen Natur des Kaiserwaldes, unweit der Stadt Marienbad."
-  feature:
-    gameRestaurant:
-      title: "Wildrestaurant"
-      desc: "Wir sind auf die Zubereitung hochwertiger Wildgerichte spezialisiert."
-    family:
-      title: "Familienbetrieb"
-      desc: "Familientradition in der Gastfreundschaft seit über 20 Jahren."
-  image:
-    alt: "Innenraum des Restaurants U Tetřeva"
-    caption: "Restaurant und Pension"
-
-common:
-  currency: "Kč"
+  common:
+    currency: "Kč"
+    personsShort: "Personen"
+    perNight: "/Nacht"

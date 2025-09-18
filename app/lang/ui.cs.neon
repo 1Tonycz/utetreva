@@ -31,19 +31,30 @@ hero:
 cta:
   reserveTable: "Rezervovat stůl"
   viewMenu: "Prohlédnout Menu"
-  reserveRoom: "Rezervovat pokoj"
+  reserveRoom: "Nabídka pokojů"
   viewPhotos: "Prohlédnout fotografie"
+  bookRoom: "Rezervovat pokoj"
 
 food:
   title: "Naše oblíbené speciality"
   subtitle: "Ochutnejte naše nejoblíbenější zvěřinové pokrmy připravované z čerstvých regionálních surovin"
   viewAll: "Zobrazit celé menu"
+  subtitleMenu: "Vychutnejte si jedinečné pokrmy připravované z nejkvalitnějších surovin"
+  navigation:
+    starters: "Předkrmy"
+    mains: "Hlavní chody"
+    desserts: "Dezerty"
+    drinks: "Nápoje"
 
 accommodation:
   title: "Ubytování"
   subtitle: "Nabízíme komfortní ubytování ve stylu loveckého srubu s krásným výhledem do přírody"
+  lead: "Vyberte si z našich komfortních pokojů a užijte si odpočinek v přírodě"
+  servicesTitle: "Služby pro hosty"
   equipment:
+    title2: "Vybavení pokoje"
     title: "Vybavení:"
+    servicesTitle: "Služby pro hosty"
     bathroom: "Koupelna"
     tv: "TV"
     wifi: "Wi-Fi"
@@ -51,13 +62,13 @@ accommodation:
   capacity: "Kapacita: %count% osoby"
   apartment:
     name: "Apartmán"
-    shortDesc: "Popisek apartmánu"
+    shortDesc: "Prostorný apartmán s vlastní koupelnou a pohodlným zázemím"
   triple:
     name: "Třílůžkový pokoj"
-    shortDesc: "Popisek pokoje"
+    shortDesc: "Komfortní třílůžkový pokoj ideální pro rodiny nebo skupiny"
   double:
     name: "Dvoulůžkový pokoj"
-    shortDesc: "Popisek pokoje"
+    shortDesc: "Útulný dvoulůžkový pokoj pro páry nebo jednotlivce"
   extras:
     parking: "Parkování zdarma"
     breakfast: "Snídaně"
@@ -77,5 +88,47 @@ about:
     alt: "Interiér restaurace U Tetřeva"
     caption: "Restaurace a Pension"
 
+gallery:
+    title: "Galerie"
+    subtitle: "Prohlédněte si fotografie naší restaurace, ubytování a okolní přírody"
+    restaurace: "Restaurace"
+    pension: "Penzion"
+    kladska: "Okolí Kladská"
+
+reservation:
+    title: "Rezervace"
+    subtitle: "Rezervujte si stůl v naší restauraci nebo pokoj pro váš pobyt"
+    nav:
+        room: "Rezervace ubytování"
+        table: "Rezervace stolu"
+    room:
+        title: "Rezervace ubytování"
+        subtitle: "Rezervujte si pokoj a užijte si odpočinek v našem pensionu"
+        first: "Jméno"
+        firstRequired: "Jméno je povinné"
+        second: "Příjmení"
+        secondRequired: "Příjmení je povinné"
+        email: "E-mail"
+        emailRequired: "E-mail je povinný"
+        emailRule: "Zadejte platný e-mail"
+        phone: "Telefon"
+        phoneRequired: "Telefon je povinný"
+        phoneRule: "Zadejte platné telefonní číslo"
+        persons: "Počet osob"
+        personsRequired: "Počet osob je povinný"
+        from: "Příjezd"
+        fromRequired: "Datum příjezdu je povinný"
+        to: "Odjezd"
+        toRequired: "Datum odjezdu je povinný"
+        dog: "Mazlíček"
+        message: "Poznámka"
+        gdpr: "Souhlasím se zpracováním osobních údajů"
+        gdprRequired: "Souhlas je povinný"
+        newsletter: "Chci odebírat nabídky e-mailem"
+        button: "Odeslat rezervaci"
+
+
 common:
   currency: "Kč"
+  personsShort: "osoby"
+  perNight: "/noc"

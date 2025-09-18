@@ -1,86 +1,150 @@
-{var $css = "home"}
+{var $css = "accommodation"}
 {block content}
 
-<section class="rooms" aria-labelledby="rooms-title">
-    <h2 id="rooms-title" class="visually-hidden">Nabídka pokojů</h2>
+    <section class="rooms">
+        <h1 id="rooms-title" class="visually-hidden">{_'ui.cta.reserveRoom'}</h1>
+        <p>{_'ui.accommodation.lead'}</p>
 
-    <ul class="rooms__list" role="list">
-        <li>
-            <article class="room" itemscope itemtype="https://schema.org/HotelRoom">
-                <header class="room__header">
-                    <p class="room__badge" aria-label="Kapacita">
-            <span itemprop="occupancy" itemscope itemtype="https://schema.org/QuantitativeValue">
-              <data value="2" itemprop="value">2</data> osoby
-            </span>
+        <ul class="rooms__list">
+            <li>
+                <article class="room">
+                    <header class="room__header">
+                        <h2 class="room__title">{_'ui.accommodation.double.name'}</h2>
+                        <div class="room__layout">
+                            <p class="room__badge">
+                            <span>
+                                <data value="2">{include icon-bed}2</data> {_'ui.common.personsShort'}
+                            </span>
+                            </p>
+                            <p class="room__price">
+                            <span>
+                                <data value="{$doubleRoom}">{$doubleRoom}</data>
+                                <span><abbr title="korun českých">{_'ui.common.currency'}</abbr></span>
+                                <span class="room__per">{_'ui.common.perNight'}</span>
+                            </span>
+                            </p>
+                        </div>
+                    </header>
+
+                    <p class="room__desc">
+                        {_'ui.accommodation.double.shortDesc'}
                     </p>
 
-                    <h3 class="room__title" itemprop="name">Dvoulůžkový pokoj</h3>
+                    <h4 class="room__amenities-title">{_'ui.accommodation.equipment.title'}</h4>
+                    <ul class="room__amenities">
+                        <li><span class="chip">{_'ui.accommodation.equipment.bathroom'}</span></li>
+                        <li><span class="chip">{_'ui.accommodation.equipment.tv'}</span></li>
+                        <li><span class="chip">{_'ui.accommodation.equipment.wifi'}</span></li>
+                        <li><span class="chip">{_'ui.accommodation.equipment.towels'}</span></li>
+                    </ul>
 
-                    <p class="room__price">
-            <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-              <data value="1800" itemprop="price">1 800</data>
-              <span itemprop="priceCurrency" content="CZK"><abbr title="korun českých">Kč</abbr></span>
-              <span class="room__per">/noc</span>
-            </span>
+                    <footer class="room__buttons">
+                        <p class="room__secondarybutton"><a href="/pokoje/dvouluzkovy/fotky">{_'ui.cta.viewPhotos'}</a></p>
+                        <p class="room__button"><a href="/rezervace?room=dvouluzkovy">{_'ui.cta.bookRoom'}</a></p>
+                    </footer>
+                </article>
+            </li>
+
+            <li>
+                <article class="room" id="room__mid" itemscope itemtype="https://schema.org/HotelRoom">
+                    <header class="room__header">
+                        <h2 class="room__title" itemprop="name">{_'ui.accommodation.apartment.name'}</h2>
+                        <div class="room__layout">
+                            <p class="room__badge" aria-label="Kapacita">
+                            <span itemprop="occupancy" itemscope itemtype="https://schema.org/QuantitativeValue">
+                                <data value="4" itemprop="value">{include icon-bed}4</data> {_'ui.common.personsShort'}
+                            </span>
+                            </p>
+                            <p class="room__price">
+                            <span>
+                                <data value="{$apartment}">{$apartment}</data>
+                                <span content="CZK"><abbr title="korun českých">{_'ui.common.currency'}</abbr></span>
+                                <span class="room__per">{_'ui.common.perNight'}</span>
+                            </span>
+                            </p>
+                        </div>
+                    </header>
+
+                    <p class="room__desc" itemprop="description">
+                        {_'ui.accommodation.apartment.shortDesc'}
                     </p>
-                </header>
 
-                <p class="room__desc" itemprop="description">
-                    Útulný pokoj s vlastní koupelnou se sprchou a toaletou
-                </p>
+                    <h4 class="room__amenities-title">{_'ui.accommodation.equipment.title'}</h4>
+                    <ul class="room__amenities" role="list">
+                        <li><span class="chip">{_'ui.accommodation.equipment.bathroom'}</span></li>
+                        <li><span class="chip">{_'ui.accommodation.equipment.tv'}</span></li>
+                        <li><span class="chip">{_'ui.accommodation.equipment.wifi'}</span></li>
+                        <li><span class="chip">{_'ui.accommodation.equipment.towels'}</span></li>
+                    </ul>
 
-                <h4 class="room__amenities-title">Vybavení:</h4>
-                <ul class="room__amenities" role="list">
-                    <li><span class="chip">Vlastní koupelna</span></li>
-                    <li><span class="chip">TV</span></li>
-                    <li><span class="chip">Wi-Fi</span></li>
-                    <li><span class="chip">Ručníky a povlečení</span></li>
-                </ul>
+                    <footer class="room__buttons">
+                        <p class="room__secondarybutton"><a href="/pokoje/apartman/fotky">{_'ui.cta.viewPhotos'}</a></p>
+                        <p class="room__button"><a href="/rezervace?room=apartman">{_'ui.cta.bookRoom'}</a></p>
+                    </footer>
+                </article>
+            </li>
 
-                <footer class="room__actions">
-                    <!-- Pokud vede na samostatnou stránku s fotkami: -->
-                    <a href="/pokoje/dvouluzkovy/fotky" class="btn btn-ghost">Zobrazit více fotografií</a>
-                    <!-- Pokud otevírá modální okno, použij button type="button" -->
-                    <a href="/rezervace?room=dvouluzkovy" class="btn btn-primary">Rezervovat pokoj</a>
-                </footer>
-            </article>
-        </li>
+            <li>
+                <article class="room" itemscope itemtype="https://schema.org/HotelRoom">
+                    <header class="room__header">
+                        <h2 class="room__title" itemprop="name">{_'ui.accommodation.triple.name'}</h2>
+                        <div class="room__layout">
+                            <p class="room__badge" aria-label="Kapacita">
+                            <span itemprop="occupancy" itemscope itemtype="https://schema.org/QuantitativeValue">
+                                <data value="3" itemprop="value">{include icon-bed}3</data> {_'ui.common.personsShort'}
+                            </span>
+                            </p>
+                            <p class="room__price">
+                            <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                <data value="{$familyRoom}" itemprop="price">{$familyRoom}</data>
+                                <span itemprop="priceCurrency" content="CZK"><abbr title="korun českých">{_'ui.common.currency'}</abbr></span>
+                                <span class="room__per">{_'ui.common.perNight'}</span>
+                            </span>
+                            </p>
+                        </div>
+                    </header>
 
-        <li>
-            <article class="room" itemscope itemtype="https://schema.org/HotelRoom">
-                <header class="room__header">
-                    <p class="room__badge" aria-label="Kapacita">
-            <span itemprop="occupancy" itemscope itemtype="https://schema.org/QuantitativeValue">
-              <data value="4" itemprop="value">4</data> osoby
-            </span>
+                    <p class="room__desc" itemprop="description">
+                        {_'ui.accommodation.triple.shortDesc'}
                     </p>
-                    <h3 class="room__title" itemprop="name">Čtyřlůžkový pokoj</h3>
-                    <p class="room__price">
-            <span itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-              <data value="2800" itemprop="price">2 800</data>
-              <span itemprop="priceCurrency" content="CZK"><abbr title="korun českých">Kč</abbr></span>
-              <span class="room__per">/noc</span>
-            </span>
-                    </p>
-                </header>
 
-                <p class="room__desc" itemprop="description">
-                    Prostorný pokoj s vanou a kompletním vybavením
-                </p>
+                    <h4 class="room__amenities-title">{_'ui.accommodation.equipment.title'}</h4>
+                    <ul class="room__amenities" role="list">
+                        <li><span class="chip">{_'ui.accommodation.equipment.bathroom'}</span></li>
+                        <li><span class="chip">{_'ui.accommodation.equipment.tv'}</span></li>
+                        <li><span class="chip">{_'ui.accommodation.equipment.wifi'}</span></li>
+                        <li><span class="chip">{_'ui.accommodation.equipment.towels'}</span></li>
+                    </ul>
 
-                <h4 class="room__amenities-title">Vybavení:</h4>
-                <ul class="room__amenities" role="list">
-                    <li><span class="chip">Vlastní koupelna s vanou</span></li>
-                    <li><span class="chip">TV</span></li>
-                    <li><span class="chip">Wi-Fi</span></li>
-                    <li><span class="chip">Kompletní vybavení</span></li>
-                </ul>
+                    <footer class="room__buttons">
+                        <p class="room__secondarybutton"><a href="/pokoje/triluzkovy/fotky">{_'ui.cta.viewPhotos'}</a></p>
+                        <p class="room__button"><a href="/rezervace?room=triluzkovy">{_'ui.cta.bookRoom'}</a></p>
+                    </footer>
+                </article>
+            </li>
+        </ul>
+    </section>
 
-                <footer class="room__actions">
-                    <a href="/pokoje/ctyrluzkovy/fotky" class="btn btn-ghost">Zobrazit více fotografií</a>
-                    <a href="/rezervace?room=ctyrluzkovy" class="btn btn-primary">Rezervovat pokoj</a>
-                </footer>
-            </article>
-        </li>
-    </ul>
-</section>
+    <section class="services">
+        <article>
+            <h2>{_'ui.accommodation.servicesTitle'}</h2>
+            <ul>
+                <li>{include icon-coffee}{_'ui.accommodation.extras.breakfast'}</li>
+                <li>{include icon-car}{_'ui.accommodation.extras.parking'}</li>
+            </ul>
+        </article>
+    </section>
+
+{/block}
+
+{define icon-bed}
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bed h-6 w-6"><path d="M2 4v16"></path><path d="M2 8h18a2 2 0 0 1 2 2v10"></path><path d="M2 17h20"></path><path d="M6 8v9"></path></svg>
+{/define}
+
+{define icon-car}
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-car h-5 w-5 text-accent"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path><circle cx="7" cy="17" r="2"></circle><path d="M9 17h6"></path><circle cx="17" cy="17" r="2"></circle></svg>
+{/define}
+
+{define icon-coffee}
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-coffee h-5 w-5 text-accent"><path d="M10 2v2"></path><path d="M14 2v2"></path><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"></path><path d="M6 2v2"></path></svg>
+{/define}

@@ -2,6 +2,10 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js!./style/admin/food.scss ***!
   \******************************************************************************************************************************************************************************************************************/
 @charset "UTF-8";
+* {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+}
+
 :root {
   font-size: 16px;
   font-weight: 400;
@@ -177,7 +181,7 @@ small {
 .nav__menu a {
   display: flex;
   text-decoration: none;
-  color: #000;
+  color: black;
   align-items: center;
   gap: 0.4rem;
   padding: 0.5rem 1rem;
@@ -388,7 +392,8 @@ h4[style] {
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
-  padding: 16px;
+  padding: 16px; /* vnější odsazení pro malé displeje */
+  overflow-y: auto; /* když je obsah vyšší než viewport, ať se celé pozadí může posouvat */
 }
 
 .modal[aria-hidden=false] {
@@ -398,18 +403,46 @@ h4[style] {
 .modal-content {
   background: #fff;
   width: 100%;
-  max-width: 520px;
+  max-width: 720px; /* širší, ale rozumné */
   border-radius: 12px;
   border: 1px solid #e5e7eb;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-  padding: 16px 16px 14px;
-  position: relative;
+  /* klíčové: omezit výšku a dovolit vnitřní scroll */
+  max-height: 92vh; /* ať nikdy nepřeroste okno */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* scroll řešíme na body části */
+  /* vnitřní padding přesuneme do sekcí kvůli sticky header/footer */
+}
+
+.modal__header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #fff;
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal__body {
+  padding: 12px 16px;
+  overflow: auto; /* tady se bude scrollovat obsah */
+  flex: 1 1 auto; /* vyplní dostupný prostor */
+}
+
+.modal__footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  background: #fff;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border);
 }
 
 .modal-close {
   position: absolute;
-  top: 8px;
-  right: 10px;
+  top: 10px;
+  right: 12px;
   border: 0;
   background: transparent;
   font-size: 22px;
@@ -461,6 +494,34 @@ h4[style] {
   .actions {
     width: 100%;
     justify-content: flex-end;
+  }
+}
+@media (max-width: 540px) {
+  .modal {
+    align-items: flex-end; /* přirazeno ke spodní hraně */
+    padding: 0; /* využij celý prostor */
+  }
+  .modal-content {
+    max-width: 100%;
+    max-height: 96svh; /* bezpečný téměř fullscreen */
+    width: 100%;
+    border-radius: 16px 16px 0 0;
+  }
+}
+/* (Volitelně) jemná animace otevření */
+@media (prefers-reduced-motion: no-preference) {
+  .modal[aria-hidden=false] .modal-content {
+    animation: modalIn 0.16s ease-out;
+  }
+  @keyframes modalIn {
+    from {
+      transform: translateY(6px);
+      opacity: 0.95;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
 }
 @media screen and (min-width: 768px) {

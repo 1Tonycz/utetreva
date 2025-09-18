@@ -1,0 +1,21 @@
+{var $css = "reservation"}
+{block content}
+<section class="reservation">
+    <header class="reservation__header">
+        <h1>{_'ui.reservation.title'}</h1>
+        <p>{_'ui.reservation.subtitle'}</p>
+        <ul n:snippet="formTabs">
+            <li>
+                <a n:href="changeForm! 'reservation'" n:class="$formType === 'reservation' ? 'reservation__active ajax' : 'ajax'"
+               >{_'ui.reservation.nav.room'}</a>
+            </li>
+            <li>
+                <a n:href="changeForm! 'reservationTable'" n:class="$formType === 'reservationTable' ? 'reservation__active ajax' : 'ajax'"
+               >{_'ui.reservation.nav.table'}</a>
+            </li>
+        </ul>
+    </header>
+    <div n:snippet="formBox" class="form">
+        {include $formTemplate}
+    </div>
+</section>

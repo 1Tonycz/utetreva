@@ -13,8 +13,8 @@
             <li><a href="{$presenter->link(':Front:Home:default')}" class="{if isLinkCurrent(':Front:Home:default')}active{/if}">{_'ui.menu.home'}</a></li>
             <li><a href="{$presenter->link(':Front:Menu:default')}" class="{if isLinkCurrent(':Front:Menu:default')}active{/if}">{_'ui.menu.menu'}</a></li>
             <li><a href="{$presenter->link(':Front:Accommodation:default')}" class="{if isLinkCurrent(':Front:Accommodation:default')}active{/if}">{_'ui.menu.accommodation'}</a></li>
-            <li><a href="/#gallery">{_'ui.menu.gallery'}</a></li>
-            <li><a href="/#contact" id="badge">{_'ui.menu.reservation'}</a></li>
+            <li><a href="{$presenter->link(':Front:Galerie:default')}" class="{if isLinkCurrent(':Front:Galerie:default')}active{/if}">{_'ui.menu.gallery'}</a></li>
+            <li><a href="{$presenter->link(':Front:Reservation:default')}" class="{if isLinkCurrent(':Front:Reservation:default')}active{/if}" id="badge">{_'ui.menu.reservation'}</a></li>
         </div>
         <a href="javascript:void(0);" onclick="toggleNav()" class="nav__hamburger">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" class="bi bi-list" viewBox="0 0 16 16">
@@ -25,20 +25,36 @@
                     aria-haspopup="listbox"
                     aria-expanded="false"
                     aria-controls="translateMenu">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-globe-americas" viewBox="0 0 16 16">
-                    <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484q-.121.12-.242.234c-.416.396-.787.749-.758 1.266.035.634.618.824 1.214 1.017.577.188 1.168.38 1.286.983.082.417-.075.988-.22 1.52-.215.782-.406 1.48.22 1.48 1.5-.5 3.798-3.186 4-5 .138-1.243-2-2-3.5-2.5-.478-.16-.755.081-.99.284-.172.15-.322.279-.51.216-.445-.148-2.5-2-1.5-2.5.78-.39.952-.171 1.227.182.078.099.163.208.273.318.609.304.662-.132.723-.633.039-.322.081-.671.277-.867.434-.434 1.265-.791 2.028-1.12.712-.306 1.365-.587 1.579-.88A7 7 0 1 1 2.04 4.327Z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-translate" viewBox="0 0 16 16">
+                    <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286zm1.634-.736L5.5 3.956h-.049l-.679 2.022z"/>
+                    <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm7.138 9.995q.289.451.63.846c-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6 6 0 0 1-.415-.492 2 2 0 0 1-.94.31"/>
                 </svg>
-                <span class="code">CS</span>
                 <svg class="chevron" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                     <path d="M6 9l6 6 6-6" fill="white" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
             </button>
 
             <ul id="translateMenu" class="nav__translate-menu" role="listbox" hidden>
-                <li role="option" aria-selected="true"><a href="/cs/{$presenter->link("this")}" lang="cs"><span class="code">CS</span><span class="name">Čeština</span></a></li>
-                <li role="option"><a href="/en/{$presenter->link("this")}" lang="en"><span class="code">EN</span><span class="name">English</span></a></li>
-                <li role="option"><a href="/de/{$presenter->link("this")}" lang="de"><span class="code">DE</span><span class="name">Deutsch</span></a></li>
-                <li role="option"><a href="/ru/{$presenter->link("this")}" lang="ru"><span class="code">RU</span><span class="name">Русский</span></a></li>
+                <li role="option" aria-selected="{$currentLocale === 'cs'}">
+                    <a n:href="setLocale! locale => 'cs'" class="ajax" lang="cs">
+                        <span class="code">CS</span><span class="name">Čeština</span>
+                    </a>
+                </li>
+                <li role="option" aria-selected="{$currentLocale === 'en'}">
+                    <a n:href="setLocale! locale => 'en'" class="ajax" lang="en">
+                        <span class="code">EN</span><span class="name">English</span>
+                    </a>
+                </li>
+                <li role="option" aria-selected="{$currentLocale === 'de'}">
+                    <a n:href="setLocale! locale => 'de'" class="ajax" lang="de">
+                        <span class="code">DE</span><span class="name">Deutsch</span>
+                    </a>
+                </li>
+                <li role="option" aria-selected="{$currentLocale === 'ru'}">
+                    <a n:href="setLocale! locale => 'ru'" class="ajax" lang="ru">
+                        <span class="code">RU</span><span class="name">Русский</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>

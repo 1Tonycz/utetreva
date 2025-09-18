@@ -22,7 +22,7 @@
 		"tracy/tracy": "^2.10",
 		"mpdf/mpdf": "^8.2",
 		"kwn/number-to-words": "^2.12",
-		"dompdf/dompdf": "^3.1",
+		"dompdf/dompdf": "2.0",
 		"spatie/browsershot": "^5.0",
 		"contributte/translation": "^2.0"
 	},

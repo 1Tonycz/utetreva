@@ -6,6 +6,8 @@ use App\Core\Repository\FoodRepository;
 use App\Core\Repository\OpeningExpectionsRepository;
 use App\Core\Repository\OpeningHoursRepository;
 use App\Front\UI\BasePresenter;
+use Contributte\Translation\Translator;
+use Nette\Http\Session;
 
 final class MenuPresenter extends BasePresenter
 {
@@ -15,14 +17,18 @@ final class MenuPresenter extends BasePresenter
     public function __construct(
         OpeningHoursRepository $openingHoursRepository,
         OpeningExpectionsRepository $openingExpectionsRepository,
-        public FoodRepository $foodRepository
+        public FoodRepository $foodRepository,
+        protected Translator $translator,
+        protected Session $session
+
     ) {
-        parent::__construct($openingHoursRepository, $openingExpectionsRepository, $foodRepository);
+        parent::__construct($openingHoursRepository, $openingExpectionsRepository, $translator, $session);
     }
 
     public function renderDefault(): void
     {
-        // vždy nastavíme aktuální kategorii + položky
+        $locale = $this->translator->getLocale();
+        $this->template->locale = $locale;
         $this->template->selectedCategory = $this->category;
         $this->template->menuItems = $this->getMenuItems($this->mapCategory($this->category));
     }
