@@ -1,0 +1,16 @@
+{var $css = "voucher"}
+{block content}
+{form variablSymbolForm}
+    {input Vs}
+    {input Send}
+{/form}
+<
+<hr>
+{if flashes}
+    {foreach $flashes as $flash}
+        <div>
+            {$flash->message}
+        </div>
+    {/foreach}
+{/if}
+

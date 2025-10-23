@@ -21,29 +21,31 @@
         </div>
     </section>
 
-    <section class="food__section">
-        <div class="food__header">
-            <h2>{_ 'ui.food.title'}</h2>
-            <p>{_ 'ui.food.subtitle'}</p>
+    <section class="about__section">
+        <div class="about__header">
+            <h2>O nás</h2>
         </div>
+        <div class="about__grid">
+            <article>
+                <h3>{_'ui.accommodation.title'}</h3>
+                <p>{_'ui.about.accommodation.text'}</p>
+            </article>
+            <article>
+                <h3>{_'ui.hero.title.before'}</h3>
+                <p>{_'ui.about.restaurant.text'}</p>
+            </article>
+            <article>
+                <h3>{_'ui.about.kladska.title'}</h3>
+                <p>{_'ui.about.kladska.text'}</p>
+            </article>
+        </div>
+    </section>
 
-        <ul class="food__list">
-            {var $prop = $locale === 'cs' ? 'Name_cs' : 'Name_' . $locale}
-            {var $propDesc = $locale === 'cs' ? 'Description_cs' : 'Description_' . $locale}
-                {foreach $foods as $food}
-                    <li>
-                        <article>
-                            <h3>{$food[$prop] ?? $food->Name_cs}</h3>
-                            <p>{$food[$propDesc] ?? $food->Description_cs}</p>
-                            <p>{$food->Price} {_ 'ui.common.currency'}</p>
-                        </article>
-                    </li>
-                {/foreach}
-        </ul>
+    <section class="voucher__section">
+        <div class="voucher__header">
 
-        <p class="food__button">
-            <a href="{$presenter->link(':Front:Menu:default')}">{_ 'ui.food.viewAll'}</a>
-        </p>
+        </div>
+        <
     </section>
 
     <section class="accommodation__section">

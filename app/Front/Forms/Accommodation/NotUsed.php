@@ -28,6 +28,12 @@ final class AccommodationFormFactory
         $form->addInteger('Person', 'Počet osob')
             ->setRequired('Zadejte počet ubytováných osob.');
 
+        $form->addInteger('Child', 'Počet dětí od 3 do 17 let')
+            ->setRequired('Zadejte počet ubytováných dětí.');
+
+        $form->addInteger('Baby', 'Počet dětí do 3 let')
+            ->setRequired('Zadejte počet ubytováných dětí.');
+
         $form->addText('Date_from', 'Datum příjezdu:')
             ->setHtmlType('date')
             ->setRequired('Zadejte datum.')
