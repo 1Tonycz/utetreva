@@ -1,0 +1,45 @@
+Hello,<br>
+<br>
+We confirm your reservation.<br>
+<br>
+Date: {$from|date: 'd/m/Y'} - {$to|date: 'd/m/Y'}<br>
+<br>
+<ul>
+    {foreach $rooms as $room}
+        <li>Room: {$room['price']} CZK / night</li><br>
+    {/foreach}
+</ul>
+
+{$nights} nights x  {$totalPrice} = {= ($nights * $totalPrice)},-<br>
+{$nights} nights x {$person} adults x 50 spa fee = {= ($nights * $person) * 50},-<br>
+{if $Dog == 1}
+    Pet fee: 150 CZK / night<br>
+    {$nights} nights x $150 * {$Dog_count} {= $Dog_count > 1 ? 'pets': 'pet'} = {= $nights * 150 * $Dog_count},-<br>
+{/if}
+--------------------------- -------------------<br>
+Total price: {= ($nights * $totalPrice) + (($nights * $person) * 50) + ($Dog == 1 ? ($nights * 150) : 0)},-<br>
+<br>
+The deposit is at least 50% of the total price of the stay<br>
+{= (($nights * $totalPrice) + (($nights * $person) * 50) + ($Dog == 1 ? ($nights * 150) : 0)) / 2},- up to 14 days before arrival. The remaining amount<br>
+can be paid by bank transfer or at our office.<br>
+If you arrive within 14 days, it is not necessary to pay a deposit.<br>
+<br>
+You can send your payment to the following account: <br>
+Account number: 2161122163/0800
+IBAN: CZ56 0800 0000 0021 6112 2163
+BIC/SWIFT: GIBACZPX
+Variable symbol: {$VS}
+In the note: {$name}<br>
+<br>
+Important information:<br>
+<br>
+There is no mobile signal throughout the Kladská resort and it is not possible to pay by credit card.<br>
+The Wi-Fi signal is very weak in the rooms and restaurant.<br>
+
+Breakfast is served from 9:00 a.m. to 10:00 a.m.<br>
+
+Parking in our car park is free of charge.<br>
+<br>
+Please find general information attached.<br>
+<br>
+Thank you and we look forward to your visit.<br>

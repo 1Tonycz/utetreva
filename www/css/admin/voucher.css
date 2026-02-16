@@ -1,0 +1,452 @@
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js!./style/admin/voucher.scss ***!
+  \*********************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
+* {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+}
+
+:root {
+  font-size: 16px;
+  font-weight: 400;
+  scroll-behavior: smooth;
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body,
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: calc(1.375rem + 1.5vw);
+}
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+h2 {
+  font-size: calc(1.325rem + 0.9vw);
+}
+@media screen and (min-width: 768px) {
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+h3 {
+  font-size: calc(1.3rem + 0.6vw);
+}
+@media screen and (min-width: 768px) {
+  h3 {
+    font-size: 1.75rem;
+  }
+}
+
+h4 {
+  font-size: calc(1.275rem + 0.3vw);
+}
+@media screen and (min-width: 768px) {
+  h4 {
+    font-size: 1.5rem;
+  }
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+@media screen and (min-width: 768px) {
+  h5 {
+    font-size: 1.25rem;
+  }
+}
+
+h6 {
+  font-size: 1rem;
+}
+@media screen and (min-width: 768px) {
+  h6 {
+    font-size: 1rem;
+  }
+}
+
+a {
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+ul, ol {
+  padding-left: 1.5em;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+textarea,
+input,
+button {
+  font-family: inherit;
+}
+
+iframe {
+  border: none;
+}
+
+sup,
+sub,
+small {
+  font-size: smaller;
+}
+
+.nav {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1rem 2rem 0 2rem;
+  font-family: "Segoe UI", sans-serif;
+}
+.nav__up {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.nav__up h1 {
+  font-size: 1.6rem;
+  color: #333;
+  margin: 0;
+}
+.nav__up .nav__left {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.nav__up .nav__right {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 1rem;
+}
+.nav__up .nav__right a {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+.nav__up .nav__right a:hover {
+  color: #0056b3;
+}
+.nav__down {
+  margin-top: 1rem;
+  border-top: 1px solid #eee;
+}
+.nav__menu {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  border-radius: 15px;
+  justify-content: center;
+  gap: 1rem;
+}
+.nav__menu a {
+  display: flex;
+  text-decoration: none;
+  color: black;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  background: #e9eaec;
+  border-radius: 8px;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.nav__menu a:hover {
+  background: #e9ecef;
+}
+.nav__menu a i {
+  font-size: 1.2rem;
+  color: #495057;
+}
+
+.voucher__header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px 0;
+}
+.voucher__header form {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.voucher__header form input[type=number] {
+  padding: 5px;
+  border-radius: 5px;
+}
+.voucher__header form label {
+  font-size: 1.2rem;
+}
+.voucher__header form input[type=submit] {
+  padding: 5px 5px;
+  color: #ffffff;
+  background-color: #008000;
+  border-radius: 5px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+.voucher__header form input[type=submit]:hover {
+  scale: 1.05;
+}
+.voucher__header span {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.voucher__header span input {
+  width: 320px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.voucher__button {
+  padding: 5px 15px;
+  background: #2563eb;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #ffffff;
+  text-decoration: none;
+}
+.voucher__box {
+  display: grid;
+  padding: 2rem 2rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+.voucher__item {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid #ccc;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 8px 20px rgba(0, 0, 0, 0.04);
+  padding: 1rem 1rem;
+  border-radius: 10px;
+}
+.voucher__info p {
+  font-size: 1.1rem;
+}
+.voucher__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.voucher__buttons a {
+  padding: 5px 10px;
+  background: #2563eb;
+  border-radius: 5px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+}
+.voucher__buttons a:hover {
+  scale: 1.05;
+}
+.voucher__buttons button {
+  padding: 5px 10px;
+  background: #ffe88a;
+  border-radius: 5px;
+  color: black;
+  font-size: 1rem;
+}
+.voucher__buttons button:hover {
+  scale: 1.05;
+}
+
+h2 {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.form {
+  margin: auto auto;
+}
+.form form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem 2rem;
+  border: 1px solid #ccc;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 8px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  min-width: 400px;
+}
+.form form label {
+  font-size: 1.2rem;
+}
+.form form input {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+}
+.form form textarea {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+}
+.form form input[type=submit] {
+  padding: 10px 15px;
+  background: #2563eb;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+}
+.form form input[type=submit]:hover {
+  scale: 1.05;
+}
+
+/* vlastní okno modalu */
+.voucher__modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  gap: 1rem;
+  min-width: 360px;
+  max-width: 90%;
+  padding: 1.5rem 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  font-family: sans-serif;
+  z-index: 1001; /* nad overlayem */
+}
+
+/* backdrop s rozmazáním */
+#amountModal::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+/* text a inputy uvnitř */
+.voucher__modal h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.voucher__modal label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.voucher__modal input {
+  margin-top: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.voucher__modal menu {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.voucher__modal button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.voucher__modal button[value=cancel] {
+  background: #eee;
+}
+
+.voucher__modal button#vm-save {
+  background: #0069d9;
+  color: #fff;
+}
+
+.voucher__modal button#vm-save:hover {
+  background: #0053aa;
+}
+
+.alert {
+  width: 100%;
+  text-align: center;
+}
+.alert__success {
+  background: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+.alert__error {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+.alert__close {
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .nav__up {
+    flex-wrap: nowrap;
+  }
+  .nav__left {
+    justify-content: flex-start !important;
+  }
+  .nav__right {
+    justify-content: flex-end !important;
+  }
+}

@@ -1,0 +1,90 @@
+{var $css = "formpdf"}
+{block content}
+
+    {form accommodationBookForm, class => 'nf-form', novalidate => true}
+
+        {** Globální chyby formuláře **}
+        <ul class="nf-errors" n:if="$form->hasErrors()">
+            <li n:foreach="$form->errors as $e">{$e}</li>
+        </ul>
+
+        <div class="nf-grid">
+            {var $err = $form['First']->hasErrors()}
+        <div class="nf-field{if $err} is-error{/if}">
+                    {label First, class => 'nf-label' /}
+            {input First, class => 'nf-input'}
+                    <small class="nf-help" n:if="$err">{inputError First}</small>
+        </div>
+
+        {var $err = $form['Second']->hasErrors()}
+        <div class="nf-field{if $err} is-error{/if}">
+                    {label Second, class => 'nf-label' /}
+            {input Second, class => 'nf-input'}
+                    <small class="nf-help" n:if="$err">{inputError Second}</small>
+        </div>
+
+        {var $err = $form['Nationality']->hasErrors()}
+            <div class="nf-field{if $err} is-error{/if}">
+                    {label Nationality, class => 'nf-label' /}
+            {input Nationality, class => 'nf-input'}
+                    <small class="nf-help" n:if="$err">{inputError Nationality}</small>
+            </div>
+
+        {var $err = $form['Card_id']->hasErrors()}
+        <div class="nf-field nf-affix{if $err} is-error{/if}">
+                    {label Card_id, class => 'nf-label' /}
+            {input Card_id, class => 'nf-input'}
+                    <small class="nf-help" n:if="$err">{inputError Card_id}</small>
+        </div>
+
+        {var $err = $form['Town']->hasErrors()}
+        <div class="nf-field nf-affix{if $err} is-error{/if}">
+                    {label Town, class => 'nf-label' /}
+            {input Town, class => 'nf-input'}
+                    <small class="nf-help" n:if="$err">{inputError Town}</small>
+        </div>
+
+        {var $err = $form['Town_part']->hasErrors()}
+        <div class="nf-field nf-affix{if $err} is-error{/if}">
+                    {label Town_part, class => 'nf-label' /}
+            {input Town_part, class => 'nf-input'}
+                    <small class="nf-help" n:if="$err">{inputError Town_part}</small>
+        </div>
+
+        {var $err = $form['Street']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                {label Street, class => 'nf-label' /}
+            {input Street, class => 'nf-input'}
+                <small class="nf-help" n:if="$err">{inputError Street}</small>
+            </div>
+
+            {var $err = $form['Date_from']->hasErrors()}
+            <div class="nf-field{if $err} is-error{/if}">
+                {label Date_from, class => 'nf-label' /}
+            {input Date_from, class => 'nf-input'}
+                <small class="nf-help" n:if="$err">{inputError Date_from}</small>
+            </div>
+
+            {var $err = $form['Date_to']->hasErrors()}
+            <div class="nf-field{if $err} is-error{/if}">
+                {label Date_to, class => 'nf-label' /}
+            {input Date_to, class => 'nf-input'}
+                <small class="nf-help" n:if="$err">{inputError Date_to}</small>
+            </div>
+
+            {var $err = $form['Birth']->hasErrors()}
+            <div class="nf-field{if $err} is-error{/if}">
+                {label Birth, class => 'nf-label' /}
+            {input Birth, class => 'nf-input'}
+                <small class="nf-help" n:if="$err">{inputError Birth}</small>
+            </div>
+
+
+        </div>
+
+        <div class="nf-actions">
+            {input Submit, class => 'nf-btn nf-btn--primary', value => 'Uložit'}
+        </div>
+
+    {/form}
+{/block}

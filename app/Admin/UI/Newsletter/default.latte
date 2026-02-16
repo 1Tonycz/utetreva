@@ -1,0 +1,27 @@
+{var $css = "newsletter"}
+{block content}
+
+<section class="newsletter">
+    <div class="newsletter__header">
+        <h2 class="newsletter__title">Newsletter</h2>
+    </div>
+
+    {form newsletterForm}
+        <div class="newsletter__field">
+            {label Subject/}
+            {input Subject}
+        </div>
+
+        <div class="newsletter__field">
+            {label Body/}
+            {input Body}
+        </div>
+
+        <div class="newsletter__field">
+            {label Attachment/}
+            {input Attachment}
+        </div>
+
+        {input Submit}
+    {/form}
+</section>

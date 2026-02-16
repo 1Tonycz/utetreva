@@ -1,0 +1,69 @@
+{var $css = "event"}
+{block content}
+<div class="container">
+    <header class="page-header">
+        <h1>Akce</h1>
+        <p class="subtitle">Správa jediné akce včetně více jazyků a rozsahu dat.</p>
+    </header>
+
+    <div class="grid">
+        <section class="card">
+            {if $event}
+                <div class="event-card">
+                    <div class="event-card__media">
+                        {if (int)($event['Image'] ?? 0) === 1 && $event['Image_name']}
+                            <img src="{$basePath}/css/img/event/{$event['Image_name']}" alt="Obrázek akce" class="event-image">
+                        {else}
+                            <div class="image-placeholder">Bez obrázku</div>
+                        {/if}
+                    </div>
+                    <div class="event-card__body">
+                        <div class="event-card__header">
+                            <h2 class="event-title">{$event['Title_cs']}</h2>
+                            <span class="badge-date">{$event['Date_from']|date:'j. n. Y'} – {$event['Date_to']|date:'j. n. Y'}</span>
+                        </div>
+                        <div class="i18n">
+                            <details open>
+                                <summary>Čeština</summary>
+                                <p class="event-desc">{$event['Description_cs']}</p>
+                            </details>
+                            <details>
+                                <summary>Deutsch</summary>
+                                <p class="event-desc"><strong>{$event['Title_de']}</strong><br>{$event['Description_de']}</p>
+                            </details>
+                            <details>
+                                <summary>English</summary>
+                                <p class="event-desc"><strong>{$event['Title_en']}</strong><br>{$event['Description_en']}</p>
+                            </details>
+                            <details>
+                                <summary>Русский</summary>
+                                <p class="event-desc"><strong>{$event['Title_ru']}</strong><br>{$event['Description_ru']}</p>
+                            </details>
+                        </div>
+                        <div class="actions">
+                            {if (int)($event['Image'] ?? 0) === 1 && $event['Image_name']}
+                                <a n:href="deleteImage!" class="btn btn-outline">Smazat obrázek</a>
+                            {/if}
+                            <a n:href="delete!" class="btn btn-danger" onclick="return confirm('Opravdu smazat celou akci?')">Smazat akci</a>
+                        </div>
+                    </div>
+                </div>
+            {else}
+                <div class="empty">
+                    <div class="empty__icon" aria-hidden>📅</div>
+                    <h2>Zatím nemáte žádnou akci</h2>
+                    <p>Vytvořte první akci pomocí formuláře vpravo.</p>
+                </div>
+            {/if}
+        </section>
+
+        <section class="card">
+            <div class="card__header">
+                <h2>{$event ? 'Upravit akci' : 'Vytvořit akci'}</h2>
+            </div>
+            <div class="card__body form-skin">
+                {control eventForm}
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Restaurace a pension U Tetřeva – Kontakt</title>
+    <meta name="description" content="Dočasná stránka s kontakty: telefon, e‑mail a mapa s adresou. Pracujeme na novém webu." />
+    <style>
+        :root{
+            --primary:#141414;
+            --orange-text:#f08b42;
+            --orange-hover:#f08b42;
+            --orange:#f97316;
+            --white:#ffffff;
+            --green:#1b3226;
+            --light-green:#265940;
+            --dark-grey:#1c1c1c;
+            --light-grey:#a6a6a6;
+            --border:#2c2c2c;
+            --footer:#131514;
+            --black:#000000;
+
+            --color-border: var(--border);
+            --color-white: var(--white);
+            --brand: var(--green);
+            --brand-hover: var(--light-green);
+        }
+
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{
+            margin:0;
+            font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+            background: var(--primary);
+            color: var(--color-white);
+            line-height:1.6;
+        }
+        .wrap{max-width:960px;margin:0 auto;padding:32px 20px 56px}
+        header{display:grid;gap:8px;margin-bottom:24px}
+        .badge{
+            display:inline-flex;align-items:center;gap:8px;
+            padding:6px 10px;border:1px solid var(--color-border);
+            border-radius:999px;color:var(--light-grey);font-size:14px;
+            background: rgba(255,255,255,.02);
+        }
+        h1{font-size:clamp(28px,3.5vw,40px);margin:0;letter-spacing:-.02em}
+        p.lead{color:var(--light-grey);margin:0}
+
+        .grid{display:grid;gap:20px;grid-template-columns:1fr}
+        @media(min-width:900px){.grid{grid-template-columns:.9fr 1.1fr}}
+
+        .card{
+            background: var(--dark-grey);
+            border:1px solid var(--color-border);
+            border-radius:16px;
+            padding:20px;
+            box-shadow:0 1px 0 rgba(255,255,255,.02) inset;
+        }
+
+        .contact{display:grid;gap:12px}
+        .contact a{color:var(--color-white);text-underline-offset:3px}
+        .contact a:hover{color:var(--orange-text)}
+
+        .muted{color:var(--light-grey);font-size:14px}
+
+        .map{aspect-ratio:16/10;width:100%;border:0;border-radius:14px;overflow:hidden}
+        /* pokud chcete pevné rozměry, odstraňte aspect-ratio a nastavte width/height */
+
+        a{color:var(--orange-text)}
+        a:hover{color:var(--orange-hover)}
+
+        footer{
+            margin-top:32px;color:var(--light-grey);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;background:var(--footer);padding:12px 16px;border:1px solid var(--color-border);border-radius:12px
+        }
+    </style>
+</head>
+<body>
+<div class="wrap" role="main">
+    <header>
+        <span class="badge">🔧 Pracujeme na novém webu</span>
+        <h1>Kontakt</h1>
+        <p class="lead">Tato stránka je dočasná. Neváhejte nás kontaktovat telefonem nebo e‑mailem, případně nás navštivte na uvedené adrese.</p>
+    </header>
+
+    <div class="grid">
+        <!-- Kontakty a adresa -->
+        <section class="card" aria-labelledby="kontakt">
+            <h2 id="kontakt" style="margin-top:0">Telefon, e‑mail &amp; adresa</h2>
+            <div class="contact">
+                <div>
+                    <strong>Restaurace a pension U Tetřeva</strong><br />
+                    Kladská 8, 353 01 Mariánské Lázně 1<br />
+                    Česká republika
+                </div>
+                <div>
+                    📞 <a href="tel:+420353577841">+420 353 577 841</a>
+                </div>
+                <div>
+                    ✉️ <a href="mailto:restauraceutetreva@seznam.cz">restauraceutetreva@seznam.cz</a>
+                </div>
+                <p class="muted">Otevírací doba: Po–Ne 10:00–22:00</p>
+            </div>
+        </section>
+
+        <!-- Mapa -->
+        <section class="card" aria-labelledby="mapa">
+            <h2 id="mapa" style="margin-top:0">Mapa</h2>
+            <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2563.244323966678!2d12.665214676071592!3d50.02551751786947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a0886077b43ca7%3A0xb22625729bdc7dfa!2zS2xhZHNrw6EgOCwgMzUzIDAxIE1hcmnDoW5za8OpIEzDoXpuxJsgMQ!5e0!3m2!1scs!2scz!4v1762699198811!5m2!1scs!2scz" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa – Restaurace a pension U Tetřeva"></iframe>
+        </section>
+    </div>
+
+    <footer>
+        <div>© <span id="year"></span> Restaurace a pension U Tetřeva</div>
+        <small>Dočasná stránka. <code>v0.2</code></small>
+    </footer>
+</div>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

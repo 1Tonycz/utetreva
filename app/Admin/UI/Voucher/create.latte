@@ -1,0 +1,23 @@
+{var $css = "voucher"}
+{block content}
+<div class="form">
+    {form createVoucherForm}
+        <h2>Vytvořit voucher</h2>
+        <span>
+            {label Amount/}
+            {input Amount}
+        </span>
+        <span>
+            {label Code/}
+            {input Code}
+        </span>
+        <span>
+            {label Date/}
+            {input Date}
+        </span>
+        <span>
+            {input Note}
+        </span>
+        {input Send}
+    {/form}
+</div>

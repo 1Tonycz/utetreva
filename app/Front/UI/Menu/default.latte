@@ -10,32 +10,35 @@
             <ul n:snippet="menuTabs">
                 <li>
                     <a n:href="changeCategory! predkrmy"
-               n:class="$selectedCategory === 'predkrmy' ? 'menu__active ajax' : 'ajax'">{_'ui.food.navigation.starters'}</a>
+                   n:class="$selectedCategory === 'predkrmy' ? 'menu__active ajax' : 'ajax'">{_'ui.food.navigation.starters'}</a>
                 </li>
                 <li>
                     <a n:href="changeCategory! hlavni"
-               n:class="$selectedCategory === 'hlavni' ? 'menu__active ajax' : 'ajax'">{_'ui.food.navigation.mains'}</a>
+                   n:class="$selectedCategory === 'hlavni' ? 'menu__active ajax' : 'ajax'">{_'ui.food.navigation.mains'}</a>
                 </li>
                 <li>
                     <a n:href="changeCategory! dezerty"
-               n:class="$selectedCategory === 'dezerty' ? 'menu__active ajax' : 'ajax'">{_'ui.food.navigation.desserts'}</a>
+                   n:class="$selectedCategory === 'dezerty' ? 'menu__active ajax' : 'ajax'">{_'ui.food.navigation.desserts'}</a>
                 </li>
                 <li>
                     <a n:href="changeCategory! napoje"
-               n:class="$selectedCategory === 'napoje' ? 'menu__active ajax' : 'ajax'">{_'ui.food.navigation.drinks'}</a>
+                   n:class="$selectedCategory === 'napoje' ? 'menu__active ajax' : 'ajax'">{_'ui.food.navigation.drinks'}</a>
                 </li>
             </ul>
         </header>
         <article>
             <div n:snippet="menuContent">
                 {var $prop = $locale === 'cs' ? 'Name_cs' : 'Name_' . $locale}
-            {var $propDesc = $locale === 'cs' ? 'Description_cs' : 'Description_' . $locale}
-                {foreach $menuItems as $item}
-                    <div class="menu__item">
-                        <h2>{$item[$prop] ?? $item->Name_cs}</h2>
-                        <p>{$item[$propDesc] ?? $item->Description_cs}</p>
-                        <span class="menu__price">{$item->Price}{_'ui.common.currency'}</span>
-                    </div>
+                {var $propDesc = $locale === 'cs' ? 'Description_cs' : 'Description_' . $locale}
+                {foreach $categories as $categoryName => $items}
+                    <h2>{$categoryName}</h2> <!-- Zobrazení názvu kategorie -->
+                    {foreach $items as $item}
+                        <div class="menu__item">
+                            <h3>{$item[$prop] ?? $item->Name_cs}</h3>
+                            <p>{$item[$propDesc] ?? $item->Description_cs}</p>
+                            <span class="menu__price">{if $categoryName == 'Vinný list'}{else}{$item->Price}{_'ui.common.currency'}{/if}</span>
+                        </div>
+                    {/foreach}
                 {/foreach}
             </div>
         </article>

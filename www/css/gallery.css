@@ -313,8 +313,8 @@ nav {
 }
 .gallery ul {
   padding: 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 1rem;
   list-style: none;
 }
@@ -322,6 +322,10 @@ nav {
   height: 200px;
   border-radius: 10px;
   border: 1px solid #2c2c2c;
+}
+.gallery figcaption {
+  color: #a6a6a6;
+  font-size: 0.9rem;
 }
 
 .footer {
@@ -425,7 +429,7 @@ nav {
     font-size: 1.3rem;
   }
   .gallery ul {
-    flex-direction: row;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
   .footer {
     padding: 2rem 10rem;

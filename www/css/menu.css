@@ -404,6 +404,11 @@ nav {
   gap: 1rem;
   width: 100%;
 }
+.menu article h2 {
+  font-size: 1.5rem;
+  color: #ffffff;
+  text-align: left;
+}
 .menu__item {
   border: 1px solid #2c2c2c;
   width: 100%;
@@ -411,7 +416,7 @@ nav {
   border-radius: 10px;
   background: #1c1c1c;
 }
-.menu__item h2 {
+.menu__item h3 {
   font-size: 1.5rem;
   color: #f08b42;
   text-align: left;

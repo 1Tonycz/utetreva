@@ -3,6 +3,17 @@
 {var $description = "Restaurace a Pension U Tetřeva – stylové ubytování a domácí kuchyně v srdci přírodní rezervace Kladská u Mariánských Lázní. Užijte si klidnou atmosféru, tradiční speciality z čerstvých surovin a pohodlné pokoje jen pár kroků od krásné přírody Slavkovského lesa."}
 {var $keywords = "Restaurace U Tetřeva, Pension U Tetřeva, Kladská, Mariánské Lázně, restaurace Slavkovský les, ubytování Kladská"}
 {block content}
+    {if $flashes}
+        <div class="flash-messages" id="flash-messages">
+            {foreach $flashes as $flash}
+                <div class="flash-message {$flash->type}">
+                    <span class="flash-message-content">{$flash->message}</span>
+                    <button class="close-btn" onclick="closeFlashMessage('flash-messages')">×</button>
+                </div>
+            {/foreach}
+        </div>
+    {/if}
+
     <section class="hero">
         <div class="hero__content">
             <h1>
@@ -14,12 +25,34 @@
             </p>
 
             <div class="hero__buttons">
-                <a href="{$presenter->link(':Front:Reservation:default')}" class="hero__button">{_ 'ui.cta.reserveTable'}</a>
+                <a n:href=":Front:Reservation:default, do => 'changeForm', type => 'reservationTable'" class="hero__button">{_ 'ui.cta.reserveTable'}</a>
                 <a href="{$presenter->link(':Front:Menu:default')}" class="hero__secondarybutton">{_ 'ui.cta.viewMenu'}</a>
                 <a href="{$presenter->link(':Front:Reservation:default')}" class="hero__button">{_ 'ui.cta.reserveRoom'}</a>
             </div>
         </div>
     </section>
+    {ifset $event}
+        {foreach $event as $item}
+            {var $prop = $locale === 'cs' ? 'Title_cs' : 'Title_' . $locale}
+            {var $propDesc = $locale === 'cs' ? 'Description_cs' : 'Description_' . $locale}
+            <section class="event">
+                <div class="event__content">
+                    <h2>{$item[$prop]}</h2>
+                    <p>{$item->Date_from|date: 'd.m.Y'} - {$item->Date_to|date: 'd.m.Y'}</p>
+                    <div class="event__text">
+                        <p>{$item[$propDesc]|noescape}</p>
+                    </div>
+                </div>
+                    {ifset $item->Image}
+                        <div class="event__image">
+                            <figure class="event__img">
+                                <img src="{$basePath}/css/img/event/{$item->Image_name}" alt="{$item[$prop]}">
+                            </figure>
+                        </div>
+                    {/ifset}
+            </section>
+        {/foreach}
+    {/ifset}
 
     <section class="about__section">
         <div class="about__header">
@@ -30,22 +63,29 @@
                 <h3>{_'ui.accommodation.title'}</h3>
                 <p>{_'ui.about.accommodation.text'}</p>
             </article>
+            <article id="about__mid">
+                <h3>{_'ui.about.kladska.title'}</h3>
+                <p>{_'ui.about.kladska.text'}</p>
+            </article>
             <article>
                 <h3>{_'ui.hero.title.before'}</h3>
                 <p>{_'ui.about.restaurant.text'}</p>
-            </article>
-            <article>
-                <h3>{_'ui.about.kladska.title'}</h3>
-                <p>{_'ui.about.kladska.text'}</p>
             </article>
         </div>
     </section>
 
     <section class="voucher__section">
-        <div class="voucher__header">
-
+        <div class="voucher__title">
+            <h2>{_ 'ui.voucher.title'}</h2>
+            <p>{_ 'ui.voucher.subtitle'}</p>
+            <a href="{$presenter->link(':Front:Voucher:default')}" class="voucher__button">{_'ui.cta.voucher'}</a>
         </div>
-        <
+        <figure class="voucher__figure">
+            <img src="{$basePath}/css/img/poukaz.webp"
+                 alt="{_ 'ui.voucher.image.alt'}">
+
+            <figcaption>{_ 'ui.voucher.image.caption'}</figcaption>
+        </figure>
     </section>
 
     <section class="accommodation__section">
@@ -125,34 +165,32 @@
     </section>
 
     <section class="history">
-        <h2>{_ 'ui.about.title'}</h2>
-        <p>{_ 'ui.about.subtitle'}</p>
+        <h2>{_ 'ui.history.title'}</h2>
+        <p>{_ 'ui.history.subtitle'}</p>
 
         <div class="history__grid">
             <div class="history__text">
-                <p>{_ 'ui.about.paragraph1'}</p>
+                <p>{_ 'ui.history.paragraph1'}</p>
 
                 <dl class="history__features">
                     <div>
-                        <dt>{_ 'ui.about.feature.gameRestaurant.title'}</dt>
-                        <dd>{_ 'ui.about.feature.gameRestaurant.desc'}</dd>
+                        <dt>{_ 'ui.history.gameRestaurant.title'}</dt>
                     </div>
                     <div>
-                        <dt>{_ 'ui.about.feature.family.title'}</dt>
-                        <dd>{_ 'ui.about.feature.family.desc'}</dd>
+                        <dt>{_ 'ui.history.family.title'}</dt>
                     </div>
                 </dl>
             </div>
 
             <figure class="history__img">
-                <img src="{$basePath}/css/img/u_tetreva_restaurace.jpg"
-                     alt="{_ 'ui.about.image.alt'}">
+                <img src="{$basePath}/css/img/u_tetreva_restaurace.webp"
+                     alt="{_ 'ui.history.image.alt'}">
 
-                <figcaption>{_ 'ui.about.image.caption'}</figcaption>
+                <figcaption>{_ 'ui.history.image.caption'}</figcaption>
             </figure>
         </div>
     </section>
-
+{*MODAL*}
     <div id="modal-no-card" class="modal" aria-hidden="true">
         <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="nocardTitle">
             <button type="button" class="modal-close" data-modal-close aria-label="Zavřít">×</button>
@@ -199,17 +237,25 @@
         </div>
     </div>
     <script>
+        function closeFlashMessage(id) {
+            var flashMessage = document.getElementById(id);
+            flashMessage.style.opacity = 0;
+            setTimeout(function() {
+                flashMessage.style.display = 'none';
+            }, 500);
+        }
+
         (function () {
             const MODAL_ID = 'modal-no-card';
-            const STORAGE_KEY = 'noCardPaymentDismissed';
+            const STORAGE_KEY = 'noCardPaymentDismissedAt';
             const SHOW_DELAY_MS = 200;
+            const SNOOZE_MS = 24 * 60 * 60 * 1000; // 24 hodin
 
             const modal = document.getElementById(MODAL_ID);
             if (!modal) return;
 
             const content = modal.querySelector('.modal-content');
             const closers = modal.querySelectorAll('[data-modal-close]');
-
             const isOpen = () => modal.getAttribute('aria-hidden') === 'false';
 
             function openModal() {
@@ -224,11 +270,24 @@
                 closeModal();
             }
 
-            // automatické otevření – jen pokud to uživatel dřív neodmítl
+            function shouldShowNow() {
+                try {
+                    const raw = localStorage.getItem(STORAGE_KEY);
+                    if (!raw) return true; // nikdy neodmítnuto → zobrazit
+                    const last = parseInt(raw, 10);
+                    if (Number.isNaN(last)) return true;
+                    return (Date.now() - last) >= SNOOZE_MS; // po 24 h znovu zobrazit
+                } catch(e) {
+                    // pokud localStorage nefunguje, raději zobrazit
+                    return true;
+                }
+            }
+
+            // automatické otevření – jen pokud neodmítnuto v posledních 24 h
             document.addEventListener('DOMContentLoaded', () => {
-                let dismissed = false;
-                try { dismissed = !!localStorage.getItem(STORAGE_KEY); } catch(e) {}
-                if (!dismissed) setTimeout(openModal, SHOW_DELAY_MS);
+                if (shouldShowNow()) {
+                    setTimeout(openModal, SHOW_DELAY_MS);
+                }
             });
 
             // zavření tlačítky / křížkem
@@ -248,6 +307,7 @@
             });
         })();
     </script>
+
 
 
 {/block}

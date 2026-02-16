@@ -12,6 +12,7 @@ use App\Front\Components\footer\FooterControl;
 use Contributte\Translation\Translator;
 use Nette\Http\Session;
 use Nette\Application\UI\Presenter;
+use Contributte\Translation\LocalesResolvers\Session as TranslatorSessionResolver;
 
 /**
  * @property-read $template
@@ -26,7 +27,7 @@ class BasePresenter extends Presenter
         protected OpeningHoursRepository $openingHoursRepository,
         protected OpeningExpectionsRepository $openingExpectionsRepository,
         protected Translator $translator,
-        protected Session $session
+        protected TranslatorSessionResolver $translatorSessionResolver,
 
     ){
         parent::__construct();
@@ -41,18 +42,6 @@ class BasePresenter extends Presenter
     {
         parent::startup();
 
-        $locale = $this->getParameter('locale');
-
-        if ($locale) {
-            $sec = $this->session->getSection('locale');
-            $sec->code = $locale;
-            $this->translator->setLocale($locale);
-        } else {
-            $sec = $this->session->getSection('locale');
-            if (!empty($sec->code)) {
-                $this->translator->setLocale($sec->code);
-            }
-        }
     }
 
 
@@ -65,7 +54,7 @@ class BasePresenter extends Presenter
     {
         return new NavbarControl(
             $this->translator,
-            $this->session
+            $this->translatorSessionResolver,
         );
     }
 

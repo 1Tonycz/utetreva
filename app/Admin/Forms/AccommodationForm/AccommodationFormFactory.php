@@ -16,13 +16,6 @@ final class AccommodationFormFactory
         private ReservationroomRepository $reservationroomRepository,
     ) {}
 
-    /**
-     * Vytvoří formulář pro rezervaci.
-     *
-     * @param \DateTimeInterface|null $from  volitelné – když zadáš, zakážeme přetížené pokoje
-     * @param \DateTimeInterface|null $to    volitelné – když zadáš, zakážeme přetížené pokoje
-     * @param int|null $excludeReservationId volitelné – při editaci, aby si rezervace nepřekážela sama sobě
-     */
     public function create(
         ?\DateTimeInterface $from = null,
         ?\DateTimeInterface $to = null,
@@ -30,7 +23,6 @@ final class AccommodationFormFactory
     ): Form {
         $form = new Form;
 
-        // --- ZÁKLADNÍ ÚDAJE ---
         $form->addText('First', 'Jméno:')
             ->setRequired('Zadejte své jméno.');
 
@@ -38,20 +30,27 @@ final class AccommodationFormFactory
             ->setRequired('Zadejte své příjmení.');
 
         $form->addEmail('Mail', 'E-mail:')
-            ->setRequired('Zadejte e-mail.');
+            ->addRule($form::EMAIL, 'Zadejte platnou e-mailovou adresu.');
 
         $form->addText('Tel', 'Telefon:')
             ->addRule(
                 $form::PATTERN,
                 'Zadejte platné telefonní číslo.',
                 '^\+?[0-9 ]{9,15}$'
-            )
-            ->setRequired('Zadejte telefon.');
+            );
 
         $form->addInteger('Person', 'Počet osob:')
             ->setRequired('Zadejte počet ubytovaných osob.')
             ->setDefaultValue(2)
             ->addRule($form::MIN, 'Počet osob musí být alespoň 1.', 1);
+
+        $form->addInteger('Child', 'Počet dětí:')
+            ->setDefaultValue(0)
+            ->addRule($form::MIN, 'Počet dětí nemůže být záporný.', 0);
+
+        $form->addInteger('Baby', 'Počet dětí do 3 let:')
+            ->setDefaultValue(0)
+            ->addRule($form::MIN, 'Počet miminek nemůže být záporný.', 0);
 
         $form->addText('Date_from', 'Datum příjezdu:')
             ->setHtmlType('date')
@@ -65,21 +64,37 @@ final class AccommodationFormFactory
 
         $form->addCheckbox('Dog', 'Mazlíček');
 
+        $form->addInteger('Dog_count', 'Počet mazlíčků:')
+            ->setDefaultValue(0)
+            ->addRule($form::MIN, 'Počet mazlíčků nemůže být záporný.', 0);
+
         $form->addTextArea('Note', 'Poznámka:')
             ->setHtmlAttribute('rows', 5);
 
-        // --- POKOJE (checkboxy) ---
-        // Připravíme options: [id => "Název (cena / noc)"]
+        // --- POKOJE ---
         $rooms = $this->roomRepository->getAll()->order('Name')->fetchAll();
+
+        // Checkboxy (pokoje)
         $options = [];
         foreach ($rooms as $r) {
             $options[(int) $r->ID] = sprintf('%s (%s Kč / noc)', $r->Name, number_format((float)$r->Price, 0, ',', ' '));
         }
-
         $roomField = $form->addCheckboxList('room_ids', 'Pokoje:', $options)
             ->setRequired('Vyberte alespoň jeden pokoj.');
 
-        // Pokud máme interval, zakážeme nedostupné pokoje
+        // Kontejner na speciální ceny vedle každé položky
+        $prices = $form->addContainer('custom_prices');
+        foreach ($rooms as $r) {
+            $prices->addText((string) $r->ID, 'Speciální cena')
+                ->setNullable() // prázdné = ignorovat
+                ->setHtmlType('number')
+                ->setHtmlAttribute('step', '0.01')
+                ->setHtmlAttribute('min', '0')
+                ->addCondition($form::FILLED)
+                ->addRule($form::FLOAT, 'Cena musí být číslo.');
+        }
+
+        // Pokud máme interval, zakážeme nedostupné pokoje (+ jejich price input)
         if ($from && $to) {
             $disabled = [];
             foreach ($rooms as $r) {
@@ -95,6 +110,11 @@ final class AccommodationFormFactory
             }
             if ($disabled) {
                 $roomField->setDisabled($disabled);
+                foreach ($disabled as $rid) {
+                    if (isset($prices[(string)$rid])) {
+                        $prices[(string)$rid]->setDisabled();
+                    }
+                }
             }
         }
 
@@ -110,7 +130,7 @@ final class AccommodationFormFactory
                         $form['Date_to']->addError('Datum odjezdu musí být stejné nebo po datu příjezdu.');
                     }
                 } catch (\Throwable) {
-                    // form už má vlastní pattern validace; tady jen ochrana
+                    // pattern validace to zachytí; zde jen ochrana
                 }
             }
         };

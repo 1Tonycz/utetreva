@@ -1,16 +1,174 @@
 {var $css = "voucher"}
 {block content}
-{form variablSymbolForm}
-    {input Vs}
-    {input Send}
-{/form}
-<
-<hr>
 {if flashes}
     {foreach $flashes as $flash}
-        <div>
-            {$flash->message}
+        <div class="alert alert__{$flash->type}">
+            <span>{$flash->message|noescape}</span>
+            <button class="alert__close" onclick="this.parentElement.style.display='none'">Zavřít</button>
         </div>
     {/foreach}
+    <hr>
 {/if}
+<div class="voucher__header">
+    {if $user->isAllowed('voucher', 'vs')}
+        {form variablSymbolForm}
+            {label Vs/}
+            {input Vs}
+            {input Send}
+        {/form}
+    {/if}
+    <a href="{$presenter->link(':Admin:Voucher:create')}" class="voucher__button">Vytvořit voucher</a>
+    <span><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+</svg><input id="voucherSearch" type="search" placeholder="Hledat: kód, e-mail, jméno nebo přijmení"></span>
+</div>
+<hr>
+<h2>Zaplacené</h2>
+<div class="voucher__box">
+{foreach $Paid as $p}
+    <div class="voucher__item" data-search="{$p->Code} {$p->Mail}{ifset $p->First} {$p->First} {$p->Second}{/ifset}">
+        <div class="voucher__info">
+            <p><strong>Číslo voucheru: {$p->Code}</strong></p>
+            {if $p->First}
+                <p>Jméno: {$p->First} {$p->Second}</p>
+            {else}
+                <p>Jméno neznámé - zakoupeno na restauraci</p>
+            {/if}
+            <p>E-mail: {$p->Mail}</p>
+            <p><strong>Částka: {$p->Amount}</strong></p>
+            <p><strong>Zakoupen: {$p->Date|date: 'd.m.Y'}</strong></p>
+            <p>{if $p->Note}
+                Poznámka: {$p->Note}
+            {else}
+                Žádná poznámka
+                {/if}</p>
+        </div>
+        <div class="voucher__buttons">
+            <a n:href="usedVoucher!, id=>$p->ID">Označit jako použitý</a>
+            <button class="voucher__set"
+                    data-href="{$presenter->link('setAmount!', ['id' => $p->ID])}"
+                    data-current="{$p->Amount}">Nastavit částku</button>
+            <a n:href="detail, id=>$p->ID">Více</a>
+        </div>
+    </div>
+{/foreach}
+</div>
+{if $user->isAllowed('voucher', 'unpaid')}
+    <h2>Nezaplacené</h2>
+    <div class="voucher__box">
+        {foreach $Unpaid as $u}
+            <div class="voucher__item" data-search="{$u->Code} {$u->Mail}{ifset $u->First} {$u->First} {$u->Second}{/ifset}">
+                <div class="voucher__info">
+                    <p><strong>Číslo voucheru: {$u->Code}</strong></p>
+                    <p>VS: {$u->Vs}</p>
+                    {if $u->First}
+                        <p>Jméno: {$u->First} {$u->Second}</p>
+                    {else}
+                        <p>Jméno neznámé - zakoupeno na restauraci</p>
+                    {/if}
+                    <p>E-mail: {$u->Mail}</p>
+                    <p><strong>Částka: {$u->Amount}</strong></p>
+                </div>
+                <div class="voucher__buttons">
+                    <a n:href="paidVoucher!, id=>$u->ID">Označit jako zaplacený</a>
+                    <a n:href="detail, id=>$u->ID">Více</a>
+                </div>
+            </div>
+        {/foreach}
+    </div>
+{/if}
+
+<!-- Modal pro odečtení částky -->
+
+<dialog id="amountModal">
+    <form method="dialog" class="voucher__modal">
+        <h3>Nastavit hodnotu voucheru</h3>
+        <p>Aktuální částka: <strong id="vm-current">–</strong></p>
+        <label>Nová částka:
+            <input id="vm-amount" type="number" step="1" min="0" required>
+        </label>
+        <menu>
+            <button value="cancel" onclick="amountModal.close()">Zrušit</button>
+            <button id="vm-save" value="confirm">Uložit</button>
+        </menu>
+    </form>
+</dialog>
+
+<script n:syntax="off">
+    (function () {
+        const $input = document.getElementById('voucherSearch');
+        if (!$input) return;
+
+        const $items = Array.from(document.querySelectorAll('.voucher__item'));
+
+        // normalizace: malá písmena + bez diakritiky
+        const norm = s => (s || '')
+            .toString()
+            .normalize('NFD')
+            .replace(/\p{Diacritic}/gu, '')
+            .toLowerCase()
+            .trim();
+
+        const dataset = $items.map(el => ({
+            el,
+            text: norm(el.getAttribute('data-search'))
+        }));
+
+        let raf = 0;
+        let last = '';
+        const apply = () => {
+            raf = 0;
+            const q = norm($input.value);
+            if (q === last) return;
+            last = q;
+
+            // víceslovné dotazy => AND (všechny termy musí být obsaženy)
+            const terms = q.split(/\s+/).filter(Boolean);
+
+            for (const row of dataset) {
+                const show = terms.every(t => row.text.includes(t));
+                row.el.style.display = show ? '' : 'none';
+            }
+        };
+
+        // lehký debounce + plynulé vykreslení
+        const schedule = () => {
+            if (!raf) raf = requestAnimationFrame(apply);
+        };
+
+        $input.addEventListener('input', schedule);
+    })();
+    (function () {
+        // MODAL – čisté nastavení hodnoty
+        const dlg = document.getElementById('amountModal');
+        const currentEl = document.getElementById('vm-current');
+        const amountEl  = document.getElementById('vm-amount');
+        const saveBtn   = document.getElementById('vm-save');
+        let href = null;
+
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.voucher__set');
+            if (!btn) return;
+            e.preventDefault();
+            href = btn.getAttribute('data-href');
+            currentEl.textContent = btn.getAttribute('data-current') || '0';
+            amountEl.value = '';
+            amountEl.focus();
+            dlg.showModal();
+        });
+
+        saveBtn?.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!href) return;
+            const val = amountEl.value.replace(',', '.');
+            const num = parseFloat(val);
+            if (!(num >= 0)) { amountEl.focus(); return; }
+            location.href = `${href}&amount=${encodeURIComponent(num)}`;
+        });
+    })();
+
+</script>
+
+
+
 

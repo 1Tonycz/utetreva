@@ -1,0 +1,56 @@
+Hello,<br>
+<br>
+We confirm your reservation.<br>
+<br>
+Date: {$from|date: 'd/m/Y'} - {$to|date: 'd/m/Y'}<br>
+<br>
+<ul>
+    {foreach $rooms as $room}
+        <li>Room: {$room['price']} CZK / night</li><br>
+    {/foreach}
+</ul>
+
+{$nights} {= $nights > 1 ? 'nights': 'night'} x  {$totalPrice} = {= ($nights * $totalPrice)},-<br>
+{if $countFees}
+    {$nights} {= $nights > 1 ? 'nights': 'night'} x {$person} adults x 50 spa fee = {= ($nights * $person) * 50},-<br>
+{/if}
+{if $Dog}
+    Pet fee: 150 CZK / night<br>
+    {$nights} {= $nights > 1 ? 'nights': 'night'} x 150 CZK * {$Dog_count} {= $Dog_count > 1 ? 'pets': 'pet'} = {= $nights * 150 * $Dog_count},-<br>
+{/if}
+{ifset $extraItems}
+    {foreach $extraItems as $item}
+        {$item['label']} = {$item['amount']},-<br>
+    {/foreach}
+{/ifset}
+----- --------------------------------------<br>
+{if $NoteEmail == ''}
+{else}
+    {$NoteEmail}<br>
+    ----------------------------- --------------<br>
+{/if}
+Total price: {$allPrice},-<br>
+<br>
+The deposit is at least 50% of the total value of the stay, pay<br>
+{= $allPrice / 2},- within 14 days prior to arrival. The remaining amount<br>
+can be paid by bank transfer or at our office.<br>
+<br>
+You can send your payment to the following account:<br>
+Account number: 2161122163/0800<br>
+IBAN: CZ56 0800 0000 0021 6112 2163<br>
+BIC/SWIFT: GIBACZPX<br>
+Variable symbol: {$VS}<br>
+In the note: {$name}<br>
+<br>
+Important information:<br>
+<br>
+There is no mobile signal throughout the Kladská resort and it is not possible to pay by credit card.<br>
+The Wi-Fi signal is very weak in the rooms and restaurant.<br>
+
+Breakfast is served from 9:00 a.m. to 10:00 a.m.<br>
+
+Parking in our car park is free of charge.<br>
+<br>
+Please find general information attached.<br>
+<br>
+Thank you and we look forward to your visit.<br>

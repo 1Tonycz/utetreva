@@ -1,5 +1,10 @@
-    <h2>Rezervace ubytování</h2>
-    <p>Rezervujte si pokoj a užijte si odpočinek v našem pensionu</p>
+    <h2>{_'ui.reservation.room.title'}</h2>
+    <p>{_'ui.reservation.room.subtitle'}</p>
+    {if flashes}
+            {foreach $flashes as $flash}
+                <p class="form__{$flash->type}">{$flash->message}</p>
+            {/foreach}
+    {/if}
     {form reservationForm}
         <div class="form__row">
             <div class="form__input">
@@ -36,9 +41,24 @@
                 {label Person/}
                 {input Person}
             </div>
+            <div class="form__input">
+                {label Child/}
+                {input Child}
+            </div>
+            <div class="form__input">
+                {label Baby/}
+                {input Baby}
+            </div>
+
+        </div>
+        <div class=" form__row">
             <div class="form__input" id="checkbox">
                 {label Dog/}
                 {input Dog}
+            </div>
+            <div class="form__input">
+                {label Dog_count/}
+                {input Dog_count}
             </div>
         </div>
         <div class="form__row">

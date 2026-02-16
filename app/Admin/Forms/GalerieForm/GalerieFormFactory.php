@@ -25,7 +25,6 @@ final class GalerieFormFactory
 
         $form->addUpload('Images', 'Obrázky:')
             ->setRequired('Nahrajte alespoň jeden obrázek.')
-            ->addRule($form::MAX_FILE_SIZE, 'Max. velikost jednoho souboru je 5 MB.', 5 * 1024 * 1024)
             ->addRule($form::MIME_TYPE, 'Povoleny jsou pouze obrázky.', ['image/jpeg', 'image/png', 'image/gif']);
 
         $form->addProtection();

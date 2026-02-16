@@ -10,11 +10,14 @@ translation:
     dirs:
         - %appDir%/Lang
     returnOriginalMessage: true
+
     localeResolvers:
-        - Contributte\Translation\LocalesResolvers\Router
         - Contributte\Translation\LocalesResolvers\Session
+        - Contributte\Translation\LocalesResolvers\Router
+        - Contributte\Translation\LocalesResolvers\Parameter
 
 parameters:
+    newsletterTempDir: %tempDir%/newsletter
 
 application:
 	errorPresenter: Error:Error

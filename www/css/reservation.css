@@ -360,6 +360,9 @@ nav {
   color: #a6a6a6;
   font-size: 1.1rem;
 }
+.form__error {
+  color: red !important;
+}
 .form form {
   display: flex;
   flex-direction: column;

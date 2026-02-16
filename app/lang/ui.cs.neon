@@ -25,7 +25,7 @@ footer:
 
 hero:
   title:
-    before: "Restaurace"
+    before: "Restaurace a pension"
   subtitle: "Vychutnejte si jedinečné kulinářské zážitky v našem útulném prostředí s možností ubytování v srdci přírody"
 
 cta:
@@ -34,6 +34,8 @@ cta:
   reserveRoom: "Nabídka pokojů"
   viewPhotos: "Prohlédnout fotografie"
   bookRoom: "Rezervovat pokoj"
+  voucher: "Mám zájem o voucher"
+
 
 food:
   title: "Naše oblíbené speciality"
@@ -45,6 +47,44 @@ food:
     mains: "Hlavní chody"
     desserts: "Dezerty"
     drinks: "Nápoje"
+
+about:
+    title: "O nás"
+    accommodation:
+        text: "Nabízíme ubytování ve dvoulůžkových pokojích a nebo máme k dispozici čtyřlůžkový apartmán. V každém pokoji je vlastní koupelna se sprchou nebo vanou a toaletou."
+    restaurant:
+        text: "Srdečně vás zveme k návštěvě naší restaurace ve stylu loveckého srubu. V restauraci připravujeme zvěřinové speciality. Náš jídelní lístek obsahuje i tradiční českou kuchyni."
+    kladska:
+        title: "Co je to Kladská?"
+        text: "Je to ráj pro milovníky přírody a turistiky. Vedou sem turistické stezky z Lazní Kynžvart a Mariánských Lázní. Přimo od restaurace začíná hojně navštěvovaná naučná stezka Kladská. Mnohé návštěvníky k nám přivadí taktéž lov zvěře."
+
+voucher:
+    title: "Dárkové poukazy"
+    subtitle: "Nabízíme dárkové poukazy na všechny naše služby, které potěší každého milovníka dobrého jídla a přírody. Vyberte si z naší nabídky a udělejte radost svým blízkým."
+    subtitle2: "Objednejte si dárkový poukaz na naše služby. Poukaz Vám bude zaslán na Váš email."
+    image:
+        alt: "Dárkový poukaz"
+        caption: "Dárkový poukaz"
+    form:
+        amount: "Hodnota v kč:"
+        amountRequired: "Zadejte hodnotu voucheru."
+        amountRule: "Hodnota voucheru musí být mezi 500 a 50000 Kč. "
+        button: "Objednat voucher"
+    flashmessage:
+        type1: "Obdrželi jste email s informacemi o platbě voucheru."
+
+
+history:
+    title: "Historie"
+    subtitle: "Je to rodinná restaurace manželů Kolesových, kterou jsme otevřeli 1. 2. 2019."
+    paragraph1: "Restaurace U Tetřeva stojí na místě staršího hostince z roku 1869, jehož původní podoba se nedochovala. V roce 1877 nechal kníže po dokončení sousedního loveckého zámečku postavit nový hostinec podle návrhu architekta Johanna Meyera z Lucernu, pravděpodobně firmou Parquet- & Chalet-Fabrik Interlaken ze Švýcarska. Zpočátku byl hostinec málo navštěvovaný kvůli odlehlé poloze, o čemž svědčí časté střídání nájemců. Až od 80. let 19. století, kdy sem byla z Mariánských Lázní zavedena silnice, se stal oblíbenou zastávkou lázeňských hostů. Hostinec nesl původně název Gasthaus Glatzen, roku 1881 byl znám jako Zum Kaiserwald a od 1884 nese dodnes jméno U Tetřeva"
+    family:
+        title: "Rodinná restaurace a pension"
+    image:
+        alt: "Restaurace a pension U Tetřeva"
+        caption: "Restaurace a pension U Tetřeva"
+    gameRestaurant:
+        title: "Restaurace se zvěřinovými specialitami"
 
 accommodation:
   title: "Ubytování"
@@ -73,20 +113,7 @@ accommodation:
     parking: "Parkování zdarma"
     breakfast: "Snídaně"
 
-about:
-  title: "O nás"
-  subtitle: "Restaurace a penzion v srdci Slavkovského lesa"
-  paragraph1: "Specializujeme se na zvěřinové speciality a tradiční českou kuchyni. Restaurace U Tetřeva se nachází v krásné přírodě Slavkovského lesa, nedaleko města Mariánské Lázně."
-  feature:
-    gameRestaurant:
-      title: "Zvěřinová restaurace"
-      desc: "Specializujeme se na přípravu kvalitních zvěřinových specialit."
-    family:
-      title: "Rodinný podnik"
-      desc: "Rodinná tradice v pohostinství již více než 20 let."
-  image:
-    alt: "Interiér restaurace U Tetřeva"
-    caption: "Restaurace a Pension"
+
 
 gallery:
     title: "Galerie"
@@ -116,19 +143,52 @@ reservation:
         phoneRule: "Zadejte platné telefonní číslo"
         persons: "Počet osob"
         personsRequired: "Počet osob je povinný"
+        personsRule: "Počet osob nesmí být 0 nebo záporný"
+        child: "Počet dětí od 3 do 17let:"
+        childRule: "Počet dětí nesmí být záporný"
+        baby: "Počet dětí do 3let:"
+        babyRule: "Počet dětí nesmí být záporný"
+        dogCount: "Počet mazlíčků:"
+        dogCountRule: "Počet mazlíčků nesmí být záporný"
         from: "Příjezd"
         fromRequired: "Datum příjezdu je povinný"
         to: "Odjezd"
         toRequired: "Datum odjezdu je povinný"
         dog: "Mazlíček"
         message: "Poznámka"
+        messagePlaceholder: "2 dospělí, 1 dítě..."
         gdpr: "Souhlasím se zpracováním osobních údajů"
         gdprRequired: "Souhlas je povinný"
         newsletter: "Chci odebírat nabídky e-mailem"
         button: "Odeslat rezervaci"
+    flashmessage:
+        type1: "Nelze mít datum odjezdu dříve než datum přijezdu."
+        type2: "Pokud máte mazlíčka, musíte zadat počet mazličků."
+        type3: "Nelze vytvořit rezervaci na dnešní den pouze den dopředu. Kontaktujte nás prosím telefonicky."
+        type4: "Rezervace stolu byla úspěšně přijmuta, v případě změn Vás budeme kontaktovat."
+        type5: "V tuto dobu nepřijímáme rezervace, kuchyně zavírá hodinu před celkovou zavíračkou restaurace. Popřípadě nás kontaktujte telefonicky. Otevírací doba je od "
+        type5plus: " do "
+        type6: "Nelze rezervovat stůl na minulý datum."
+    table:
+        title: "Rezervace stolu"
+        subtitle: "Rezervujte si stůl online a užijte si skvělé jídlo v naší restauraci"
+        first: "Jméno"
+        date: "Datum rezervace"
+        dateRequired: "Datum je povinný"
+        time: "Čas rezervace"
+        timeRequired: "Čas je povinný"
+
+
 
 
 common:
   currency: "Kč"
   personsShort: "osoby"
-  perNight: "/noc"
+  perNight:
+
+flashmessage:
+    type1: "Neplatný odhlašovací odkaz."
+    type2: "Byl jste úspěšně odhlášeni z odběru newsletteru."
+    type3: "Nebyl jste přihlášen k odběru newsletteru."
+    type4: "Nepodařilo se odeslat rezervaci, kontaktujte nás telefonicky."
+    type5: "Děkujeme za odeslání rezervace. Brzy Vás budeme kontaktovat prostřednictvím emailu."

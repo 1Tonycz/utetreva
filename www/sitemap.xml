@@ -7,48 +7,48 @@
     <!-- Home / Domovská stránka -->
     <!-- ===================== -->
     <url>
-        <loc>https://1tonytesterweb.online/cs/</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/" />
+        <loc>https://utetreva.cz/cs/</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
 
     <url>
-        <loc>https://1tonytesterweb.online/en/</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/" />
+        <loc>https://utetreva.cz/en/</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
 
     <url>
-        <loc>https://1tonytesterweb.online/de/</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/" />
+        <loc>https://utetreva.cz/de/</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
 
     <url>
-        <loc>https://1tonytesterweb.online/ru/</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/" />
+        <loc>https://utetreva.cz/ru/</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
@@ -58,48 +58,48 @@
     <!-- Jídelní lístek -->
     <!-- ===================== -->
     <url>
-        <loc>https://1tonytesterweb.online/cs/jidelni-listek</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/jidelni-listek" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/jidelni-listek" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/jidelni-listek" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/jidelni-listek" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/jidelni-listek" />
+        <loc>https://utetreva.cz/cs/jidelni-listek</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/cs/jidelni-listek" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://1tonytesterweb.online/en/jidelni-listek</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/jidelni-listek" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/jidelni-listek" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/jidelni-listek" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/jidelni-listek" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/jidelni-listek" />
+        <loc>https://utetreva.cz/en/jidelni-listek</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/cs/jidelni-listek" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://1tonytesterweb.online/de/jidelni-listek</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/jidelni-listek" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/jidelni-listek" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/jidelni-listek" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/jidelni-listek" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/jidelni-listek" />
+        <loc>https://utetreva.cz/de/jidelni-listek</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/cs/jidelni-listek" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://1tonytesterweb.online/ru/jidelni-listek</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/jidelni-listek" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/jidelni-listek" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/jidelni-listek" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/jidelni-listek" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/jidelni-listek" />
+        <loc>https://utetreva.cz/ru/jidelni-listek</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/jidelni-listek" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/cs/jidelni-listek" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -109,48 +109,48 @@
     <!-- Ubytování -->
     <!-- ===================== -->
     <url>
-        <loc>https://1tonytesterweb.online/cs/ubytovani</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/ubytovani" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/ubytovani" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/ubytovani" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/ubytovani" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/ubytovani" />
+        <loc>https://utetreva.cz/cs/ubytovani</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/cs/ubytovani" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://1tonytesterweb.online/en/ubytovani</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/ubytovani" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/ubytovani" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/ubytovani" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/ubytovani" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/ubytovani" />
+        <loc>https://utetreva.cz/en/ubytovani</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/cs/ubytovani" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://1tonytesterweb.online/de/ubytovani</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/ubytovani" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/ubytovani" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/ubytovani" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/ubytovani" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/ubytovani" />
+        <loc>https://utetreva.cz/de/ubytovani</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/cs/ubytovani" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://1tonytesterweb.online/ru/ubytovani</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/ubytovani" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/ubytovani" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/ubytovani" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/ubytovani" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/ubytovani" />
+        <loc>https://utetreva.cz/ru/ubytovani</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/ubytovani" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/cs/ubytovani" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -160,48 +160,48 @@
     <!-- Rezervace -->
     <!-- ===================== -->
     <url>
-        <loc>https://1tonytesterweb.online/cs/rezervace</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/rezervace" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/rezervace" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/rezervace" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/rezervace" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/rezervace" />
+        <loc>https://utetreva.cz/cs/rezervace</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/rezervace" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/rezervace" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/rezervace" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/rezervace" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/cs/rezervace" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://1tonytesterweb.online/en/rezervace</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/rezervace" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/rezervace" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/rezervace" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/rezervace" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/rezervace" />
+        <loc>https://utetreva.cz/en/rezervace</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/rezervace" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/rezervace" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/rezervace" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/rezervace" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/cs/rezervace" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://1tonytesterweb.online/de/rezervace</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/rezervace" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/rezervace" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/rezervace" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/rezervace" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/rezervace" />
+        <loc>https://utetreva.cz/de/rezervace</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/rezervace" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/rezervace" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/rezervace" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/rezervace" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/cs/rezervace" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
-        <loc>https://1tonytesterweb.online/ru/rezervace</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/rezervace" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/rezervace" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/rezervace" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/rezervace" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/rezervace" />
+        <loc>https://utetreva.cz/ru/rezervace</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/rezervace" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/rezervace" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/rezervace" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/rezervace" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/cs/rezervace" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -211,48 +211,48 @@
     <!-- Galerie -->
     <!-- ===================== -->
     <url>
-        <loc>https://1tonytesterweb.online/cs/galerie</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/galerie" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/galerie" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/galerie" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/galerie" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/galerie" />
+        <loc>https://utetreva.cz/cs/galerie</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/galerie" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/galerie" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/galerie" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/galerie" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/cs/galerie" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
 
     <url>
-        <loc>https://1tonytesterweb.online/en/galerie</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/galerie" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/galerie" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/galerie" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/galerie" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/galerie" />
+        <loc>https://utetreva.cz/en/galerie</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/galerie" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/galerie" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/galerie" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/galerie" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/cs/galerie" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
 
     <url>
-        <loc>https://1tonytesterweb.online/de/galerie</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/galerie" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/galerie" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/galerie" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/galerie" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/galerie" />
+        <loc>https://utetreva.cz/de/galerie</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/galerie" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/galerie" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/galerie" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/galerie" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/cs/galerie" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
 
     <url>
-        <loc>https://1tonytesterweb.online/ru/galerie</loc>
-        <xhtml:link rel="alternate" hreflang="cs" href="https://1tonytesterweb.online/cs/galerie" />
-        <xhtml:link rel="alternate" hreflang="en" href="https://1tonytesterweb.online/en/galerie" />
-        <xhtml:link rel="alternate" hreflang="de" href="https://1tonytesterweb.online/de/galerie" />
-        <xhtml:link rel="alternate" hreflang="ru" href="https://1tonytesterweb.online/ru/galerie" />
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://1tonytesterweb.online/cs/galerie" />
+        <loc>https://utetreva.cz/ru/galerie</loc>
+        <xhtml:link rel="alternate" hreflang="cs" href="https://utetreva.cz/cs/galerie" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://utetreva.cz/en/galerie" />
+        <xhtml:link rel="alternate" hreflang="de" href="https://utetreva.cz/de/galerie" />
+        <xhtml:link rel="alternate" hreflang="ru" href="https://utetreva.cz/ru/galerie" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://utetreva.cz/cs/galerie" />
         <lastmod>2025-09-18</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>

@@ -9,6 +9,7 @@ use Nette\Http\Session;
 use Nette;
 use Contributte\Translation\Translator;
 use Nette\Bridges\ApplicationLatte\Template;
+use Contributte\Translation\LocalesResolvers\Session as TranslatorSessionResolver;
 
 
 /**
@@ -19,13 +20,12 @@ final class NavbarControl extends Control
 {
     use Nette\SmartObject;
 
-    private const SESSION_LOCALE = 'locale';
     /** @var string[] povolené jazyky */
-    private array $allowed = ['cs','en','de','ru'];
+    private array $allowed = ['cs', 'en', 'de', 'ru'];
 
     public function __construct(
         private Translator $translator,
-        private Session $session,
+        private TranslatorSessionResolver $translatorSessionResolver,
     ) {}
 
 
@@ -41,24 +41,20 @@ final class NavbarControl extends Control
             $this->getPresenter()->error('Unsupported locale');
         }
 
-        // ulož do session
-        $sec = $this->session->getSection(self::SESSION_LOCALE);
-        $sec->code = $locale;
+        $this->translatorSessionResolver->setLocale($locale);
 
-        // projeví se hned i v tomto requestu
         $this->translator->setLocale($locale);
 
-        // AJAX vs. full reload
         $p = $this->getPresenter();
         if ($p->isAjax()) {
-
             if (method_exists($p, 'redrawControl')) {
                 $p->redrawControl('navbar');
-                $p->redrawControl('content');// uprav podle svých snippetů
+                $p->redrawControl('content');
                 $p->redrawControl('footer');
             }
         } else {
             $p->redirect('this');
         }
     }
+
 }

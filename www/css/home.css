@@ -358,73 +358,105 @@ nav {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Menu sekce */
-.food__list {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: repeat(6, auto);
-  gap: 1rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.food__list li {
-  background-color: #1c1c1c;
-  padding: 2rem 2rem;
-  border-radius: 15px;
-  border: 1px solid #2c2c2c;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), 0 8px 20px rgba(0, 0, 0, 0.25);
-  transition: scale 1s ease, border 0.5s ease;
-}
-.food__list li h3 {
-  color: #f08b42;
-  margin: 0 0 0.5rem 0;
-}
-.food__list li p {
-  color: #ffffff;
-  font-weight: 600;
-  text-align: right;
-  font-size: 1.2rem;
-}
-.food__list li:hover {
-  transform: scale(1.05);
-  border: 1px solid #265940;
-}
-.food__section {
+/* Kladska o Nás */
+.about__section {
   display: flex;
   flex-direction: column;
   padding: 2rem 2rem;
-  gap: 5rem;
-  background-color: #141414;
+  gap: 2rem;
+  background: #141414;
 }
-.food__header {
+.about__header {
   display: flex;
   justify-content: center;
+  align-items: center;
   text-align: center;
   flex-direction: column;
 }
-.food__header p {
+.about__header p {
   color: #a6a6a6;
   font-size: 1.1rem;
 }
-.food__header h2 {
+.about__header h2 {
   color: #f08b42;
 }
-.food__button {
-  margin: 0 2rem;
+.about__grid {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+}
+.about__grid article {
+  background: #1c1c1c;
+  padding: 1rem 1rem;
+  border-radius: 20px;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 1px solid #2c2c2c;
+}
+.about__grid article h3 {
+  color: #f97316;
+  margin: 0 0.5rem;
+}
+.about__grid article p {
+  color: #a6a6a6;
+  margin: 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* Voucher sekce */
+.voucher__section {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2rem;
+  gap: 2rem;
+  background: #141414;
+  width: 100%;
+  align-items: center;
+}
+.voucher__title {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+.voucher__title p {
+  color: #a6a6a6;
+  font-size: 1.1rem;
+}
+.voucher__title h2 {
+  color: #f08b42;
+}
+.voucher__button {
   text-align: center;
   transition: scale 0.5s ease;
-}
-.food__button a {
   text-decoration: none;
   color: #ffffff;
-  padding: 1rem 1.2rem;
+  padding: 0.8rem 1.2rem;
   background: linear-gradient(90deg, #1b3226, #265940);
   border-radius: 10px;
   font-weight: 500;
 }
-.food__button:hover {
+.voucher__button:hover {
   transform: scale(1.1);
+}
+.voucher__figure {
+  width: 100%;
+}
+.voucher__figure img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  filter: brightness(0.9) contrast(1.1) saturate(1.1);
+}
+.voucher__figure figcaption {
+  color: #a6a6a6;
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
 }
 
 /* Ubytování sekce */
@@ -746,6 +778,111 @@ nav {
   transform: translateY(1px);
 }
 
+/* Flash Message */
+.flash-messages {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 9999;
+  width: auto;
+  max-width: 100%;
+  padding: 10px;
+}
+
+.flash-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  font-size: 14px; /* Menší písmo pro mobilní zařízení */
+}
+
+.flash-message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+}
+
+.flash-message.warning {
+  background-color: #fff3cd;
+  color: #856404;
+  border-color: #ffeeba;
+}
+
+.flash-message.info {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border-color: #bee5eb;
+}
+
+.flash-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
+}
+
+.flash-message-content {
+  max-width: 80%;
+  overflow-wrap: break-word;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.event {
+  background: #141414;
+  margin: 0 auto;
+  padding: 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.event h2 {
+  margin: 0 0 0.25rem;
+  font-size: 3rem;
+  line-height: 1.2;
+  color: #f08b42;
+}
+.event p {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: #ffffff;
+}
+.event__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+.event__image {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.event__image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 .footer {
   border-top: 1px solid #2c2c2c;
   background: #131514;
@@ -842,12 +979,28 @@ nav {
     grid-template-columns: repeat(3, 1fr);
   }
   /*Menu sekce*/
-  .food__list {
-    grid-template-rows: repeat(2, auto);
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .food__section {
+  .about__section {
     padding: 5rem 10rem;
+  }
+  .about__grid {
+    grid-template-rows: repeat(1, auto);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  #about__mid {
+    transform: scale(1.1);
+  }
+  /* Voucher sekce*/
+  .voucher__section {
+    gap: 5rem;
+    padding: 5rem 10rem;
+    flex-direction: row;
+  }
+  .voucher__title {
+    width: 40%;
+  }
+  .voucher__figure {
+    width: 60%;
   }
   /*Ubytování sekce*/
   .accommodation__section {
@@ -893,6 +1046,38 @@ nav {
   }
 }
 @media screen and (min-width: 768px) {
+  .flash-messages {
+    max-width: 300px; /* Nastavení max šířky pro desktop */
+    right: 10px;
+    left: auto;
+  }
+  .flash-message {
+    font-size: 16px; /* Větší písmo pro desktop */
+    padding: 15px;
+  }
+  .close-btn {
+    font-size: 22px; /* Větší tlačítko pro desktop */
+  }
+}
+@media screen and (min-width: 768px) and (min-width: 1024px) {
+  .flash-message {
+    font-size: 18px; /* Ještě větší písmo pro větší obrazovky */
+  }
+}
+@media screen and (min-width: 768px) {
+  .event {
+    padding: 5rem 10rem;
+    flex-direction: row;
+  }
+  .event__content {
+    width: 50%;
+  }
+  .event__image {
+    width: 50%;
+  }
+  .event__image img {
+    height: 640px;
+  }
   .footer {
     padding: 2rem 10rem;
   }

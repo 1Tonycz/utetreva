@@ -32,8 +32,8 @@ final class ReservationroomRepository
               FROM reservation_room rr
               JOIN reservations r ON r.ID = rr.reservation_id
               WHERE rr.room_id = ?
-                AND r.Date_from <= ?
-                AND r.Date_to   >= ?
+                AND r.Date_from < ?
+                AND r.Date_to   > ?
             ) AS is_available
         ', $roomId, $to, $from)->fetch();
 
@@ -59,8 +59,8 @@ final class ReservationroomRepository
               FROM reservation_room rr
               JOIN reservations r ON r.ID = rr.reservation_id
               WHERE rr.room_id = ro.ID
-                AND r.Date_from <= ?
-                AND r.Date_to   >= ?
+                AND r.Date_from < ?
+                AND r.Date_to   > ?
             )
             ORDER BY ro.ID
         ', $to, $from)->fetchPairs(null, 'ID');
@@ -89,6 +89,7 @@ final class ReservationroomRepository
             ->where('Old', 0)
             ->where('Date_from < ?', $to)                   // překryv [from, to)
             ->where('Date_to > ?', $from)
+            ->order('Date_from DESC')
             ->fetchAll();
     }
 
@@ -105,15 +106,18 @@ final class ReservationroomRepository
             $to = $to->format('Y-m-d');
         }
 
+        // [from, to) + možnost vyloučit konkrétní rezervaci (např. při editaci)
         $sql = '
         SELECT NOT EXISTS (
           SELECT 1
           FROM reservation_room rr
           JOIN reservations r ON r.ID = rr.reservation_id
           WHERE rr.room_id = ?
-            AND r.Date_from <= ?   -- inkluzivně: blokuje i den odjezdu
-            AND r.Date_to   >= ?
-    ';
+            AND r.Solved = 1
+            AND r.Old = 0
+            AND r.Date_from < ?
+            AND r.Date_to   > ?
+        ';
 
         $params = [$roomId, $to, $from];
 
@@ -139,6 +143,18 @@ final class ReservationroomRepository
             ->where('reservation_id', $reservationId)
             ->where('room_id', $oldRoomId)
             ->update(['room_id' => $newRoomId]);
+    }
+
+    public function getDeparturesForRoomInRange(int $roomId, \DateTimeInterface $from, \DateTimeInterface $to): array
+    {
+        return $this->database->table('reservations')
+            ->where(':reservation_room.room_id', $roomId)  // M:N join přes reservation_room
+            ->where('Solved', 1)
+            ->where('Old', 0)
+            ->where('Date_to >= ?', $from)                 // spadá do zobrazeného měsíce
+            ->where('Date_to <  ?', $to)
+            ->order('Date_from DESC')
+            ->fetchAll();
     }
 
 }

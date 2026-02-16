@@ -60,6 +60,8 @@ final class ReservationPresenter extends BasePresenter
                         $this->redirect('this');
                     }
 
+                    $lng = $reservation->Locale;
+
                     if (!$roomIds) {
                         $this->flashMessage('Vyber alespoň jeden pokoj.');
                         $this->redirect('this');
@@ -97,7 +99,7 @@ final class ReservationPresenter extends BasePresenter
                     $this->accommodationRepository->update($reservationId, ['Solved' => 1]);
 
                     // 6) Variabilní symbol (ddmmyyddmmyy)
-                    $VS = $reservation->Date_from->format('dmy') . $reservation->Date_to->format('dmy');
+                    $VS = $reservation->Date_from->format('dm') . $reservation->Date_to->format('dmy');
 
                     // 7) Seznam pokojů pro e-mail (jméno + cena / noc)
                     $roomList = [];
@@ -112,7 +114,7 @@ final class ReservationPresenter extends BasePresenter
                     $totalPrice = array_sum(array_column($roomList, 'price'));
                     // cena celého pobytu všetně poplatků
                     if($reservation->Dog == 1){
-                        $Price = ($totalPrice * $nights) + (($nights * $reservation->Person) * 50 ) + ($nights * 150);
+                        $Price = ($totalPrice * $nights) + (($nights * $reservation->Person) * 50 ) + ($nights * 150 * $reservation->Dog_count);
                     } else {
                         $Price = ($totalPrice * $nights) + (($nights * $reservation->Person) * 50 );
                     }
@@ -135,7 +137,8 @@ final class ReservationPresenter extends BasePresenter
                         'VS'         => $VS,
                         'name'       => $reservation->First . ' ' . $reservation->Second,
                         'Dog'        => $reservation->Dog,
-                    ]);
+                        'Dog_count'  => $reservation->Dog_count,
+                    ], $lng);
 
                     // 10) Zápis do M:N tabulky (reservation_room)
                     foreach (array_unique($roomIds) as $rid) {
@@ -170,6 +173,8 @@ final class ReservationPresenter extends BasePresenter
             $this->flashMessage('Rezervace nenalezena.');
             $this->redirect('Reservation:default');
         }
+
+        $lng = $reservation->Locale;
 
         // 2) Základní parametry
         $nights       = $this->accommodationRepository->getNumberOfNights($reservation->Date_from, $reservation->Date_to);
@@ -225,10 +230,14 @@ final class ReservationPresenter extends BasePresenter
                     $customPrices[$rid] = $v;
                 }
             }
+            // Poznámka
+
+            $NoteEmail = $post['note_email'] ?? '';
 
             // checkboxy poplatků
             $countFees   = isset($post['count_fees']) && (int)$post['count_fees'] === 1;
             $countDogFee = isset($post['count_dog_fee']) && (int)$post['count_dog_fee'] === 1;
+
 
             // přídavné položky (částka + popis)
             $extraFeesAmounts = $post['extra_fees_amount'] ?? [];
@@ -274,7 +283,7 @@ final class ReservationPresenter extends BasePresenter
                 $accomFees += ($nights * (int) $reservation->Person) * $perPersonFee;
             }
             if ($reservation->Dog && $countDogFee) {
-                $accomFees += $nights * $dogFeePerN;
+                $accomFees += $nights * $dogFeePerN * $reservation->Dog_count;
             }
 
             // výsledný souhrn
@@ -283,7 +292,7 @@ final class ReservationPresenter extends BasePresenter
                 'accomFees'     => $accomFees,
                 'extraFees'     => $extraFeesSum,
                 'nights'        => $nights,
-                'total'         => ($perNight * $nights) + $accomFees + ($extraFeesSum*$nights),
+                'total'         => ($perNight * $nights) + $accomFees + $extraFeesSum,
                 'items'         => $items,
                 'flags'         => [
                     'countFees'   => $countFees,
@@ -316,7 +325,7 @@ final class ReservationPresenter extends BasePresenter
                 ]);
 
                 // VS + e-mail
-                $VS = $reservation->Date_from->format('dmy') . $reservation->Date_to->format('dmy');
+                $VS = $reservation->Date_from->format('dm') . $reservation->Date_to->format('dmy');
 
                 // seznam pokojů do e-mailu s použitou cenou / noc
                 $roomList = [];
@@ -333,6 +342,7 @@ final class ReservationPresenter extends BasePresenter
                 $this->mailService->sendCalculationMessage($reservation->Mail, $subject, [
                     'from'       => $reservation->Date_from,
                     'to'         => $reservation->Date_to,
+                    'NoteEmail'  => $NoteEmail,
                     'rooms'      => $roomList,
                     'totalPrice' => $summary['perNightRooms'],
                     'allPrice'   => $summary['total'],
@@ -341,9 +351,10 @@ final class ReservationPresenter extends BasePresenter
                     'VS'         => $VS,
                     'name'       => $reservation->First . ' ' . $reservation->Second,
                     'Dog'        => $summary['flags']['countDogFee'],
+                    'Dog_count'  => $reservation->Dog_count,
                     'countFees' => $summary['flags']['countFees'],
                     'extraItems' => $summary['extraItems'],
-                ]);
+                ], $lng);
 
                 foreach (array_unique($selectedRoomIds) as $rid) {
                     $this->reservationroomRepository->insert([
@@ -386,26 +397,14 @@ final class ReservationPresenter extends BasePresenter
         $form->addSubmit('send', 'Odeslat e-mail');
 
         $form->onSuccess[] = function (Form $form, ArrayHash $v): void{
-
-            try {
                 // sjednoť konce řádků na "\n"
                 $message = Strings::normalizeNewLines((string) $v->message);
                 $html = nl2br(htmlspecialchars($message, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
                 // pokud tvoje služba očekává HTML, použij HTML variantu/flag:
                 $this->mailService->sendGenericMessage($v->email, $v->subject, $html);
 
-                $this->accommodationRepository->update(
-                    (int) $this->getParameter('id'),
-                    ['Solved' => 1]
-                );
-
                 $this->flashMessage('E-mail byl odeslán.', 'success');
                 $this->redirect('Reservation:default');
-            } catch (\Throwable $e) {
-                $form->addError('E-mail se nepodařilo odeslat. Zkuste to prosím později.');
-                // případně log:
-                // $this->logger?->error($e->getMessage(), ['exception' => $e]);
-            }
         };
 
         return $form;
@@ -429,5 +428,29 @@ final class ReservationPresenter extends BasePresenter
         ]);
 
         $this->template->reservation = $reservation;
+    }
+
+    public function handleDelete(int $id): void
+    {
+        if (!$this->getUser()->isAllowed('reservation', 'delete')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
+        $reservation = $this->accommodationRepository->getById($id);
+        if (!$reservation) {
+            $this->flashMessage('Rezervace nenalezena.');
+            $this->redirect('Reservation:default');
+        }
+
+        // Smaž záznamy v M:N tabulce
+        $this->reservationroomRepository->getAll()
+            ->where('Reservation_id = ?', $id)
+            ->delete();
+
+        // Smaž rezervaci
+        $this->accommodationRepository->delete($id);
+
+        $this->flashMessage('Rezervace byla smazána.', 'success');
+        $this->redirect('Reservation:default');
     }
 }

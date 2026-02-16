@@ -1,0 +1,162 @@
+{var $css = "detail"}
+{block content}
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; padding: 2rem;">
+    {foreach $all as $one}
+        <div class="card">
+            <div class="card-header">Informace o rezervaci</div>
+
+            <div class="info-list" id="{$one->ID}">
+                <div class="info-row">
+                    <div class="info-label">Jméno</div>
+                    <div class="info-value">{$one->First} {$one->Second}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Od</div>
+                    <div class="info-value">{$one->Date_from|date:'j. n. Y'}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Do</div>
+                    <div class="info-value">{$one->Date_to|date:'j. n. Y'}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Občanský průkaz</div>
+                    <div class="info-value">{$one->Card_id}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Národnost</div>
+                    <div class="info-value">{$one->Nationality}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Obec</div>
+                    <div class="info-value">{$one->Town}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Část města</div>
+                    <div class="info-value">{$one->Town_part}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Ulice</div>
+                    <div class="info-value">{$one->Street}</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Narození</div>
+                    <div class="info-value">{$one->Birth|date:'d.m.Y'}</div>
+                </div>
+            </div>
+
+            <div class="actions" style="margin-top:.5rem; display:flex; justify-content: space-between;">
+                <button type="button" class="copy-btn btn primary">Zkopírovat vše</button>
+                <a n:href="deleteInfo!, id => $one->ID" class="btn danger">Smazat</a>
+            </div>
+        </div>
+    {/foreach}
+</div>
+<script>
+    function readCardRows(card) {
+        const rows = card.querySelectorAll('.info-list .info-row');
+        const out = [];
+        rows.forEach(function (row) {
+            var labelEl = row.querySelector('.info-label');
+            var valueEl = row.querySelector('.info-value');
+            if (labelEl && valueEl) {
+                var label = labelEl.innerText.trim();
+                var value = valueEl.innerText.trim();
+                if (label && value) out.push({ label: label, value: value });
+            }
+        });
+        return out;
+    }
+
+    // plain text pro zálohu
+    function buildPlain(rows) {
+        return rows.map(function (r) { return r.label + ': ' + r.value; }).join('\n');
+    }
+
+    // HTML tabulka, která se pěkně vkládá do Wordu
+    function buildHtml(rows) {
+        var html = ''
+            + '<table style="border-collapse:collapse; width:100%;">'
+            + rows.map(function (r) {
+                return ''
+                    + '<tr>'
+                    +   '<td style="font-weight:bold; padding:3pt 6pt; vertical-align:top; white-space:nowrap;">' + escapeHtml(r.label) + '</td>'
+                    +   '<td style="padding:3pt 6pt; vertical-align:top;">' + escapeHtml(r.value) + '</td>'
+                    + '</tr>';
+            }).join('')
+            + '</table>';
+        return '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>' + html + '</body></html>';
+    }
+
+    // jednoduché escapování
+    function escapeHtml(s) {
+        return s
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    // hlavní kopírovací funkce: zkusí Clipboard API s text/html, jinak fallback přes selection
+    async function copyForWord(html, plain) {
+        // Moderní Clipboard API (přednostně HTML)
+        if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+            try {
+                var item = new ClipboardItem({
+                    'text/html': new Blob([html], { type: 'text/html' }),
+                    'text/plain': new Blob([plain], { type: 'text/plain' })
+                });
+                await navigator.clipboard.write([item]);
+                return true;
+            } catch (e) {
+                // spadne do fallbacku
+            }
+        }
+        // Fallback: vložíme HTML do hidden contenteditable divu, označíme a zkopírujeme
+        try {
+            var helper = document.createElement('div');
+            helper.contentEditable = 'true';
+            helper.style.position = 'fixed';
+            helper.style.left = '-9999px';
+            helper.innerHTML = html;
+            document.body.appendChild(helper);
+
+            var range = document.createRange();
+            range.selectNodeContents(helper);
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+
+            var ok = document.execCommand('copy');
+
+            sel.removeAllRanges();
+            document.body.removeChild(helper);
+            return ok;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    // Delegace kliknutí pro všechna tlačítka .copy-btn
+    document.addEventListener('click', async function (e) {
+        var btn = e.target.closest('.copy-btn');
+        if (!btn) return;
+
+        var card = btn.closest('.card');
+        if (!card) return;
+
+        var rows = readCardRows(card);
+        var plain = buildPlain(rows);
+        var html = buildHtml(rows);
+        var ok = await copyForWord(html, plain);
+
+        var prev = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = ok ? 'Zkopírováno ✔' : 'Nepodařilo se 😕';
+        setTimeout(function () {
+            btn.textContent = prev;
+            btn.disabled = false;
+        }, 1500);
+    });
+</script>
+

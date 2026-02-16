@@ -8,6 +8,7 @@ use App\Core\Repository\OpeningHoursRepository;
 use App\Front\UI\BasePresenter;
 use Contributte\Translation\Translator;
 use Nette\Http\Session;
+use Contributte\Translation\LocalesResolvers\Session as TranslatorSessionResolver;
 
 final class AccommodationPresenter extends BasePresenter
 {
@@ -15,10 +16,10 @@ final class AccommodationPresenter extends BasePresenter
         OpeningHoursRepository $openingHoursRepository,
         OpeningExpectionsRepository $openingExpectionsRepository,
         public RoomRepository $roomRepository,
-        protected Session $session,
+        protected TranslatorSessionResolver $translatorSessionResolver,
         protected Translator $translator,
     ) {
-        parent::__construct($openingHoursRepository, $openingExpectionsRepository, $translator, $session);
+        parent::__construct($openingHoursRepository, $openingExpectionsRepository, $translator, $translatorSessionResolver);
     }
 
     public function renderDefault(): void

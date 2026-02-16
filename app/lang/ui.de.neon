@@ -1,134 +1,185 @@
-  brand:
-    name: "U Tetřeva"
+brand:
+  name: "U Tetřeva"
 
-  menu:
-    home: "Startseite"
-    menu: "Speisekarte"
-    accommodation: "Unterkunft"
-    gallery: "Galerie"
-    reservation: "Reservierung"
+menu:
+  home: "Startseite"
+  menu: "Speisekarte"
+  accommodation: "Unterkunft"
+  gallery: "Galerie"
+  reservation: "Reservierung"
 
-  footer:
-    contact: "Kontakt"
-    openHours: "Öffnungszeiten"
-    pay: "Zahlungsarten"
-    monday: "Montag"
-    tuesday: "Dienstag"
-    wednesday: "Mittwoch"
-    thursday: "Donnerstag"
-    friday: "Freitag"
-    saturday: "Samstag"
-    sunday: "Sonntag"
-    close: "Geschlossen"
-    expection: "Ausnahmen"
-    onlycash: "Nur Barzahlung"
+footer:
+  contact: "Kontakt"
+  openHours: "Öffnungszeiten"
+  pay: "Zahlungsarten"
+  monday: "Montag"
+  tuesday: "Dienstag"
+  wednesday: "Mittwoch"
+  thursday: "Donnerstag"
+  friday: "Freitag"
+  saturday: "Samstag"
+  sunday: "Sonntag"
+  close: "Geschlossen"
+  expection: "Ausnahmen"
+  onlycash: "Nur Barzahlung"
 
-  hero:
-    title:
-      before: "Restaurant"
-    subtitle: "Genießen Sie außergewöhnliche kulinarische Erlebnisse in gemütlicher Atmosphäre mit Übernachtungsmöglichkeit im Herzen der Natur"
+hero:
+  title:
+    before: "Restaurant & Pension"
+  subtitle: "Genießen Sie einzigartige kulinarische Erlebnisse in gemütlicher Atmosphäre mit Übernachtungsmöglichkeit im Herzen der Natur"
 
-  cta:
-    reserveTable: "Tisch reservieren"
-    viewMenu: "Speisekarte ansehen"
-    reserveRoom: "Unsere Zimmer"
-    viewPhotos: "Fotos ansehen"
-    bookRoom: "Zimmer buchen"
+cta:
+  reserveTable: "Tisch reservieren"
+  viewMenu: "Speisekarte ansehen"
+  reserveRoom: "Zimmerangebot"
+  viewPhotos: "Fotos ansehen"
+  bookRoom: "Zimmer buchen"
+  voucher: "Ich interessiere mich für einen Gutschein"
 
-  food:
-    title: "Unsere Lieblingsspezialitäten"
-    subtitle: "Probieren Sie unsere beliebtesten Wildspezialitäten, zubereitet aus frischen regionalen Zutaten"
-    viewAll: "Gesamte Speisekarte anzeigen"
-    subtitleMenu: "Genießen Sie einzigartige Gerichte aus den hochwertigsten Zutaten"
-    navigation:
-      starters: "Vorspeisen"
-      mains: "Hauptgerichte"
-      desserts: "Desserts"
-      drinks: "Getränke"
+food:
+  title: "Unsere Lieblingsspezialitäten"
+  subtitle: "Probieren Sie unsere beliebtesten Wildgerichte aus frischen regionalen Zutaten"
+  viewAll: "Gesamte Speisekarte anzeigen"
+  subtitleMenu: "Genießen Sie einzigartige Gerichte aus besten Zutaten"
+  navigation:
+    starters: "Vorspeisen"
+    mains: "Hauptgerichte"
+    desserts: "Desserts"
+    drinks: "Getränke"
 
+about:
+  title: "Über uns"
   accommodation:
-    title: "Unterkunft"
-    subtitle: "Wir bieten komfortable Unterkünfte im Stil einer Jagdhütte mit schönem Blick in die Natur"
-    lead: "Wählen Sie aus unseren komfortablen Zimmern und genießen Sie Erholung in der Natur"
+    text: "Wir bieten Unterkunft in Doppelzimmern sowie ein Vierbett-Apartment. Jedes Zimmer verfügt über ein eigenes Bad mit Dusche oder Badewanne und WC."
+  restaurant:
+    text: "Wir laden Sie herzlich in unser Restaurant im Stil einer Jagdhütte ein. Wir bereiten Wildspezialitäten zu; unsere Speisekarte umfasst auch traditionelle tschechische Küche."
+  kladska:
+    title: "Was ist Kladská?"
+    text: "Ein Paradies für Natur- und Wanderfreunde. Wanderwege führen von Lázně Kynžvart und Marienbad hierher. Direkt am Restaurant beginnt der beliebte Lehrpfad Kladská. Viele Besucher kommen auch wegen der Jagd."
+  
+voucher:
+  title: "Geschenkgutscheine"
+  subtitle: "Wir bieten Geschenkgutscheine für all unsere Leistungen – die perfekte Freude für Liebhaber von gutem Essen und Natur. Wählen Sie aus unserem Angebot und machen Sie Ihren Liebsten eine Freude."
+  subtitle2: "Bestellen Sie einen Geschenkgutschein für unsere Leistungen. Der Gutschein wird an Ihre E-Mail gesendet."
+  image:
+    alt: "Geschenkgutschein"
+    caption: "Geschenkgutschein"
+  form:
+    amount: "Wert in CZK:"
+    amountRequired: "Bitte geben Sie den Gutscheinwert ein."
+    amountRule: "Der Gutscheinwert muss zwischen 500 und 50.000 CZK liegen."
+    button: "Gutschein bestellen"
+  flashmessage:
+    type1: "Wir haben Ihnen eine E-Mail mit Zahlungsinformationen zum Gutschein gesendet."
+
+history:
+  title: "Geschichte"
+  subtitle: "Ein Familienrestaurant der Eheleute Koles, eröffnet am 1. Februar 2019."
+  paragraph1: "Das Restaurant U Tetřeva steht an der Stelle eines älteren Gasthauses von 1869, dessen ursprüngliche Form nicht erhalten geblieben ist. 1877 wurde nach Fertigstellung des benachbarten Jagdschlösschens ein neues Gasthaus nach einem Entwurf des Architekten Johann Meyer aus Luzern, vermutlich von der Firma Parquet- & Chalet-Fabrik Interlaken (Schweiz), erbaut. Anfangs war das Gasthaus wegen seiner abgelegenen Lage wenig besucht, was häufige Pächterwechsel belegen. Erst ab den 1880er Jahren, als eine Straße von Marienbad hierher führte, wurde es zu einem beliebten Halt der Kurgäste. Ursprünglich trug es den Namen Gasthaus Glatzen, 1881 war es als Zum Kaiserwald bekannt und seit 1884 heißt es bis heute U Tetřeva."
+  family:
+    title: "Familienrestaurant und Pension"
+  image:
+    alt: "Restaurant und Pension U Tetřeva"
+    caption: "Restaurant und Pension U Tetřeva"
+  gameRestaurant:
+    title: "Restaurant mit Wildspezialitäten"
+
+accommodation:
+  title: "Unterkunft"
+  subtitle: "Komfortable Unterkunft im Stil einer Jagdhütte mit wunderschönem Naturblick"
+  lead: "Wählen Sie aus unseren komfortablen Zimmern und genießen Sie Erholung in der Natur"
+  servicesTitle: "Gästeservices"
+  equipment:
+    title2: "Zimmerausstattung"
+    title: "Ausstattung:"
     servicesTitle: "Gästeservices"
-    equipment:
-      title2: "Zimmerausstattung"
-      title: "Ausstattung:"
-      servicesTitle: "Gästeservices"
-      bathroom: "Badezimmer"
-      tv: "TV"
-      wifi: "WLAN"
-      towels: "Handtücher und Bettwäsche"
-    capacity: "Kapazität: %count% Personen"
-    apartment:
-      name: "Apartment"
-      shortDesc: "Geräumiges Apartment mit eigenem Bad und komfortabler Ausstattung"
-    triple:
-      name: "Dreibettzimmer"
-      shortDesc: "Komfortables Dreibettzimmer – ideal für Familien oder Gruppen"
-    double:
-      name: "Doppelzimmer"
-      shortDesc: "Gemütliches Doppelzimmer für Paare oder Alleinreisende"
-    extras:
-      parking: "Kostenloses Parken"
-      breakfast: "Frühstück"
+    bathroom: "Bad"
+    tv: "TV"
+    wifi: "WLAN"
+    towels: "Handtücher und Bettwäsche"
+  capacity: "Kapazität: %count% Personen"
+  apartment:
+    name: "Apartment"
+    shortDesc: "Geräumiges Apartment mit eigenem Bad und komfortabler Ausstattung"
+  triple:
+    name: "Dreibettzimmer"
+    shortDesc: "Komfortables Dreibettzimmer – ideal für Familien oder Gruppen"
+  double:
+    name: "Doppelzimmer"
+    shortDesc: "Gemütliches Doppelzimmer für Paare oder Alleinreisende"
+  extras:
+    parking: "Kostenloses Parken"
+    breakfast: "Frühstück"
 
-  about:
-    title: "Über uns"
-    subtitle: "Restaurant und Pension im Herzen des Slavkovský-Waldes"
-    paragraph1: "Wir sind auf Wildspezialitäten und traditionelle tschechische Küche spezialisiert. Das Restaurant U Tetřeva liegt in der schönen Natur des Slavkovský-Waldes, unweit der Stadt Marienbad."
-    feature:
-      gameRestaurant:
-        title: "Wildrestaurant"
-        desc: "Wir sind auf hochwertige Wildspezialitäten spezialisiert."
-      family:
-        title: "Familienbetrieb"
-        desc: "Familientradition in der Gastronomie seit mehr als 20 Jahren."
-    image:
-      alt: "Innenraum des Restaurants U Tetřeva"
-      caption: "Restaurant und Pension"
+gallery:
+  title: "Galerie"
+  subtitle: "Sehen Sie Fotos unseres Restaurants, der Unterkunft und der umliegenden Natur"
+  restaurace: "Restaurant"
+  pension: "Pension"
+  kladska: "Umgebung Kladská"
 
-  gallery:
-      title: "Galerie"
-      subtitle: "Sehen Sie sich Fotos von unserem Restaurant, unseren Unterkünften und der umliegenden Natur an."
-      restaurace: "Restaurant"
-      pension: "Pension"
-      kladska: "Umgebung von Kladská"
+reservation:
+  title: "Reservierung"
+  subtitle: "Reservieren Sie einen Tisch in unserem Restaurant oder ein Zimmer für Ihren Aufenthalt"
+  nav:
+    room: "Unterkunft reservieren"
+    table: "Tisch reservieren"
+  room:
+    title: "Unterkunft reservieren"
+    subtitle: "Buchen Sie ein Zimmer und genießen Sie erholsame Tage in unserer Pension"
+    first: "Vorname"
+    firstRequired: "Vorname ist erforderlich"
+    second: "Nachname"
+    secondRequired: "Nachname ist erforderlich"
+    email: "E-Mail"
+    emailRequired: "E-Mail ist erforderlich"
+    emailRule: "Bitte eine gültige E-Mail eingeben"
+    phone: "Telefon"
+    phoneRequired: "Telefon ist erforderlich"
+    phoneRule: "Bitte eine gültige Telefonnummer eingeben"
+    persons: "Personenanzahl"
+    personsRequired: "Personenanzahl ist erforderlich"
+    personsRule: "Die Personenanzahl darf nicht 0 oder negativ sein"
+    child: "Anzahl der Kinder 3–17 Jahre:"
+    childRule: "Die Anzahl der Kinder darf nicht negativ sein"
+    baby: "Anzahl der Kinder bis 3 Jahre:"
+    babyRule: "Die Anzahl der Kinder darf nicht negativ sein"
+    dogCount: "Anzahl der Haustiere:"
+    dogCountRule: "Die Anzahl der Haustiere darf nicht negativ sein"
+    from: "Anreise"
+    fromRequired: "Anreisedatum ist erforderlich"
+    to: "Abreise"
+    toRequired: "Abreisedatum ist erforderlich"
+    dog: "Haustier"
+    message: "Hinweis"
+    messagePlaceholder: "2 Erwachsene, 1 Kind..."
+    gdpr: "Ich stimme der Verarbeitung personenbezogener Daten zu"
+    gdprRequired: "Zustimmung ist erforderlich"
+    newsletter: "Ich möchte Angebote per E-Mail erhalten"
+    button: "Reservierung absenden"
+  flashmessage:
+    type1: "Das Abreisedatum darf nicht vor dem Anreisedatum liegen."
+    type2: "Wenn Sie ein Haustier haben, geben Sie bitte die Anzahl der Haustiere an."
+    type3: "Reservierungen für den heutigen Tag sind nicht möglich — nur mindestens einen Tag im Voraus. Bitte kontaktieren Sie uns telefonisch."
+    type4: "Die Tischreservierung wurde erfolgreich angenommen; bei Änderungen kontaktieren wir Sie."
+    type5: "Zu diesem Zeitpunkt nehmen wir keine Reservierungen an; die Küche schließt eine Stunde vor der allgemeinen Schließzeit des Restaurants. Alternativ kontaktieren Sie uns bitte telefonisch. Die Öffnungszeiten sind von "
+    type5plus: " bis "
+  table:
+    title: "Tischreservierung"
+    subtitle: "Reservieren Sie einen Tisch online und genießen Sie köstliche Speisen in unserem Restaurant."
+    date: "Reservierungsdatum"
+    dateRequired: "Datum ist erforderlich"
+    time: "Reservierungszeit"
+    timeRequired: "Uhrzeit ist erforderlich"
 
-  reservation:
-      title: "Reservierung"
-      subtitle: "Reservieren Sie einen Tisch in unserem Restaurant oder ein Zimmer für Ihren Aufenthalt"
-      nav:
-          room: "Zimmerreservierung"
-          table: "Tischreservierung"
-      room:
-          title: "Zimmerreservierung"
-          subtitle: "Buchen Sie ein Zimmer und genießen Sie Entspannung in unserer Pension"
-          first: "Vorname"
-          firstRequired: "Vorname ist erforderlich"
-          second: "Nachname"
-          secondRequired: "Nachname ist erforderlich"
-          email: "E-Mail"
-          emailRequired: "E-Mail ist erforderlich"
-          emailRule: "Bitte geben Sie eine gültige E-Mail-Adresse ein"
-          phone: "Telefon"
-          phoneRequired: "Telefonnummer ist erforderlich"
-          phoneRule: "Bitte geben Sie eine gültige Telefonnummer ein"
-          persons: "Anzahl der Personen"
-          personsRequired: "Anzahl der Personen ist erforderlich"
-          from: "Anreise"
-          fromRequired: "Anreisedatum ist erforderlich"
-          to: "Abreise"
-          toRequired: "Abreisedatum ist erforderlich"
-          dog: "Haustier"
-          message: "Bemerkung"
-          gdpr: "Ich stimme der Verarbeitung personenbezogener Daten zu"
-          gdprRequired: "Zustimmung ist erforderlich"
-          newsletter: "Ich möchte Angebote per E-Mail erhalten"
-          button: "Reservierung senden"
+common:
+  currency: "CZK"
+  personsShort: "Personen"
+  perNight: "pro Nacht"
 
-
-  common:
-    currency: "Kč"
-    personsShort: "Personen"
-    perNight: "/Nacht"
+flashmessage:
+  type1: "Ungültiger Abmelde-Link."
+  type2: "Sie wurden erfolgreich vom Newsletter abgemeldet."
+  type3: "Sie waren nicht für den Newsletter angemeldet."
+  type4: "Die Reservierung konnte nicht gesendet werden; bitte kontaktieren Sie uns telefonisch."
+  type5: "Vielen Dank für Ihre Reservierung. Wir kontaktieren Sie in Kürze per E-Mail."

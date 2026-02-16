@@ -45,28 +45,54 @@
                     <small class="nf-help" n:if="$err">{inputError Person}</small>
             </div>
 
-            {* Pokoje — vlastní rendrování do gridu *}
-            {var $err = $form['room_ids']->hasErrors()}
-            <fieldset class="nf-field nf-col-span-2{if $err} is-error{/if}">
-                    <legend class="nf-label">{label room_ids /}</legend>
+            {var $err = $form['Child']->hasErrors()}
+            <div class="nf-field nf-affix{if $err} is-error{/if}" data-suffix="os.">
+                    {label Child, class => 'nf-label' /}
+                {input Child, class => 'nf-input', inputmode => 'numeric', step => '1', min => '0'}
+                    <small class="nf-help" n:if="$err">{inputError Child}</small>
+            </div>
 
-                    <div class="nf-rooms">
+            {var $err = $form['Baby']->hasErrors()}
+            <div class="nf-field nf-affix{if $err} is-error{/if}" data-suffix="os.">
+                    {label Baby, class => 'nf-label' /}
+                {input Baby, class => 'nf-input', inputmode => 'numeric', step => '1', min => '0'}
+                    <small class="nf-help" n:if="$err">{inputError Baby }</small>
+            </div>
+
+            {* --- Pokoje: custom render (bez fieldsetu) + speciální cena vedle --- *}
+            {var $roomsErr = $form['room_ids']->hasErrors()}
+            <div class="nf-field nf-col-span-2{if $roomsErr} is-error{/if}">
+                    <div class="nf-label">{label room_ids /}</div>
+
+                    <div class="nf-rooms nf-rooms-grid">
                         {var $ctrl = $form['room_ids']}
+                    {var $prices = $form['custom_prices']}
+
                     {foreach $ctrl->items as $id => $label}
-                            {*
-                               Použijeme n:name="room_ids:$id" – Nette doplní checked/disabled/ids samo.
-                               Třídu 'is-disabled' přidáme podle disabled stavu controlu.
-                            *}
                             {var $part = $ctrl->getControlPart($id)}
-                            <label class="nf-check nf-room{if isset($part->attrs['disabled'])} is-disabled{/if}">
+                            {var $priceCtrl = $prices[$id] ?? null}
+
+                            <label class="nf-room-row{if isset($part->attrs['disabled'])} is-disabled{/if}">
+                            <span class="nf-room-check">
                                 <input n:name="room_ids:$id">
-                                <span>{$label}</span>
+                            </span>
+                                <span class="nf-room-name">{$label}</span>
+                                <span class="nf-room-price">
+                                {if $priceCtrl}
+                                    {input $priceCtrl, class => 'nf-input nf-input--sm nf-price', inputmode => 'decimal', placeholder => 'speciální cena / noc' }
+                                {/if}
+                            </span>
                             </label>
+
+                            {if $priceCtrl && $priceCtrl->hasErrors()}
+                                <small class="nf-help is-error">{inputError $priceCtrl}</small>
+                            {/if}
                         {/foreach}
                     </div>
 
-                    <small class="nf-help" n:if="$err">{inputError room_ids}</small>
-            </fieldset>
+                    <small class="nf-help" n:if="$roomsErr">{inputError room_ids}</small>
+                    <small class="nf-help">Nech prázdné, pokud chceš použít standardní cenu pokoje.</small>
+            </div>
 
             {* Date range vedle sebe *}
             <div class="nf-row-2 nf-col-span-2">
@@ -85,13 +111,22 @@
                     </div>
             </div>
 
-            {var $err = $form['Dog']->hasErrors()}
+            <div class="nf-row-2 nf-col-span-2">
+                    {var $err = $form['Dog']->hasErrors()}
             <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
-                    <label class="nf-check">
-                        {input Dog}
-                        <span>{label Dog /}</span>
-                    </label>
-                    <small class="nf-help" n:if="$err">{inputError Dog}</small>
+                            <label class="nf-check">
+                                {input Dog}
+                                <span>{label Dog /}</span>
+                            </label>
+                            <small class="nf-help" n:if="$err">{inputError Dog}</small>
+            </div>
+
+                {var $err = $form['Dog_count']->hasErrors()}
+                    <div class="nf-field nf-affix{if $err} is-error{/if}" data-suffix="os.">
+                        {label Dog_count, class => 'nf-label' /}
+                {input Dog_count, class => 'nf-input', inputmode => 'numeric', step => '1', min => '1'}
+                        <small class="nf-help" n:if="$err">{inputError Person}</small>
+                    </div>
             </div>
 
             {var $err = $form['Note']->hasErrors()}

@@ -19,7 +19,9 @@ use Dompdf\Options;
 use Nette\Application\Responses\FileResponse;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\Utils\Strings;
+use App\Core\Mail\MailService;
 use NumberToWords\NumberToWords;
+
 
 
 final class HomePresenter extends BasePresenter
@@ -31,7 +33,8 @@ final class HomePresenter extends BasePresenter
         private ReservationCommentsRepository $reservationCommentsRepository,
         private CleanRepository $cleanRepository,
         private AccommodationFormFactory $accommodationFormFactory,
-        private TemplateFactory $templateFactory
+        private TemplateFactory $templateFactory,
+        private MailService $mailService,
     ) {}
 
     // přijmeme parametry y=rok, m=měsíc (1–12)
@@ -41,18 +44,15 @@ final class HomePresenter extends BasePresenter
             $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
         }
 
-
-        // --- Základ: vychozí časová zóna a datum ---
         $tz = new \DateTimeZone('Europe/Prague');
         $base = new \DateTimeImmutable('today', $tz);
         if ($y !== null && $m !== null && $m >= 1 && $m <= 12) {
             $base = new \DateTimeImmutable(sprintf('%04d-%02d-01', $y, $m), $tz);
         }
 
-        $monthStart = $base->modify('first day of this month')->setTime(0, 0);
+        $monthStart        = $base->modify('first day of this month')->setTime(0, 0);
         $monthEndExclusive = $monthStart->modify('first day of next month');
 
-        // --- Formattery pro CZ lokalizaci (Intl/ICU) ---
         $locale = 'cs_CZ';
         $mkFmt = function (string $pattern) use ($locale, $tz): \IntlDateFormatter {
             return new \IntlDateFormatter(
@@ -65,10 +65,8 @@ final class HomePresenter extends BasePresenter
             );
         };
 
-        // Nadpis měsíce (samostatný název měsíce → LLLL), např. "září 2025"
         $this->template->monthLabel = $mkFmt('LLLL yyyy')->format($monthStart);
 
-        // Krátké názvy dní v týdnu pro hlavičku kalendáře (Po, Út, …)
         $monday = $monthStart->modify('monday this week');
         $weekdays = [];
         for ($i = 0; $i < 7; $i++) {
@@ -76,7 +74,7 @@ final class HomePresenter extends BasePresenter
         }
         $this->template->weekdays = $weekdays;
 
-        // Helper do šablony: {$formatCz($day, 'd. MMMM y')} → "1. září 2025"
+        // Helper do šablony
         $this->template->formatCz = function (\DateTimeInterface $d, string $pattern) use ($mkFmt): string {
             return $mkFmt($pattern)->format($d);
         };
@@ -95,21 +93,27 @@ final class HomePresenter extends BasePresenter
         // --- Pokoje ---
         $rooms = $this->roomRepository->getAll()->order('ID')->fetchAll();
 
-        // --- Obsazenost ---
+        // --- Obsazenost: nocování + den odjezdu jako dlaždice ---
         $occupiedMap = [];
+
         foreach ($rooms as $room) {
             $roomId = (int) $room->ID;
             $occupiedMap[$roomId] = [];
 
+            // 1) Rezervace, které v měsíci NOCUJÍ ([from, to) – end exkluzivní)
             $reservations = $this->reservationRoomRepository
                 ->getReservationsForRoomInRange($roomId, $monthStart, $monthEndExclusive);
 
             foreach ($reservations as $res) {
-                // ořež na aktuální měsíc (konvence [from, to))
+                // ořez na zobrazovaný měsíc
                 $start = $res->Date_from < $monthStart ? $monthStart : $res->Date_from;
-                $end   = $res->Date_to->modify('+1 day') > $monthEndExclusive ? $monthEndExclusive : $res->Date_to;
+                $end   = $res->Date_to   > $monthEndExclusive ? $monthEndExclusive : $res->Date_to;
 
-                // připrav datové pole s detaily
+                $hasNote = (bool) $this->reservationCommentsRepository
+                    ->getAll()
+                    ->where('reservation_id', $res->ID)
+                    ->count('*');
+
                 $detail = [
                     'name'       => trim($res->First . ' ' . $res->Second),
                     'mail'       => (string) $res->Mail,
@@ -117,15 +121,59 @@ final class HomePresenter extends BasePresenter
                     'id'         => (int) $res->ID,
                     'deposit'    => (float) $res->Deposit,
                     'totalPrice' => (float) $res->totalPrice,
+                    'Person'     => (int) ($res->Person + $res->Child),
+                    'hasNote'    => $hasNote,
+                    'Book'       => $res->Card_id,
+                    'date_from' => $res->Date_from->format('Y-m-d'),
                 ];
 
+                // nocování po dnech: [start, end)
                 for ($d = $start; $d < $end; $d = $d->modify('+1 day')) {
                     $key = $d->format('Y-m-d');
                     $occupiedMap[$roomId][$key] ??= [];
-                    $occupiedMap[$roomId][$key][] = $detail; // umožní i výjimečný overlap
+                    $occupiedMap[$roomId][$key][] = $detail;
                 }
             }
+
+            // 2) ODJEZDY spadající do měsíce → přidej i den odjezdu jako obsazený (klikací)
+            $edgeDepartures = $this->reservationRoomRepository
+                ->getDeparturesForRoomInRange($roomId, $monthStart, $monthEndExclusive);
+
+            foreach ($edgeDepartures as $res) {
+                $hasNote = (bool) $this->reservationCommentsRepository
+                    ->getAll()
+                    ->where('reservation_id', $res->ID)
+                    ->count('*');
+
+                $detail = [
+                    'name'       => trim($res->First . ' ' . $res->Second),
+                    'mail'       => (string) $res->Mail,
+                    'tel'        => (string) $res->Tel,
+                    'id'         => (int) $res->ID,
+                    'deposit'    => (float) $res->Deposit,
+                    'totalPrice' => (float) $res->totalPrice,
+                    'Person'     => (int) ($res->Person + $res->Child),
+                    'hasNote'    => $hasNote,
+                    'Book'       => $res->Card_id,
+                    'date_from' => $res->Date_from->format('Y-m-d'),
+                ];
+
+                $depKey = $res->Date_to->format('Y-m-d'); // den odjezdu
+                $occupiedMap[$roomId][$depKey] ??= [];
+                $occupiedMap[$roomId][$depKey][] = $detail;
+            }
         }
+
+        foreach ($occupiedMap as $roomId => &$daysMap) {
+            foreach ($daysMap as $key => &$cell) {
+                usort($cell, function(array $a, array $b): int {
+                    $cmp = strcmp($a['date_from'], $b['date_from']); // vzestupně
+                    return $cmp !== 0 ? $cmp : ($a['id'] <=> $b['id']); // stabilizace
+                });
+            }
+        }
+        unset($daysMap, $cell);
+
 
         // --- Úklidy ---
         $cleanRows = $this->cleanRepository->getAll()
@@ -150,15 +198,17 @@ final class HomePresenter extends BasePresenter
         $this->template->nextY = (int) $next->format('Y');
         $this->template->nextM = (int) $next->format('n');
 
-        // (volitelné) popisky pro "‹ srpen 2025" / "říjen 2025 ›"
+        // Popisky šipek
         $this->template->prevLabel = $mkFmt('LLLL yyyy')->format($prev);
         $this->template->nextLabel = $mkFmt('LLLL yyyy')->format($next);
 
-        // Výchozí den pro úklidový formulář apod.
+        // Výchozí den pro „Uklizeno“
         $cleanDefaultDay = new \DateTimeImmutable('today', $tz);
         $this->template->cleanDefaultDay = $cleanDefaultDay;
-        $this->template->cleanMap = $cleanMap;
+        $this->template->cleanMap        = $cleanMap;
     }
+
+
 
     public function renderDetail(int $id): void
     {
@@ -274,17 +324,49 @@ final class HomePresenter extends BasePresenter
             }
         }
 
+        // === NOVÉ: načtení speciálních cen z formuláře ==========================
+        // container 'custom_prices' má klíče jako ID pokoje; prázdné = ignorovat
+        $customMap = [];
+        if (isset($values->custom_prices) && $values->custom_prices instanceof \Nette\Utils\ArrayHash) {
+            foreach ($values->custom_prices as $rid => $raw) {
+                if ($raw === null || $raw === '') {
+                    continue; // prázdné = použije se defaultní cena pokoje
+                }
+                // pro jistotu nahraď čárku tečkou, ať projde locale typu "123,45"
+                $num = (float) str_replace(',', '.', (string) $raw);
+                if ($num >= 0) {
+                    $customMap[(int) $rid] = $num;
+                }
+            }
+        }
+        // =======================================================================
+
         // 4) výpočet ceny
         $nights = $this->accommodationRepository->getNumberOfNights($from, $to);
+
+        // sečti ceny za vybrané pokoje s respektem ke speciálním cenám
         $basePerNight = 0.0;
         foreach ($rooms as $r) {
-            $basePerNight += (float)$r->Price;
+            $rid = (int) $r->ID;
+            // pokud je pro daný pokoj zadaná speciální cena, použij ji; jinak Room.Price
+            $pricePerNight = $customMap[$rid] ?? (float) $r->Price;
+            $basePerNight += $pricePerNight;
         }
-        $persons = (int)$values->Person;
-        $hasDog  = (int)$values->Dog === 1;
+
+        $persons  = (int) $values->Person;
+        $children = (int) $values->Child;
+        $dogs = (int) $values->Dog_count;
+
+        // Checkbox -> spolehlivý převod na bool (někdy chodí TRUE/FALSE, jindy 'on', '1', atd.)
+        $hasDog = !empty($values->Dog);
+
         $totalPrice = ($basePerNight * $nights)
             + (($nights * $persons) * 50)
-            + ($hasDog ? ($nights * 150) : 0);
+            + ($hasDog ? ($nights * 150 * $dogs) : 0);
+
+        // TODO: pokud máš pravidla pro slevy/příplatky za děti, aplikuj je sem s využitím $children
+
+        $totalPrice = (int) round($totalPrice);
 
         // 5) uložení rezervace
         $row = $this->accommodationRepository->getAll()->insert([
@@ -293,15 +375,17 @@ final class HomePresenter extends BasePresenter
             'Mail'       => (string)$values->Mail,
             'Tel'        => (string)$values->Tel,
             'Person'     => $persons,
+            'Child'      => (int) $values->Child,
+            'Baby'       => (int) $values->Baby,
             'Date_from'  => $from->format('Y-m-d'),
             'Date_to'    => $to->format('Y-m-d'),
-            'Dog'        => (int)$values->Dog,
+            'Dog'        => $hasDog ? 1 : 0,
             'Note'       => (string)($values->Note ?? ''),
             'Solved'     => 1, // uprav dle procesu
             'Old'        => 0,
-            'totalPrice' => (int)round($totalPrice),
+            'totalPrice' => $totalPrice,
             'Deposit'    => 0,
-            'Gdpr'       => new \DateTimeImmutable(), // pokud má být NOT NULL
+            'Gdpr'       => new \DateTimeImmutable(), // pokud je sloupec NOT NULL
         ]);
         if (!$row) {
             $this->flashMessage('Nepodařilo se uložit rezervaci.', 'error');
@@ -319,6 +403,7 @@ final class HomePresenter extends BasePresenter
         $this->flashMessage('Rezervace vytvořena.');
         $this->redirect(':Admin:Home:detail', ['id' => (int)$row->ID]);
     }
+
 
     public function handleAddComment(int $id): void
     {
@@ -339,9 +424,18 @@ final class HomePresenter extends BasePresenter
         }
 
         $amount = (float) ($this->getHttpRequest()->getPost('amount') ?? 0);
+
+        $data = $this->accommodationRepository->getById($id);
         $this->accommodationRepository->update($id, [
             'Deposit' => $amount,
         ]);
+
+        $to = $data->Mail;
+        $params = [
+          'amount' => $amount,
+        ];
+        $lng = $data->Locale;
+        $this->mailService->sendDepositPaid($to, $params, $lng);
 
         $this->flashMessage('Záloha uložena.');
         $this->redirect('this', ['id' => $id]); // refresh detailu
@@ -354,10 +448,19 @@ final class HomePresenter extends BasePresenter
         }
 
         $reservation = $this->accommodationRepository->getById($id);
-        $this->accommodationRepository->update($id, [
+        $to = $reservation->Mail;
+        $params = [
+            'amount' => $reservation->totalPrice
+        ];
+        $lng = $reservation->Locale;
+        if($to == ''){$this->accommodationRepository->update($id, [
             'Deposit' => $reservation->totalPrice,
-        ]);
-
+        ]);} else{
+            $this->mailService->sendPaidInvoice($to, $params, $lng);
+            $this->accommodationRepository->update($id, [
+                'Deposit' => $reservation->totalPrice,
+            ]);
+        }
     }
 
     public function handleChangeDates(int $id): void
@@ -473,7 +576,6 @@ final class HomePresenter extends BasePresenter
             return;
         }
 
-        // existují všechny?
         $rooms = $this->roomRepository->getAll()->where('ID', $roomIds)->fetchAll();
         if (count($rooms) !== count($roomIds)) {
             $this->flashMessage('Některý z vybraných pokojů neexistuje.', 'error');
@@ -504,25 +606,23 @@ final class HomePresenter extends BasePresenter
             ]);
         }
 
-        // přepočítej cenu
-        $nights = $this->accommodationRepository->getNumberOfNights(
-            $reservation->Date_from, $reservation->Date_to
-        );
+        $this->flashMessage('Pokoje byly změněny.');
+        $this->redirect('this', ['id' => $id]);
+    }
 
-        $basePerNight = 0.0;
-        foreach ($rooms as $room) {
-            $basePerNight += (float)$room->Price;
+    public function handleChangePrice(int $id): void
+    {
+        if (!$this->getUser()->isAllowed('home', 'changePrice')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
         }
 
-        $totalPrice = ($basePerNight * $nights)
-            + (($nights * (int)$reservation->Person) * 50)
-            + ($reservation->Dog ? ($nights * 150) : 0);
+        $price = (float) ($this->getHttpRequest()->getPost('amount') ?? 0);
 
         $this->accommodationRepository->update($id, [
-            'totalPrice' => $totalPrice,
+            'totalPrice' => $price,
         ]);
 
-        $this->flashMessage('Pokoje byly změněny.');
+        $this->flashMessage('Cena byla upravena.');
         $this->redirect('this', ['id' => $id]);
     }
 
@@ -715,16 +815,17 @@ final class HomePresenter extends BasePresenter
 
         $form->addText('received_from', 'Přijato od:');
         $form->addDate('paid_at', 'Dne:');
-        $form->addInteger('total_amount', 'Přijato KČ:');
+        $form->addFloat('total_amount', 'Přijato KČ:');
         $form->addFloat('total_amount_without_vat', 'Cena bez DPH');
-        $form->addInteger('vat', 'DPH');
+        $form->addFloat('vat', 'DPH');
         $form->addText('text', 'Text');
 
         $form->addSubmit('download', 'Vygenerovat PDF');
 
         $form->onSuccess[] = function (Form $form, ArrayHash $v): void {
 
-            $totalPrice = (int)$v->total_amount;
+            $totalPrice = (float)$v->total_amount;
+            $wordsPrice = (int)$v->total_amount;
 
             $numberToWords  = new NumberToWords();
             $transformer    = $numberToWords->getNumberTransformer('cs');
@@ -733,11 +834,11 @@ final class HomePresenter extends BasePresenter
                 'paid_at'       => $v->paid_at->format('d.m.Y'),
                 'received_from' => (string)$v->received_from,
                 'total_amount'  => $totalPrice,
-                'total_amount_words' => $transformer->toWords($totalPrice),
+                'total_amount_words' => $transformer->toWords($wordsPrice),
                 'total_amount_without_vat_words' => $transformer->toWords((int)$v->total_amount_without_vat),
-                'total_amount_without_vat' => (int)$v->total_amount_without_vat,
-                'vat'           => (int)$v->vat,
-                'vat_amount'    => $totalPrice - (int)$v->total_amount_without_vat,
+                'total_amount_without_vat' => (float)$v->total_amount_without_vat,
+                'vat'           => (float)$v->vat,
+                'vat_amount'    => $totalPrice - (float)$v->total_amount_without_vat,
                 'text'          => (string)$v->text,
             ];
 
@@ -789,14 +890,15 @@ final class HomePresenter extends BasePresenter
 
         $form->addText('received_from', 'Přijato od:');
         $form->addDate('paid_at', 'Dne:');
-        $form->addInteger('total_amount', 'Přijato KČ:');
+        $form->addFloat('total_amount', 'Přijato KČ:');
         $form->addText('text', 'Text');
 
         $form->addSubmit('download', 'Vygenerovat PDF');
 
         $form->onSuccess[] = function (Form $form, ArrayHash $v): void {
 
-            $totalPrice      = (int)$v->total_amount;
+            $totalPrice      = (float)$v->total_amount;
+            $wordsPrice = (int)$v->total_amount;
             $numberToWords   = new NumberToWords();
             $transformer     = $numberToWords->getNumberTransformer('cs');
 
@@ -804,7 +906,7 @@ final class HomePresenter extends BasePresenter
                 'paid_at'       => $v->paid_at->format('d.m.Y'),
                 'received_from' => (string)$v->received_from,
                 'total_amount'  => $totalPrice,
-                'total_amount_words' => $transformer->toWords($totalPrice),
+                'total_amount_words' => $transformer->toWords($wordsPrice),
                 'text'          => (string)$v->text,
             ];
 
@@ -845,4 +947,99 @@ final class HomePresenter extends BasePresenter
 
         return $form;
     }
+
+    protected function createComponentAccommodationBookForm(): Form
+    {
+        $form = new Form;
+
+        $form->addText('First', 'Jméno:')->setRequired();
+        $form->addText('Second', 'Příjmení:')->setRequired();
+        $form->addInteger('Card_id', 'Číslo dokladu:')->setRequired();
+        $form->addText('Nationality', 'Státní příslušnost:')->setRequired();
+        $form->addText('Town', 'Město/Obec:')->setRequired();
+        $form->addText('Town_part', 'Část obce:');
+        $form->addText('Street', 'Ulice a číslo popisné:')->setRequired();
+        $form->addDate('Birth', 'Datum narození:')->setRequired();
+        $form->addDate('Date_from', 'Datum příjezdu:')->setRequired();
+        $form->addDate('Date_to', 'Datum odjezdu:')->setRequired();
+
+        $form->addSubmit('Submit', 'Uložit');
+
+        $form->onSuccess[] = function (Form $form, array $v): void {
+            $id = $this->getParameter('id');
+
+            $this->accommodationRepository->update($id, [
+                'First' => $v['First'],
+                'Second' => $v['Second'],
+                'Card_id' => $v['Card_id'],
+                'Nationality' => $v['Nationality'],
+                'Town' => $v['Town'],
+                'Town_part' => $v['Town_part'],
+                'Street' => $v['Street'],
+                'Birth' => $v['Birth'],
+                'Date_from' => $v['Date_from'],
+                'Date_to' => $v['Date_to'],
+            ]);
+            $this->flashMessage('Ubytovací list byl vytvořen.');
+            $this->redirect('detail', ['id' => $id]);
+        };
+        return $form;
+    }
+
+    public function renderAccommodationBook(int $id): void
+    {
+        if (!$this->getUser()->isAllowed('home', 'book')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+        $r = $this->accommodationRepository->getById($id);
+        $this['accommodationBookForm']->setDefaults([
+            'First'      => $r->First,
+            'Second'     => $r->Second,
+            'Date_from'  => $r->Date_from->format('Y-m-d'),
+            'Date_to'    => $r->Date_to->format('Y-m-d'),
+        ]);
+    }
+
+    public function renderBook(): void
+    {
+        if (!$this->getUser()->isAllowed('home', 'book')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
+        $all = $this->accommodationRepository->getAll()->where('Card_id != ?', 0)->order('Date_from DESC')->fetchAll();
+        $this->template->all = $all;
+    }
+
+    public function handleDeleteInfo(int $id): void
+    {
+        if (!$this->getUser()->isAllowed('home', 'deleteInfo')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
+        $this->accommodationRepository->update($id, [
+            'Card_id'     => 0,
+            'Nationality' => null,
+            'Town'        => null,
+            'Town_part'   => null,
+            'Street'      => null,
+            'Birth'       => null,
+        ]);
+
+
+        $this->redirect('this');
+    }
+
+    public function handleDeleteComment(int $commentId): void
+    {
+        if (!$this->getUser()->isAllowed('home', 'deleteComment')) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
+        $this->reservationCommentsRepository->delete($commentId);
+
+        $reservationId = $this->getParameter('id');
+        $this->flashMessage('Poznámka smazána.');
+        $this->redirect('Home:detail', ['id' => $reservationId]);
+    }
+
 }

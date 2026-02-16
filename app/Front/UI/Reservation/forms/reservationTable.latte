@@ -1,1 +1,56 @@
-<p>Brzy/Soon</p>
+<h2>{_'ui.reservation.table.title'}</h2>
+<p>{_'ui.reservation.table.subtitle'}</p>
+{if flashes}
+    {foreach $flashes as $flash}
+        <p class="form__{$flash->type}">{$flash->message}</p>
+    {/foreach}
+{/if}
+{form reservationTableForm}
+    <div class="form__row">
+        <div class="form__input">
+            {label First/}
+                {input First}
+        </div>
+        <div class="form__input">
+            {label Second/}
+                {input Second}
+        </div>
+    </div>
+    <div class="form__row">
+        <div class="form__input">
+            {label Mail/}
+                {input Mail}
+        </div>
+        <div class="form__input">
+            {label Tel/}
+                {input Tel}
+        </div>
+    </div>
+    <div class="form__row">
+        <div class="form__input">
+            {label Date/}
+                {input Date}
+        </div>
+        <div class="form__input">
+            {label Time/}
+                {input Time}
+        </div>
+    </div>
+    <div class="form__row">
+        <div class="form__input">
+            {label Person/}
+                {input Person}
+        </div>
+    </div>
+    <div class="form__row">
+        <div class="form__input">
+            {label Note/}
+                {input Note}
+        </div>
+    </div>
+    <div class="form__row">
+        {input Gdpr}
+            {input Newsletter}
+    </div>
+    {input Submit}
+{/form}

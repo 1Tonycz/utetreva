@@ -83,6 +83,7 @@
                 {/if}
             </ul>
         </section>
+
     </div>
 
 
@@ -389,5 +390,13 @@
                 if(opener){ e.preventDefault(); _openModal(opener.getAttribute('data-modal-open')); }
             });
         })();
+        document.addEventListener('change', function(e){
+            if(e.target.name === 'type'){
+                document.getElementById('newsletter-text-field').style.display =
+                    e.target.value === 'text' ? 'block' : 'none';
+                document.getElementById('newsletter-image-field').style.display =
+                    e.target.value === 'image' ? 'block' : 'none';
+            }
+        });
     </script>
 {/block}

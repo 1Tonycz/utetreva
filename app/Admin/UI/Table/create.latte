@@ -1,0 +1,82 @@
+{var $css = "formpdf"}
+
+{block content}
+    {form groupForm, class => 'nf-form nf-form--narrow', novalidate => true}
+
+        {** Globální chyby **}
+        <ul class="nf-errors" n:if="$form->hasErrors()">
+            <li n:foreach="$form->errors as $e">{$e}</li>
+        </ul>
+
+        <div class="nf-grid">
+            <div>
+                {var $err = $form['First']->hasErrors()}
+                <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                        {label First, class => 'nf-label' /}
+                    {input First, class => 'nf-input'}
+                        <small class="nf-help" n:if="$err">{inputError First}</small>
+                </div>
+            </div>
+            <div>
+                {var $err = $form['Second']->hasErrors()}
+                <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                        {label Second, class => 'nf-label' /}
+                    {input Second, class => 'nf-input'}
+                        <small class="nf-help" n:if="$err">{inputError Second}</small>
+                </div>
+            </div>
+            <div>
+                {var $err = $form['Mail']->hasErrors()}
+                <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                        {label Mail, class => 'nf-label' /}
+                    {input Mail, class => 'nf-input'}
+                        <small class="nf-help" n:if="$err">{inputError Mail}</small>
+                </div>
+            </div>
+            <div>
+                {var $err = $form['Tel']->hasErrors()}
+                <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                    {label Tel, class => 'nf-label' /}
+                    {input Tel, class => 'nf-input'}
+                    <small class="nf-help" n:if="$err">{inputError Tel}</small>
+                </div>
+            </div>
+            <div>
+                {var $err = $form['Date']->hasErrors()}
+                <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                        {label Date class => 'nf-label' /}
+                    {input Date, class => 'nf-input'}
+                        <small class="nf-help" n:if="$err">{inputError Date}</small>
+                </div>
+            </div>
+            <div>
+                {var $err = $form['Time']->hasErrors()}
+                <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                        {label Time class => 'nf-label' /}
+                    {input Time, class => 'nf-input'}
+                        <small class="nf-help" n:if="$err">{inputError Time}</small>
+                </div>
+            </div>
+            <div>
+                {var $err = $form['Person']->hasErrors()}
+                <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                        {label Person class => 'nf-label' /}
+                    {input Person, class => 'nf-input'}
+                        <small class="nf-help" n:if="$err">{inputError Person}</small>
+                </div>
+            </div>
+                {var $err = $form['Note']->hasErrors()}
+                <div class="nf-field nf-col-span-2{if $err} is-error{/if}">
+                    {label Note class => 'nf-label' /}
+                    {input Note, class => 'nf-input', placeholder => 'Popis'}
+                    <small class="nf-help" n:if="$err">{inputError Note}</small>
+                </div>
+
+        </div>
+        <div class="nf-actions">
+            {input Submit, class => 'nf-btn nf-btn--primary', value => 'Uložit položku'}
+            <a n:href="this" class="nf-btn nf-btn--ghost">Zrušit</a>
+        </div>
+
+    {/form}
+{/block}

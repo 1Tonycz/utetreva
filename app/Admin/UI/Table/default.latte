@@ -1,0 +1,58 @@
+{var $css = "table"}
+{block content}
+{snippet reservation}
+     <div class="table">
+         <div class="table__left">
+             <h2>Online rezervace</h2>
+             <div class="table__grid1">
+                {foreach $reservation as $res}
+                    <div class="table__card">
+                        <p>Jméno: {$res->First} {$res->Second}</p>
+                        <p>Počet osob: {$res->Person}</p>
+                        <p>Den a čas: {$res->Date|date:'d.m.Y'} - {$res->Time_fmt|date:'H:i'}</p>
+                        <p>Poznámka hosta: {if $res->Note == ''}Ne{else}<strong>Ano</strong>{/if}</p>
+                        <p>Poznámka interní:
+                            {if $res->Has_note}
+                                <strong>Ano</strong>{if $res->Comments_cnt} ({$res->Comments_cnt}){/if}
+                            {else}
+                                Ne
+                            {/if}
+                        </p>
+                        <div class="table__buttons">
+                            <a n:href="solved!, id => $res->ID" id="solved">Vyřešeno</a>
+                            <a n:href="detail, id => $res->ID" id="detail">Více informací</a>
+                        </div>
+                    </div>
+                {/foreach}
+             </div>
+         </div>
+         <div class="table__right">
+             <div class="table__actions">
+                <h2>Velké skupiny</h2>
+                <a n:href="create">Přidat skupinu</a>
+             </div>
+             <div class="table__grid2">
+                 {foreach $groups as $res}
+                     <div class="table__card">
+                         <p>Jméno: {$res->First} {$res->Second}</p>
+                         <p>Počet osob: {$res->Person}</p>
+                         <p>Den a čas: {$res->Date|date:'d.m.Y'} - {$res->Time_fmt|date:'H:i'}</p>
+                         <p>Poznámka hosta: {if $res->Note == ''}Ne{else}<strong>Ano</strong>{/if}</p>
+                         <p>Poznámka interní:
+                             {if $res->Has_note}
+                                 <strong>Ano</strong>{if $res->Comments_cnt} ({$res->Comments_cnt}){/if}
+                             {else}
+                                 Ne
+                             {/if}
+                         </p>
+                         <div class="table__buttons">
+                             <a n:href="solved!, id => $res->ID" id="solved">Vyřešeno</a>
+                             <a n:href="detail, id => $res->ID" id="detail">Více informací</a>
+                         </div>
+                     </div>
+                 {/foreach}
+             </div>
+         </div>
+     </div>
+{/snippet}
+{/block}

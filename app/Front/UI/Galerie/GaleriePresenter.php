@@ -8,7 +8,7 @@ use App\Core\Repository\OpeningHoursRepository;
 use App\Front\UI\BasePresenter;
 use App\Core\Repository\GalerieRepository;
 use Contributte\Translation\Translator;
-use Nette\Http\Session;
+use Contributte\Translation\LocalesResolvers\Session as TranslatorSessionResolver;
 
 final class GaleriePresenter extends BasePresenter
 {
@@ -17,9 +17,9 @@ final class GaleriePresenter extends BasePresenter
         OpeningExpectionsRepository $openingExpectionsRepository,
         public GalerieRepository $galerieRepository,
         protected Translator $translator,
-        protected Session $session
+        protected TranslatorSessionResolver $translatorSessionResolver,
     ) {
-        parent::__construct($openingHoursRepository, $openingExpectionsRepository, $translator, $session);
+        parent::__construct($openingHoursRepository, $openingExpectionsRepository, $translator, $translatorSessionResolver);
     }
     public function renderDefault(): void
     {

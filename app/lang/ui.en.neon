@@ -1,134 +1,185 @@
-  brand:
-    name: "U Tetřeva"
+brand:
+  name: "U Tetřeva"
 
-  menu:
-    home: "Home"
-    menu: "Menu"
-    accommodation: "Accommodation"
-    gallery: "Gallery"
-    reservation: "Reservation"
+menu:
+  home: "Home"
+  menu: "Menu"
+  accommodation: "Accommodation"
+  gallery: "Gallery"
+  reservation: "Reservation"
 
-  footer:
-    contact: "Contact"
-    openHours: "Opening hours"
-    pay: "Payment methods"
-    monday: "Monday"
-    tuesday: "Tuesday"
-    wednesday: "Wednesday"
-    thursday: "Thursday"
-    friday: "Friday"
-    saturday: "Saturday"
-    sunday: "Sunday"
-    close: "Closed"
-    expection: "Exceptions"
-    onlycash: "Cash only"
+footer:
+  contact: "Contact"
+  openHours: "Opening hours"
+  pay: "Payment methods"
+  monday: "Monday"
+  tuesday: "Tuesday"
+  wednesday: "Wednesday"
+  thursday: "Thursday"
+  friday: "Friday"
+  saturday: "Saturday"
+  sunday: "Sunday"
+  close: "Closed"
+  expection: "Exceptions"
+  onlycash: "Cash only"
 
-  hero:
-    title:
-      before: "Restaurant"
-    subtitle: "Enjoy unique culinary experiences in our cozy setting, with accommodation available in the heart of nature"
+hero:
+  title:
+    before: "Restaurant & Guesthouse"
+  subtitle: "Enjoy unique culinary experiences in our cozy setting with accommodation in the heart of nature"
 
-  cta:
-    reserveTable: "Reserve a table"
-    viewMenu: "View menu"
-    reserveRoom: "Our rooms"
-    viewPhotos: "View photos"
-    bookRoom: "Book a room"
+cta:
+  reserveTable: "Reserve a table"
+  viewMenu: "View menu"
+  reserveRoom: "Room offer"
+  viewPhotos: "View photos"
+  bookRoom: "Book a room"
+  voucher: "I’m interested in a voucher"
 
-  food:
-    title: "Our favourite specialties"
-    subtitle: "Taste our most popular game dishes prepared from fresh regional ingredients"
-    viewAll: "View full menu"
-    subtitleMenu: "Enjoy unique dishes prepared from the finest ingredients"
-    navigation:
-      starters: "Starters"
-      mains: "Mains"
-      desserts: "Desserts"
-      drinks: "Drinks"
+food:
+  title: "Our Favorite Specialties"
+  subtitle: "Taste our most popular game dishes prepared from fresh regional ingredients"
+  viewAll: "View full menu"
+  subtitleMenu: "Enjoy unique dishes prepared from the finest ingredients"
+  navigation:
+    starters: "Starters"
+    mains: "Main courses"
+    desserts: "Desserts"
+    drinks: "Drinks"
 
+about:
+  title: "About us"
   accommodation:
-    title: "Accommodation"
-    subtitle: "We offer comfortable lodging in the style of a hunting lodge with beautiful views of nature"
-    lead: "Choose from our comfortable rooms and enjoy a relaxing stay in nature"
+    text: "We offer accommodation in double rooms and also a four-bed apartment. Each room has a private bathroom with a shower or bathtub and a toilet."
+  restaurant:
+    text: "We warmly invite you to visit our restaurant in the style of a hunting lodge. We prepare game specialties and also offer traditional Czech cuisine."
+  kladska:
+    title: "What is Kladská?"
+    text: "It’s a paradise for nature lovers and hikers. Tourist trails lead here from Lázně Kynžvart and Mariánské Lázně. Right from the restaurant starts the popular Kladská educational trail. Many visitors also come here for game hunting."
+
+voucher:
+  title: "Gift vouchers"
+  subtitle: "We offer gift vouchers for all our services that will delight every lover of good food and nature. Choose from our offer and make your loved ones happy."
+  subtitle2: "Order a gift voucher for our services. The voucher will be sent to your email."
+  image:
+    alt: "Gift voucher"
+    caption: "Gift voucher"
+  form:
+    amount: "Value in CZK:"
+    amountRequired: "Enter the voucher value."
+    amountRule: "The voucher value must be between 500 and 50,000 CZK."
+    button: "Order voucher"
+  flashmessage:
+    type1: "You have received an email with information about voucher payment."
+
+history:
+  title: "History"
+  subtitle: "It is a family restaurant of the Koles family, which we opened on 1 Feb 2019."
+  paragraph1: "The U Tetřeva restaurant stands on the site of an older inn from 1869, whose original form has not been preserved. In 1877, after the completion of the neighboring hunting chateau, a new inn was built according to a design by architect Johann Meyer from Lucerne, probably by the company Parquet- & Chalet-Fabrik Interlaken from Switzerland. Initially the inn was little visited due to its remote location, as evidenced by frequent changes of tenants. Only from the 1880s, when a road from Mariánské Lázně was built here, did it become a popular stop for spa guests. The inn originally bore the name Gasthaus Glatzen, in 1881 it was known as Zum Kaiserwald, and since 1884 it has borne the name U Tetřeva to this day."
+  family:
+    title: "Family restaurant & guesthouse"
+  image:
+    alt: "Restaurant and guesthouse U Tetřeva"
+    caption: "Restaurant and guesthouse U Tetřeva"
+  gameRestaurant:
+    title: "Restaurant with game specialties"
+
+accommodation:
+  title: "Accommodation"
+  subtitle: "We offer comfortable accommodation in the style of a hunting lodge with beautiful views of nature"
+  lead: "Choose from our comfortable rooms and enjoy a relaxing stay in nature"
+  servicesTitle: "Guest services"
+  equipment:
+    title2: "Room equipment"
+    title: "Equipment:"
     servicesTitle: "Guest services"
-    equipment:
-      title2: "Room amenities"
-      title: "Amenities:"
-      servicesTitle: "Guest services"
-      bathroom: "Bathroom"
-      tv: "TV"
-      wifi: "Wi-Fi"
-      towels: "Towels and bed linen"
-    capacity: "Capacity: %count% persons"
-    apartment:
-      name: "Apartment"
-      shortDesc: "Spacious apartment with private bathroom and comfortable facilities"
-    triple:
-      name: "Triple room"
-      shortDesc: "Comfortable triple room ideal for families or groups"
-    double:
-      name: "Double room"
-      shortDesc: "Cozy double room for couples or solo travelers"
-    extras:
-      parking: "Free parking"
-      breakfast: "Breakfast"
+    bathroom: "Bathroom"
+    tv: "TV"
+    wifi: "Wi-Fi"
+    towels: "Towels and bed linen"
+  capacity: "Capacity: %count% people"
+  apartment:
+    name: "Apartment"
+    shortDesc: "Spacious apartment with a private bathroom and comfortable facilities"
+  triple:
+    name: "Triple room"
+    shortDesc: "Comfortable triple room ideal for families or groups"
+  double:
+    name: "Double room"
+    shortDesc: "Cozy double room for couples or solo travelers"
+  extras:
+    parking: "Free parking"
+    breakfast: "Breakfast"
 
-  about:
-    title: "About us"
-    subtitle: "Restaurant and guesthouse in the heart of the Slavkov Forest"
-    paragraph1: "We specialize in game specialties and traditional Czech cuisine. Restaurant U Tetřeva is located in the beautiful nature of the Slavkov Forest, near the town of Mariánské Lázně."
-    feature:
-      gameRestaurant:
-        title: "Game restaurant"
-        desc: "We specialize in high-quality game specialties."
-      family:
-        title: "Family business"
-        desc: "A family tradition in hospitality for more than 20 years."
-    image:
-      alt: "Interior of the U Tetřeva restaurant"
-      caption: "Restaurant & Guesthouse"
+gallery:
+  title: "Gallery"
+  subtitle: "Browse photos of our restaurant, accommodation, and the surrounding nature"
+  restaurace: "Restaurant"
+  pension: "Guesthouse"
+  kladska: "Kladská surroundings"
 
-  gallery:
-      title: "Gallery"
-      subtitle: "Take a look at photos of our restaurant, accommodation, and the surrounding countryside."
-      restaurace: "Restaurant"
-      pension: "Guesthouse"
-      kladska: "Surroundings of Kladská"
+reservation:
+  title: "Reservation"
+  subtitle: "Reserve a table in our restaurant or a room for your stay"
+  nav:
+    room: "Accommodation reservation"
+    table: "Table reservation"
+  room:
+    title: "Accommodation reservation"
+    subtitle: "Book a room and enjoy a relaxing stay at our guesthouse"
+    first: "First name"
+    firstRequired: "First name is required"
+    second: "Last name"
+    secondRequired: "Last name is required"
+    email: "E-mail"
+    emailRequired: "E-mail is required"
+    emailRule: "Enter a valid e-mail address"
+    phone: "Phone"
+    phoneRequired: "Phone is required"
+    phoneRule: "Enter a valid phone number"
+    persons: "Number of persons"
+    personsRequired: "Number of persons is required"
+    personsRule: "The number of persons must not be 0 or negative"
+    child: "Number of children aged 3–17:"
+    childRule: "The number of children must not be negative"
+    baby: "Number of children up to 3 years:"
+    babyRule: "The number of children must not be negative"
+    dogCount: "Number of pets:"
+    dogCountRule: "The number of pets must not be negative"
+    from: "Arrival"
+    fromRequired: "Arrival date is required"
+    to: "Departure"
+    toRequired: "Departure date is required"
+    dog: "Pet"
+    message: "Note"
+    messagePlaceholder: "2 adults, 1 child..."
+    gdpr: "I agree to the processing of personal data"
+    gdprRequired: "Consent is required"
+    newsletter: "I want to receive offers by e-mail"
+    button: "Send reservation"
+  flashmessage:
+    type1: "Departure date cannot be earlier than arrival date."
+    type2: "If you have a pet, you must enter the number of pets."
+    type3: "We cannot create a reservation for today — only at least one day in advance. Please contact us by phone."
+    type4: "Table reservation has been accepted successfully; we will contact you if there are any changes."
+    type5: "We do not accept reservations at this time; the kitchen closes one hour before the restaurant’s closing time. Alternatively, please contact us by phone. Opening hours are from "
+    type5plus: " to "
+  table:
+    title: "Table reservation"
+    subtitle: "Reserve a table online and enjoy great food in our restaurant"
+    date: "Reservation date"
+    dateRequired: "Date is required"
+    time: "Reservation time"
+    timeRequired: "Time is required"
 
-  reservation:
-      title: "Reservation"
-      subtitle: "Book a table in our restaurant or a room for your stay"
-      nav:
-          room: "Room reservation"
-          table: "Table reservation"
-      room:
-          title: "Room reservation"
-          subtitle: "Book a room and enjoy a relaxing stay in our guesthouse"
-          first: "First name"
-          firstRequired: "First name is required"
-          second: "Last name"
-          secondRequired: "Last name is required"
-          email: "E-mail"
-          emailRequired: "E-mail is required"
-          emailRule: "Please enter a valid e-mail"
-          phone: "Phone"
-          phoneRequired: "Phone number is required"
-          phoneRule: "Please enter a valid phone number"
-          persons: "Number of persons"
-          personsRequired: "Number of persons is required"
-          from: "Arrival"
-          fromRequired: "Arrival date is required"
-          to: "Departure"
-          toRequired: "Departure date is required"
-          dog: "Pet"
-          message: "Note"
-          gdpr: "I agree to the processing of personal data"
-          gdprRequired: "Consent is required"
-          newsletter: "I want to receive offers by e-mail"
-          button: "Send reservation"
+common:
+  currency: "CZK"
+  personsShort: "people"
+  perNight: "per night"
 
-
-  common:
-    currency: "Kč"
-    personsShort: "persons"
-    perNight: "/night"
+flashmessage:
+  type1: "Invalid unsubscribe link."
+  type2: "You have successfully unsubscribed from the newsletter."
+  type3: "You were not subscribed to the newsletter."
+  type4: "The reservation could not be sent; please contact us by phone."
+  type5: "Thank you for your reservation. We will contact you by e-mail soon."

@@ -1,0 +1,38 @@
+{var $css = "voucher"}
+{var $keywords = "voucher, poukaz"}
+{var $description = "Zakupte si dárkový poukaz do naší restaurace a pensionu."}
+{var $title = "Voucher"}
+{block content}
+<div class="voucher">
+    {form voucherForm}
+        <div class="voucher__box">
+            <h1>{_ 'ui.voucher.title'}</h1>
+            <p>{_ 'ui.voucher.subtitle2'}</p>
+            <span>
+                {label First/}
+                {input First}
+            </span>
+            <span>
+                {label Second/}
+                {input Second}
+            </span>
+            <span>
+                {label Mail/}
+                {input Mail}
+            </span>
+            <span>
+                {label Amount/}
+                {input Amount}
+            </span>
+            <span class="checkbox">
+                {label Gdpr:/}
+                {input Gdpr:}
+            </span>
+            <span class="checkbox">
+                {label Newsletter:/}
+                {input Newsletter:}
+            </span>
+            {input Send}
+        </div>
+    {/form}
+</div>

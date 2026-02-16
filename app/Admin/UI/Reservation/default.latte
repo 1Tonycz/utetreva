@@ -15,6 +15,8 @@
                     <p><strong>Příjezd:</strong> {$reservation->Date_from|date:'j. n. Y'}</p>
                     <p><strong>Odjezd:</strong> {$reservation->Date_to|date:'j. n. Y'}</p>
                     <p><strong>Počet osob:</strong> {$reservation->Person}</p>
+                    <p><strong>Počet dětí:</strong> {$reservation->Child}</p>
+                    <p><strong>Počet dětí do 3 let:</strong> {$reservation->Baby}</p>
                     <p><strong>Mazlíček:</strong> {if $reservation->Dog == 1}Ano{else}Ne{/if}</p>
                     {if $reservation->Note}
                         <p><strong>Poznámka:</strong> {$reservation->Note}</p>
@@ -51,6 +53,7 @@
                             <button type="submit" name="action" value="accept" class="btn btn-accept">Přijmout</button>
                             <button type="submit" name="action" value="email" class="btn btn-email">E-mail</button>
                             <a n:href=":Admin:Reservation:calculation, id => $reservation->ID" class="btn btn-calc">Kalkulace</a>
+                            <a n:href="delete!, id => $reservation->ID" class="btn btn-delete">Smazat</a>
                         </div>
                     </form>
                 </div>

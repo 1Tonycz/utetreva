@@ -24,7 +24,10 @@
 		"kwn/number-to-words": "^2.12",
 		"dompdf/dompdf": "2.0",
 		"spatie/browsershot": "^5.0",
-		"contributte/translation": "^2.0"
+		"contributte/translation": "^2.0",
+		"setasign/fpdi": "^2.6",
+		"setasign/fpdf": "^1.8",
+		"guzzlehttp/guzzle": "^7.10"
 	},
 	"require-dev": {
 		"nette/tester": "^2.5",

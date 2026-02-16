@@ -1,0 +1,45 @@
+Guten Tag,<br>
+<br>
+Wir bestätigen Ihre Reservierung.<br>
+<br>
+Termin: {$from|date: 'd/m/Y'} - {$to|date: 'd/m/Y'}<br>
+<br>
+<ul>
+    {foreach $rooms as $room}
+        <li>Zimmer: {$room['price']} CZK / Nacht</li><br>
+    {/foreach}
+</ul>
+
+{$nights} Nächte x  {$totalPrice} = {= ($nights * $totalPrice)},-<br>
+{$nights} Nächte x {$person} Erwachsene x 50 Kurtaxe = {= ($nights * $person) * 50},-<br>
+{if $Dog == 1}
+    Gebühr für Haustiere: 150 CZK / Nacht<br>
+    {$nights} Nächte x 150 CZK * {$Dog_count} {= $Dog_count > 1 ? 'Haustiere': 'Haustier'} = {= $nights * 150 * $Dog_count},-<br>
+{/if}
+--------------------------- -------------------<br>
+Gesamtpreis: {= ($nights * $totalPrice) + (($nights * $person) * 50) + ($Dog == 1 ? ($nights * 150) : 0)},-<br>
+<br>
+Die Anzahlung beträgt mindestens 50 % des Gesamtpreises des Aufenthalts<br>
+{= (($nights * $totalPrice) + (($nights * $person) * 50) + ($Dog == 1 ? ($nights * 150) : 0)) / 2},- bis 14 Tage vor Anreise. Den Restbetrag<br>
+können Sie per Überweisung auf unser Konto oder bei uns vor Ort begleichen.<br>
+Wenn Sie innerhalb von 14 Tagen anreisen, ist keine Anzahlung erforderlich.<br>
+<br>
+Die Zahlung können Sie auf folgendes Konto überweisen: <br>
+Kontonummer: 2161122163/0800<br>
+IBAN: CZ56 0800 0000 0021 6112 2163<br>
+BIC/SWIFT: GIBACZPX<br>
+Variabler Symbol: {$VS}<br>
+Verwendungszweck: {$name}<br>
+<br>
+Wichtige Informationen:<br>
+<br>
+Im gesamten Resort Kladská gibt es keinen Mobilfunkempfang und es kann nicht mit Kreditkarte bezahlt werden.<br>
+Das WLAN-Signal ist im Zimmer und im Restaurant sehr schwach.<br>
+
+Das Frühstück wird von 9:00 bis 10:00 Uhr serviert.<br>
+
+Das Parken auf unserem Parkplatz ist kostenlos.<br>
+<br>
+Im Anhang senden wir Ihnen allgemeine Informationen zu.<br>
+<br>
+Vielen Dank und wir freuen uns auf Ihren Besuch.<br>

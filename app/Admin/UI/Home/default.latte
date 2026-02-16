@@ -10,6 +10,7 @@
                     data-modal-open="clean"
                     data-day="{$cleanDefaultDay->format('Y-m-d')}">🧹 Uklizeno</button>{/if}
             {if $user->isAllowed('home','reservation')}<a n:href=":Admin:Home:reservation" class="cal-btn">➕ Vytvořit rezervaci</a>{/if}
+            {if $user->isAllowed('home','book')}<a n:href=":Admin:Home:book" class="cal-btn">Ubytovací kniha</a>{/if}
         </div>
 
         <!-- STŘED: navigace měsíců -->
@@ -66,16 +67,21 @@
                                 {/foreach}
                             {/if}
 
-                            <td class="
-                            {if $status === 'paid'}day--paid{/if}
-                            {if $status === 'partial'}day--partial{/if}
-                            {if $status === 'unpaid'}day--unpaid{/if}
-                            {if $key === $todayKey} today{/if}
-                            {if isset($cleanMap[$room->ID][$key])} day--cleaned{/if}
-                        ">
+                            <td class="{if $key === $todayKey}today {/if}{if isset($cleanMap[$room->ID][$key])}day--cleaned{/if}">
                                 <div class="cell">
                                     {foreach $items as $i}
-                                        <a n:href=":Admin:Home:detail, id => $i['id']" class="rez-link">{$i['name']}</a>
+                                        {if $i['deposit'] >= $i['totalPrice']}
+                                            {var $status = 'paid'}
+                                        {elseif $i['deposit'] > 0}
+                                            {var $status = 'partial'}
+                                        {else}
+                                            {var $status = 'unpaid'}
+                                        {/if}
+                                        <a n:href=":Admin:Home:detail, id => $i['id']" class="rez-link {if $status === 'paid'}day--paid{/if}{if $status === 'partial'}day--partial{/if}{if $status === 'unpaid'}day--unpaid{/if}">
+                                            {$i['name']}{if $i['hasNote']}<b>*</b>{/if}
+                                            <hr>
+                                            {$i['Person']} os.
+                                        </a>
                                         {if !$iterator->isLast()}<hr class="rez-sep">{/if}
                                     {/foreach}
                                 </div>

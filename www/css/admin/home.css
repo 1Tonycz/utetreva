@@ -236,7 +236,7 @@ a:hover {
 
 /* Toolbar */
 .cal-toolbar {
-  max-width: 90%;
+  max-width: 95%;
   margin: 0 auto;
   padding: 18px;
   display: grid;
@@ -247,7 +247,7 @@ a:hover {
 
 @media (min-width: 900px) {
   .cal-toolbar {
-    grid-template-columns: 1.4fr 1fr 1.8fr;
+    grid-template-columns: auto auto auto;
   }
 }
 .cal-actions-left, .cal-nav, .cal-legend {
@@ -321,17 +321,17 @@ a:hover {
 }
 
 .legend-dot--paid {
-  background: #dcfce7;
+  background: #54f089;
   border-color: #bbf7d0;
 }
 
 .legend-dot--partial {
-  background: #fff7ed;
+  background: #ffe88a;
   border-color: #fde68a;
 }
 
 .legend-dot--unpaid {
-  background: #fee2e2;
+  background: #f05d5d;
   border-color: #fecaca;
 }
 
@@ -355,8 +355,8 @@ a:hover {
   width: 14px;
   height: 14px;
   border-radius: 4px;
-  border: 1px solid #f97316;
-  background: #f97316;
+  border: 1px solid rgb(143, 81, 201);
+  background: rgb(143, 81, 201);
   display: inline-block;
 }
 
@@ -481,34 +481,35 @@ table.calendar {
 
 /* Stavy */
 .calendar .day--weekend {
-  background: #f3f4f6;
+  background: #9d9d9e;
+  color: #ffffff;
 }
 
 .calendar td.today {
   box-shadow: inset 0 0 0 2px rgba(37, 99, 235, 0.25);
 }
 
-.calendar td.day--paid {
-  background: #ecfdf5;
+.calendar td a.day--paid {
+  background: #54f089 !important;
 }
 
-.calendar td.day--partial {
-  background: #fffbeb;
+.calendar td a.day--partial {
+  background: #ffe88a !important;
 }
 
-.calendar td.day--unpaid {
-  background: #fef2f2;
+.calendar td a.day--unpaid {
+  background: #f05d5d !important;
 }
 
 .calendar td.day--cleaned {
-  background-image: linear-gradient(135deg, rgba(249, 115, 22, 0.2) 25%, transparent 25%, transparent 50%, rgba(249, 115, 22, 0.2) 50%, rgba(249, 115, 22, 0.2) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(135deg, rgba(143, 81, 201, 0.8) 25%, transparent 25%, transparent 50%, rgba(143, 81, 201, 0.8) 50%, rgba(143, 81, 201, 0.8) 75%, transparent 75%, transparent) !important;
   background-size: 12px 12px;
 }
 
 .calendar .cell {
   padding: 8px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 6px;
 }
 
@@ -516,15 +517,22 @@ table.calendar {
   display: inline-block;
   padding: 6px 8px;
   border-radius: 8px;
-  background: #f3f4f6;
   color: var(--text);
   text-decoration: none;
   border: 1px solid var(--border);
   font-size: 13px;
 }
 
-.rez-link:hover {
-  background: #eef2f7;
+.rez-link b {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.rez-link svg {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  fill: var(--muted);
 }
 
 .rez-sep {

@@ -4,8 +4,8 @@
         <div class="page-title">Kalkulace rezervace - {$reservation->First} {$reservation->Second}</div>
         <div class="meta">
             Termín: <strong>{$reservation->Date_from|date:'j.n.Y'}</strong> – <strong>{$reservation->Date_to|date:'j.n.Y'}</strong>
-            · Nocí: <strong>{$summary['nights']}</strong> · Osob: <strong>{$reservation->Person}</strong>
-            {if $reservation->Dog} · Pes: <strong>ano</strong>{/if}
+            · Nocí: <strong>{$summary['nights']}</strong> · Osob: <strong>{$reservation->Person}</strong>{if $reservation->Child > 0} · Dětí: <strong>{$reservation->Child}</strong>{/if}
+            {if $reservation->Baby > 0}· Dětí do 3 let:<strong>{$reservation->Baby}</strong>{/if} {if $reservation->Dog} · Pes: <strong>ano</strong> - <strong>{$reservation->Dog_count}x</strong>{/if}
         </div>
 
         <form method="post" action="{$presenter->link('Reservation:calculation', ['id' => $reservation->ID])}" novalidate>
@@ -79,10 +79,18 @@
                         <button type="submit" class="btn-secondary" name="calc_action" value="recalc">Přepočítat</button>
                         <button type="submit" class="btn" name="calc_action" value="confirm">Potvrdit kalkulaci</button>
                     </div>
-                    <p class="hint">„Přepočítat“ neukládá do DB. „Potvrdit“ nastaví Solved, uloží cenu a odešle e-mail.</p>
                 </aside>
             </div>
+            <section class="card" style="margin-top:var(--gap)">
+                <h3 style="margin:0 0 10px;font-size:16px">Poznámka</h3>
+                <div class="section">
+                    <label class="field">
+                        <span class="label">Poznámka ke kalkulaci (zobrazí se v emailu rezervace)</span>
+                        <textarea class="input" name="note_email" rows="4" placeholder="Zadej poznámku ke kalkulaci..."></textarea>
+                    </label>
+                </div>
 
+            </section>
             <!-- FEES -->
             <section class="card" style="margin-top:var(--gap)">
                 <h3 style="margin:0 0 10px;font-size:16px">Poplatky</h3>
